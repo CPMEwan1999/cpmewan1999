@@ -41,13 +41,13 @@ class CPMEwan1999:
         params = { "key": self.access_key }
         response = requests.post(f"{BASE_URL}/set_rank", params=params, data=payload)
         response_decoded = response.json()
-        
+        return response_decoded.get("ok")
     
     def get_key_data(self) -> any:
         params = { "key": self.access_key }
         response = requests.get(f"{BASE_URL}/get_key_data", params=params)
         response_decoded = response.json()
-        
+        return response_decoded
     
     def set_player_money(self, amount) -> bool:
         payload = {
