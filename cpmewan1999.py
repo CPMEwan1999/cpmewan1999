@@ -15,7 +15,7 @@ class CPMEwan1999:
         response_decoded = response.json()
         if response_decoded.get("ok"):
             self.auth_token = response_decoded.get("auth")
-
+        return response_decoded.get("error")
     
     def register(self, email, password) -> int:
         payload = { "account_email": email, "account_password": password }
