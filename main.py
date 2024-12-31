@@ -167,6 +167,33 @@ if __name__ == "__main__":
             load_player_data(cpm)
             load_key_data(cpm)
             load_client_details()
+            choices = ["100"]
+            print(Colorate.Horizontal(Colors.rainbow, '{22}: Clone Account            5.000K'))
+            
+            elif service == 100: # Account Register
+                print(Colorate.Horizontal(Colors.rainbow, '[!] Registring new Account.'))
+                acc2_email = prompt_valid_value("[?] Account Email", "Email", password=False)
+                acc2_password = prompt_valid_value("[?] Account Password", "Password", password=False)
+                console.print("[%] Creating new Account: ", end=None)
+                status = cpm.register(acc2_email, acc2_password)
+                if status == 0:
+                    print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
+                    print(Colorate.Horizontal(Colors.rainbow, '======================================'))
+                    print(Colorate.Horizontal(Colors.rainbow, f'INFO: In order to tweak this account with Ewan_Kurdish.'))
+                    print(Colorate.Horizontal(Colors.rainbow, 'you most sign-in to the game using this account.'))
+                    sleep(2)
+                    continue
+                elif status == 105:
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED.'))
+                    print(Colorate.Horizontal(Colors.rainbow, 'This email is already exists !.'))
+                    sleep(2)
+                    continue
+                else:
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED.'))
+                    print(Colorate.Horizontal(Colors.rainbow, 'Please try again.'))
+                    sleep(2)
+                    continue
+            
             choices = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22"]
             print(Colorate.Horizontal(Colors.rainbow, '{01}: Increase Money           1.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '{02}: Increase Coins           3.500K'))
