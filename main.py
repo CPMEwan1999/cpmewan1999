@@ -130,74 +130,6 @@ def rainbow_gradient_string(customer_name):
         modified_string += f'[{interpolated_color}]{char}'
     return modified_string
 
-
-
-if __name__ == "__main__":
-    console = Console()
-    signal.signal(signal.SIGINT, signal_handler)
-    while True:
-        banner(console)
-        acc_email = prompt_valid_value("[bold][?] Account Email[/bold]", "Email", password=False)
-        acc_password = prompt_valid_value("[bold][?] Account Password[/bold]", "Password", password=False)
-        acc_access_key = prompt_valid_value("[bold][?] Access Key[/bold]", "Access Key", password=False)
-        console.print("[bold cyan][%] Trying to Login[/bold cyan]: ", end=None)
-        cpm = CPMEwan1999(acc_access_key)
-        login_response = cpm.login(acc_email, acc_password)
-        if login_response != 0:
-            if login_response == 100:
-                print(Colorate.Horizontal(Colors.rainbow, 'ACCOUNT NOT FOUND.'))
-                sleep(2)
-                continue
-            elif login_response == 101:
-                print(Colorate.Horizontal(Colors.rainbow, 'WRONG PASSWORD.'))
-                sleep(2)
-                continue
-            elif login_response == 103:
-                print(Colorate.Horizontal(Colors.rainbow, 'INVALID ACCESS KEY.'))
-                sleep(2)
-                continue
-            else:
-                print(Colorate.Horizontal(Colors.rainbow, 'TRY AGAIN.'))
-                print(Colorate.Horizontal(Colors.rainbow, '! Note: make sure you filled out the fields !.'))
-                sleep(2)
-                continue
-        else:
-            print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL.'))
-            sleep(2)
-        while True:
-            banner(console)
-            load_player_data(cpm)
-            load_key_data(cpm)
-            load_client_details()
-            choices = ["100"]
-            print(Colorate.Horizontal(Colors.rainbow, '{100}: Increase Money           1.000K'))
-            
-                        elif service == 100: # Account Register
-                print(Colorate.Horizontal(Colors.rainbow, '[!] Registring new Account.'))
-                acc2_email = prompt_valid_value("[?] Account Email", "Email", password=False)
-                acc2_password = prompt_valid_value("[?] Account Password", "Password", password=False)
-                console.print("[%] Creating new Account: ", end=None)
-                status = cpm.register(acc2_email, acc2_password)
-                if status == 0:
-                    print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
-                    print(Colorate.Horizontal(Colors.rainbow, '======================================'))
-                    print(Colorate.Horizontal(Colors.rainbow, f'INFO: In order to tweak this account with Ewan_Kurdish.'))
-                    print(Colorate.Horizontal(Colors.rainbow, 'you most sign-in to the game using this account.'))
-                    sleep(2)
-                    continue
-                elif status == 105:
-                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED.'))
-                    print(Colorate.Horizontal(Colors.rainbow, 'This email is already exists !.'))
-                    sleep(2)
-                    continue
-                else:
-                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED.'))
-                    print(Colorate.Horizontal(Colors.rainbow, 'Please try again.'))
-                    sleep(2)
-                    continue
-
-
-
 if __name__ == "__main__":
     console = Console()
     signal.signal(signal.SIGINT, signal_handler)
@@ -411,7 +343,7 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, '======================================'))
                     print(Colorate.Horizontal(Colors.rainbow, f'Thank You for using our tool, please join our telegram channe: @{__CHANNEL_USERNAME__}.'))
                 else: continue
-                                      elif service == 100: # Account Register
+            elif service == 9: # Account Register
                 print(Colorate.Horizontal(Colors.rainbow, '[!] Registring new Account.'))
                 acc2_email = prompt_valid_value("[?] Account Email", "Email", password=False)
                 acc2_password = prompt_valid_value("[?] Account Password", "Password", password=False)
