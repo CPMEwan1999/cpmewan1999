@@ -410,7 +410,7 @@ if __name__ == "__main__":
                     sleep(2)
                     continue
                     
-                    elif service == 13: # hack car speed
+                    elif service == 13: # Hack Car Speed
                 console.print("[%] Hack Car Speed: ", end=None)
                 if account_hack_car_speed():
                     print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
