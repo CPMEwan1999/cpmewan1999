@@ -408,7 +408,7 @@ if __name__ == "__main__":
                     continue
             elif service == 13: # Unlock All Cars Siren
                 console.print("[%] Unlocking All Cars Siren: ", end=None)
-                if cpm.account_hack_car_speed():
+                if cpm.unlock_all_cars_siren():
                     print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
                     print(Colorate.Horizontal(Colors.rainbow, '======================================'))
                     answ = Prompt.ask("[?] Do You want to Exit ?", choices=["y", "n"], default="n")
