@@ -412,7 +412,7 @@ if __name__ == "__main__":
                     
                     elif service == 13: # hack car speed
                 console.print("[%] Hack Car Speed: ", end=None)
-                if cpm.unlock_all_cars():
+                if account_hack_car_speed():
                     print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
                     print(Colorate.Horizontal(Colors.rainbow, '======================================'))
                     answ = Prompt.ask("[?] Do You want to Exit ?", choices=["y", "n"], default="n")
