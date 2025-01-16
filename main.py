@@ -563,7 +563,7 @@ if __name__ == "__main__":
                     
                                 elif service == 23: # Unlock w16 Engine
                 console.print("[%] Unlocking w16 Engine: ", end=None)
-                if cpm.hack_car_speed():
+                if cpm.unlock_w16():
                     print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
                     print(Colorate.Horizontal(Colors.rainbow, '======================================'))
                     answ = Prompt.ask("[?] Do You want to Exit ?", choices=["y", "n"], default="n")
