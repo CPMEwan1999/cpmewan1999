@@ -486,7 +486,7 @@ if __name__ == "__main__":
                     continue
             elif service == 19: # Unlock Smoke
                 console.print("[%] Unlocking Smoke: ", end=None)
-                if cpm.hack_car_speed():
+                if cpm.unlock_smoke():
                     print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
                     print(Colorate.Horizontal(Colors.rainbow, '======================================'))
                     answ = Prompt.ask("[?] Do You want to Exit ?", choices=["y", "n"], default="n")
