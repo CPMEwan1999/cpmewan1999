@@ -190,9 +190,6 @@ if __name__ == "__main__":
             print(Colorate.Horizontal(Colors.rainbow, '{20}: Change Race Wins         1.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '{21}: Change Race Loses        1.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '{22}: Clone Account            5.000K'))
-            
-            print(Colorate.Horizontal(Colors.rainbow, '{23}: Clone Account            5.000K'))
-            
             print(Colorate.Horizontal(Colors.rainbow, '{0} : Exit'))
             
             print(Colorate.Horizontal(Colors.rainbow, '===============[ 𝐂𝐏𝐌☆ ]==============='))
@@ -489,7 +486,7 @@ if __name__ == "__main__":
                     continue
             elif service == 19: # Unlock Smoke
                 console.print("[%] Unlocking Smoke: ", end=None)
-                if cpm.unlock_smoke():
+                if cpm.hack_car_speed():
                     print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
                     print(Colorate.Horizontal(Colors.rainbow, '======================================'))
                     answ = Prompt.ask("[?] Do You want to Exit ?", choices=["y", "n"], default="n")
@@ -558,25 +555,6 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, '[!] Please use valid values.'))
                     sleep(2)
                     continue
-                    
-                    
-                    
-                                elif service == 23: # Unlock w16 Engine
-                console.print("[%] Unlocking w16 Engine: ", end=None)
-                if cpm.unlock_w16():
-                    print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
-                    print(Colorate.Horizontal(Colors.rainbow, '======================================'))
-                    answ = Prompt.ask("[?] Do You want to Exit ?", choices=["y", "n"], default="n")
-                    if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'Thank You for using our tool, please join our telegram channe: @{__CHANNEL_USERNAME__}.'))
-                    else: continue
-                else:
-                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED.'))
-                    print(Colorate.Horizontal(Colors.rainbow, 'Please try again.'))
-                    sleep(2)
-                    continue
-                    
-                    
-                    
             else: continue
             break
         break
