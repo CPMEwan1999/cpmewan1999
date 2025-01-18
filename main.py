@@ -191,7 +191,7 @@ if __name__ == "__main__":
             print(Colorate.Horizontal(Colors.rainbow, '{19}: Unlock Smoke             2.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '{20}: Change Race Wins         1.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '{21}: Change Race Loses        1.000K'))
-            print(Colorate.Horizontal(Colors.rainbow, '{22}: Speed Car Hack        1.000K'))
+            print(Colorate.Horizontal(Colors.rainbow, '{22}: Speed Car Hack           1.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '{23}: Clone Account            5.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '{0} : Exit'))
             
