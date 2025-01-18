@@ -176,7 +176,7 @@ if __name__ == "__main__":
             print(Colorate.Horizontal(Colors.rainbow, '{06}: Change Name (Rainbow)    1.00K'))
             print(Colorate.Horizontal(Colors.rainbow, '{07}: Number Plates            2.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '{08}: Account Delete           FREE'))
-            print(Colorate.Horizontal(Colors.rainbow, '{09}: Account Register          FREE'))
+            print(Colorate.Horizontal(Colors.rainbow, '{09}: Account Register         FREE'))
             print(Colorate.Horizontal(Colors.rainbow, '{10}: Delete Friends           5.00K'))
             print(Colorate.Horizontal(Colors.rainbow, '{11}: Unlock Paid Cars         4.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '{12}: Unlock all Cars          3.000K'))
@@ -189,7 +189,7 @@ if __name__ == "__main__":
             print(Colorate.Horizontal(Colors.rainbow, '{19}: Unlock Smoke             2.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '{20}: Change Race Wins         1.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '{21}: Change Race Loses        1.000K'))
-            print(Colorate.Horizontal(Colors.rainbow, '{22}: Speed Car Hack            2.500K'))
+            print(Colorate.Horizontal(Colors.rainbow, '{22}: Speed Car Hack           2.500K'))
             print(Colorate.Horizontal(Colors.rainbow, '{23}: Clone Account            5.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '{0} : Exit'))
             
