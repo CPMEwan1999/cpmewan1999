@@ -17,7 +17,7 @@ from rich.style import Style
 # Bibliotecas de estilo (pystyle)
 import pystyle
 from pystyle import Colors, Colorate
-from cpmcheats import CPMCheats
+from cpmewan1999 import CPMEwan1999
 
 __CHANNEL_USERNAME__ = "@Rickdev999"
 __GROUP_USERNAME__ = "@CPMCheatsChannel"
@@ -322,7 +322,7 @@ if __name__ == "__main__":
             "[bold][?] Access Key[/bold]", "Access Key", password=False
         )
         console.print("[bold cyan][%] Trying to Login[/bold cyan]: ", end=None)
-        cpm = CPMCheats(acc_access_key)
+        cpm = CPMEwan1999(acc_access_key)
         login_response = cpm.login(acc_email, acc_password)
         if login_response != 0:
             if login_response == 100:
