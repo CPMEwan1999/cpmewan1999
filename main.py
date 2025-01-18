@@ -298,7 +298,7 @@ if __name__ == "__main__":
                         continue
                 else:
                     print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
-                    print(Colorate.Horizontal(Colors.rainbow, 'PLEASE USE VALID VALUES')))
+                    print(Colorate.Horizontal(Colors.rainbow, 'PLEASE USE VALID VALUES'))
                     sleep(2)
                     continue
             elif service == 6: # Change Name Rainbow
