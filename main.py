@@ -177,7 +177,7 @@ if __name__ == "__main__":
             print(Colorate.Horizontal(Colors.rainbow, '{07}: Number Plates            2.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '{08}: Account Delete           FREE'))
             print(Colorate.Horizontal(Colors.rainbow, '{09}: ccount Register          FREE'))
-            print(Colorate.Horizontal(Colors.rainbow, '{10}: Delete Friends           5.00'))
+            print(Colorate.Horizontal(Colors.rainbow, '{10}: Delete Friends           5.00'))            
             print(Colorate.Horizontal(Colors.rainbow, '{11}: Unlock Paid Cars         4.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '{12}: Unlock all Cars          3.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '{13}: Unlock all Cars Siren    2.000K'))
@@ -189,8 +189,8 @@ if __name__ == "__main__":
             print(Colorate.Horizontal(Colors.rainbow, '{19}: Unlock Smoke             2.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '{20}: Change Race Wins         1.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '{21}: Change Race Loses        1.000K'))
-            print(Colorate.Horizontal(Colors.rainbow, '{22}: speed hack car            2500k'))
-            print(Colorate.Horizontal(Colors.rainbow, '{23}: Clone Account            5.000K'))            
+            print(Colorate.Horizontal(Colors.rainbow, '{22}: Clone Account            5.000K'))
+            print(Colorate.Horizontal(Colors.rainbow, '{23}: Unkonwn            5.000K'))            
             print(Colorate.Horizontal(Colors.rainbow, '{0} : Exit'))
             
             print(Colorate.Horizontal(Colors.rainbow, '===============[ 𝐂𝐏𝐌☆ ]==============='))
@@ -540,30 +540,7 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, '[!] Please use valid values.'))
                     sleep(2)
                     continue
-                    
-                    
-                    
-                    
-            elif service == 22: # Hack Car Speed (299hp)
-                print(Colorate.Horizontal(Colors.rainbow, '[!] Note: original speed can not be restored'))
-                console.print("[!] Enter Car Details")
-                car_id = IntPrompt.ask("[?] Car ID")
-                console.print(" Hacking Car Speed: ", end=None)
-                if cpm.hack_car_speed(car_id):
-                    print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
-                    print(Colorate.Horizontal(Colors.rainbow, '======================================'))
-                    answ = Prompt.ask("[?] Do You want to Exit ?", choices=["y", "n"], default="n")
-                    if answ == "y": console.print(" Thank You for using our tool")
-                    else: continue
-                else:
-                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED.'))
-                    print(Colorate.Horizontal(Colors.rainbow, 'Please try again.'))
-                    sleep(2)
-                    continue              
-                    
-                          
-                                      
-            elif service == 23: # Clone Account
+            elif service == 22: # Clone Account
                 print(Colorate.Horizontal(Colors.rainbow, '[!] Please Enter Account Detalis.'))
                 to_email = prompt_valid_value("[?] Account Email", "Email", password=False)
                 to_password = prompt_valid_value("[?] Account Password", "Password", password=False)
@@ -579,6 +556,22 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, '[!] Please use valid values.'))
                     sleep(2)
                     continue
+            elif service == 23: # Hack Car Speed (299hp)
+                print(Colorate.Horizontal(Colors.rainbow, '[!] Note: original speed can not be restored'))
+                console.print("[!] Enter Car Details")
+                car_id = IntPrompt.ask("[?] Car ID")
+                console.print(" Hacking Car Speed: ", end=None)
+                if cpm.hack_car_speed(car_id):
+                    print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
+                    print(Colorate.Horizontal(Colors.rainbow, '======================================'))
+                    answ = Prompt.ask("[?] Do You want to Exit ?", choices=["y", "n"], default="n")
+                    if answ == "y": console.print(" Thank You for using our tool")
+                    else: continue
+                else:
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED.'))
+                    print(Colorate.Horizontal(Colors.rainbow, 'Please try again.'))
+                    sleep(2)
+                    continue                                  
             else: continue
             break
         break
