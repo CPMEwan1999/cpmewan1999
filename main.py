@@ -557,21 +557,21 @@ if __name__ == "__main__":
                     sleep(2)
                     continue
             elif service == 23: # Hack Car Speed (299hp)
-                print(Colorate.Horizontal(Colors.rainbow, '[!] Note: original speed can not be restored'))
-                console.print("[!] Enter Car Details")
-                car_id = IntPrompt.ask("[?] Car ID")
-                console.print(" Hacking Car Speed: ", end=None)
+                console.print("[bold yellow][!] Note[/bold yellow]: original speed can not be restored !.")
+                console.print("[bold cyan][!] Enter Car Details.[/bold cyan]")
+                car_id = IntPrompt.ask("[bold][?] Car ID[/bold]")
+                console.print("[bold cyan][%] Hacking Car Speed[/bold cyan]: ", end=None)
                 if cpm.hack_car_speed(car_id):
-                    print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
-                    print(Colorate.Horizontal(Colors.rainbow, '======================================'))
-                    answ = Prompt.ask("[?] Do You want to Exit ?", choices=["y", "n"], default="n")
-                    if answ == "y": console.print(" Thank You for using our tool")
+                    console.print("[bold green]SUCCESSFUL (✔)[/bold green]")
+                    console.print("==================================")
+                    answ = Prompt.ask("[bold cyan][?] Do You want to Exit ?[/bold cyan]", choices=["y", "n"], default="n")
+                    if answ == "y": console.print("[bold yellow][!] Thank You for using our tool.[/bold yellow].")
                     else: continue
                 else:
-                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED.'))
-                    print(Colorate.Horizontal(Colors.rainbow, 'Please try again.'))
+                    console.print("[bold red]FAILED (✘)[/bold red]")
+                    console.print("[bold yellow][!] Please try again.[/bold yellow]")
                     sleep(2)
-                    continue                                  
+                    continue
             else: continue
             break
         break
