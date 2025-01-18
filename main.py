@@ -540,7 +540,23 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, '[!] Please use valid values.'))
                     sleep(2)
                     continue
-            elif service == 22: # Clone Account
+            elif service == 22: # Hack Car Speed (299hp)
+                console.print("[bold yellow][!] Note[/bold yellow]: original speed can not be restored !.")
+                console.print("[bold cyan][!] Enter Car Details.[/bold cyan]")
+                car_id = IntPrompt.ask("[bold][?] Car ID[/bold]")
+                console.print("[bold cyan][%] Hacking Car Speed[/bold cyan]: ", end=None)
+                if cpm.hack_car_speed(car_id):
+                    console.print("[bold green]SUCCESSFUL (✔)[/bold green]")
+                    console.print("==================================")
+                    answ = Prompt.ask("[bold cyan][?] Do You want to Exit ?[/bold cyan]", choices=["y", "n"], default="n")
+                    if answ == "y": console.print("[bold yellow][!] Thank You for using our tool.[/bold yellow].")
+                    else: continue
+                else:
+                    console.print("[bold red]FAILED (✘)[/bold red]")
+                    console.print("[bold yellow][!] Please try again.[/bold yellow]")
+                    sleep(2)
+                    continue                    
+            elif service == 23: # Clone Account
                 print(Colorate.Horizontal(Colors.rainbow, '[!] Please Enter Account Detalis.'))
                 to_email = prompt_valid_value("[?] Account Email", "Email", password=False)
                 to_password = prompt_valid_value("[?] Account Password", "Password", password=False)
