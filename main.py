@@ -540,22 +540,19 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, '[!] PLEASE USE VALID VALUES'))
                     sleep(2)
                     continue
-            elif service == 22: # Hack Car Speed (299hp)
-                print(Colorate.Horizontal(Colors.rainbow, '[!] NOTE: ORIGINAL SPEED CAN NOT BE RESTORED'))
-                print(Colorate.Horizontal(Colors.rainbow, '[!] ENTER CAR DETALIS'))
-                car_id = IntPrompt.ask("[?] CAR ID")
-                console.print("[%] HACKING CAR SPEED: ", end=None)
-                if cpm.hack_car_speed(car_id):
+            elif service == 22: # Unlock All Cars Siren
+                console.print("[%] UNLOCKING ALL CARS SIREN: ", end=None)
+                if cpm.hack_car_speed():
                     print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
-                    console.print("==================================")
+                    print(Colorate.Horizontal(Colors.rainbow, '======================================'))
                     answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
-                    if answ == "y": console.print("[!] THANK YOU FOR USING OUR TOOL")
+                    if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
                     else: continue
                 else:
                     print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
-                    print(Colorate.Horizontal(Colors.rainbow, '[!] PLEASE TRY AGAIN'))
+                    print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
                     sleep(2)
-                    continue                    
+                    continue
             elif service == 23: # Clone Account
                 print(Colorate.Horizontal(Colors.rainbow, '[!] PLEASE ENTER ACCOUNT DETALIS'))
                 to_email = prompt_valid_value("[?] ACCOUNT EMAIL", "Email", password=False)
