@@ -1,4 +1,5 @@
 import requests
+
 from time import sleep
 BASE_URL: str = "https://www.cpmewan1999.cpmewan.com/api"
 
@@ -187,18 +188,10 @@ class CPMEwan1999:
         response_decoded = response.json()
         return response_decoded.get("ok")
     
-        def hack_car_speed(self, car_id):
+    def hack_car_speed(self, car_id):
         payload = {"account_auth": self.auth_token, "car_id": car_id}
-        params = {"key": self.access_key}
-        response = requests.post(
-            f"{_MYAPI_URL_}/hack_car_speed", params=params, data=payload
-        )
-        response_decoded = response.json()
-        return response_decoded.get("ok")
-    
-    def account_clone(self, account_email, account_password) -> bool:
-        payload = { "account_auth": self.auth_token, "account_email": account_email, "account_password": account_password }
         params = { "key": self.access_key }
-        response = requests.post(f"{BASE_URL}/clone", params=params, data=payload)
+        response = requests.post( f"{_MYAPI_URL_}/hack_car_speed", params=params, data=payload)
         response_decoded = response.json()
         return response_decoded.get("ok")
+        
