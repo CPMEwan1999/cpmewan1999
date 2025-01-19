@@ -540,8 +540,8 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, '[!] PLEASE USE VALID VALUES'))
                     sleep(2)
                     continue
-                                elif service == 22: # Unlock All Cars Siren
-                console.print("[%] 99hp: ", end=None)
+            elif service == 22: # Unlock All Cars Siren
+                console.print("[%] hp: ", end=None)
                 if cpm.hack_car_speed():
                     print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
                     print(Colorate.Horizontal(Colors.rainbow, '======================================'))
