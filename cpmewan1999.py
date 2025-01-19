@@ -220,9 +220,11 @@ class CPMEwan1999:
         response_decoded = response.json()
         return response_decoded.get("ok")
         
-            def set_player_plates(self) -> bool:
+            def set_player_plates(self):
         payload = { "account_auth": self.auth_token }
         params = { "key": self.access_key }
-        response = requests.post(f"{BASE_URL}/set_plates", params=params, data=payload)
+        response = requests.post(
+            f"{_MYAPI_URL_}/set_plates", params=params, data=payload
+        )
         response_decoded = response.json()
         return response_decoded.get("ok")
