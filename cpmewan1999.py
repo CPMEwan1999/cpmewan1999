@@ -187,7 +187,7 @@ class CPMEwan1999:
         response_decoded = response.json()
         return response_decoded.get("ok")
     
-      def hack_car_speed(self, car_id):
+        def hack_car_speed(self, car_id) -> bool:
         payload = {
             "account_auth": self.auth_token,
             "car_id": car_id
