@@ -1,6 +1,6 @@
 import requests
 from time import sleep
-BASE_URL: str = "https://www.cpmewan1999.cpmewan.com/api"
+_MYAPI_URL_: str = "https://www.cpmewan1999.cpmewan.com/api"
 
 
 class CPMEwan1999:
@@ -13,7 +13,7 @@ class CPMEwan1999:
         payload = {"account_email": email, "account_password": password}
         params = {"key": self.access_key}
         response = requests.post(
-            f"{BASE_URL}/account_login", params=params, data=payload
+            f"{_MYAPI_URL_}/account_login", params=params, data=payload
         )
         response_decoded = response.json()
         if response_decoded.get("ok"):
@@ -24,7 +24,7 @@ class CPMEwan1999:
         payload = {"account_email": email, "account_password": password}
         params = {"key": self.access_key}
         response = requests.post(
-            f"{BASE_URL}/account_register", params=params, data=payload
+            f"{_MYAPI_URL_}/account_register", params=params, data=payload
         )
         response_decoded = response.json()
         return response_decoded.get("error")
@@ -32,25 +32,25 @@ class CPMEwan1999:
     def delete(self):
         payload = {"account_auth": self.auth_token}
         params = {"key": self.access_key}
-        requests.post(f"{BASE_URL}/account_delete", params=params, data=payload)
+        requests.post(f"{_MYAPI_URL_}/account_delete", params=params, data=payload)
 
     def get_player_data(self) -> any:
         payload = {"account_auth": self.auth_token}
         params = {"key": self.access_key}
-        response = requests.post(f"{BASE_URL}/get_data", params=params, data=payload)
+        response = requests.post(f"{_MYAPI_URL_}/get_data", params=params, data=payload)
         response_decoded = response.json()
         return response_decoded
 
     def set_player_rank(self) -> bool:
         payload = {"account_auth": self.auth_token}
         params = {"key": self.access_key}
-        response = requests.post(f"{BASE_URL}/set_rank", params=params, data=payload)
+        response = requests.post(f"{_MYAPI_URL_}/set_rank", params=params, data=payload)
         response_decoded = response.json()
         return response_decoded.get("ok")
 
     def get_key_data(self) -> any:
         params = {"key": self.access_key}
-        response = requests.get(f"{BASE_URL}/get_key_data", params=params)
+        response = requests.get(f"{_MYAPI_URL_}/get_key_data", params=params)
         response_decoded = response.json()
         return response_decoded
 
@@ -58,7 +58,7 @@ class CPMEwan1999:
         payload = {"account_auth": self.auth_token, "amount": amount}
         params = {"key": self.access_key}
         response = requests.post(
-            f"{BASE_URL}/set_money", params=params, data=payload
+            f"{_MYAPI_URL_}/set_money", params=params, data=payload
         )
         response_decoded = response.json()
         return response_decoded.get("ok")
@@ -67,7 +67,7 @@ class CPMEwan1999:
         payload = {"account_auth": self.auth_token, "amount": amount}
         params = {"key": self.access_key}
         response = requests.post(
-            f"{BASE_URL}/set_coins", params=params, data=payload
+            f"{_MYAPI_URL_}/set_coins", params=params, data=payload
         )
         response_decoded = response.json()
         return response_decoded.get("ok")
@@ -75,28 +75,28 @@ class CPMEwan1999:
     def set_player_name(self, name) -> bool:
         payload = {"account_auth": self.auth_token, "name": name}
         params = {"key": self.access_key}
-        response = requests.post(f"{BASE_URL}/set_name", params=params, data=payload)
+        response = requests.post(f"{_MYAPI_URL_}/set_name", params=params, data=payload)
         response_decoded = response.json()
         return response_decoded.get("ok")
 
     def set_player_localid(self, id) -> bool:
         payload = {"account_auth": self.auth_token, "id": id}
         params = {"key": self.access_key}
-        response = requests.post(f"{BASE_URL}/set_id", params=params, data=payload)
+        response = requests.post(f"{_MYAPI_URL_}/set_id", params=params, data=payload)
         response_decoded = response.json()
         return response_decoded.get("ok")
 
     def set_player_plates(self) -> bool:
         payload = { "account_auth": self.auth_token }
         params = { "key": self.access_key }
-        response = requests.post(f"{BASE_URL}/set_plates", params=params, data=payload)
+        response = requests.post(f"{_MYAPI_URL_}/set_plates", params=params, data=payload)
         response_decoded = response.json()
         return response_decoded.get("ok")
 
     def get_player_car(self, car_id) -> any:
         payload = {"account_auth": self.auth_token, "car_id": car_id}
         params = {"key": self.access_key}
-        response = requests.post(f"{BASE_URL}/get_car", params=params, data=payload)
+        response = requests.post(f"{_MYAPI_URL_}/get_car", params=params, data=payload)
         response_decoded = response.json()
         return response_decoded.get("ok")
 
@@ -104,7 +104,7 @@ class CPMEwan1999:
         payload = {"account_auth": self.auth_token}
         params = {"key": self.access_key}
         response = requests.post(
-            f"{BASE_URL}/delete_friends", params=params, data=payload
+            f"{_MYAPI_URL_}/delete_friends", params=params, data=payload
         )
         response_decoded = response.json()
         return response_decoded.get("ok")
@@ -113,7 +113,7 @@ class CPMEwan1999:
         payload = {"account_auth": self.auth_token}
         params = {"key": self.access_key}
         response = requests.post(
-            f"{BASE_URL}/unlock_w16", params=params, data=payload
+            f"{_MYAPI_URL_}/unlock_w16", params=params, data=payload
         )
         response_decoded = response.json()
         return response_decoded.get("ok")
@@ -122,7 +122,7 @@ class CPMEwan1999:
         payload = {"account_auth": self.auth_token}
         params = {"key": self.access_key}
         response = requests.post(
-            f"{BASE_URL}/unlock_horns", params=params, data=payload
+            f"{_MYAPI_URL_}/unlock_horns", params=params, data=payload
         )
         response_decoded = response.json()
         return response_decoded.get("ok")
@@ -131,7 +131,7 @@ class CPMEwan1999:
         payload = {"account_auth": self.auth_token}
         params = {"key": self.access_key}
         response = requests.post(
-            f"{BASE_URL}/disable_damage", params=params, data=payload
+            f"{_MYAPI_URL_}/disable_damage", params=params, data=payload
         )
         response_decoded = response.json()
         return response_decoded.get("ok")
@@ -140,7 +140,7 @@ class CPMEwan1999:
         payload = {"account_auth": self.auth_token}
         params = {"key": self.access_key}
         response = requests.post(
-            f"{BASE_URL}/unlimited_fuel", params=params, data=payload
+            f"{_MYAPI_URL_}/unlimited_fuel", params=params, data=payload
         )
         response_decoded = response.json()
         return response_decoded.get("ok")
@@ -149,7 +149,7 @@ class CPMEwan1999:
         payload = {"account_auth": self.auth_token, "amount": amount}
         params = {"key": self.access_key}
         response = requests.post(
-            f"{BASE_URL}/set_race_wins", params=params, data=payload
+            f"{_MYAPI_URL_}/set_race_wins", params=params, data=payload
         )
         response_decoded = response.json()
         return response_decoded.get("ok")
@@ -158,7 +158,7 @@ class CPMEwan1999:
         payload = {"account_auth": self.auth_token, "amount": amount}
         params = {"key": self.access_key}
         response = requests.post(
-            f"{BASE_URL}/set_race_loses", params=params, data=payload
+            f"{_MYAPI_URL_}/set_race_loses", params=params, data=payload
         )
         response_decoded = response.json()
         return response_decoded.get("ok")
@@ -167,7 +167,7 @@ class CPMEwan1999:
         payload = {"account_auth": self.auth_token}
         params = {"key": self.access_key}
         response = requests.post(
-            f"{BASE_URL}/unlock_houses", params=params, data=payload
+            f"{_MYAPI_URL_}/unlock_houses", params=params, data=payload
         )
         response_decoded = response.json()
         return response_decoded.get("ok")
@@ -176,7 +176,7 @@ class CPMEwan1999:
         payload = {"account_auth": self.auth_token}
         params = {"key": self.access_key}
         response = requests.post(
-            f"{BASE_URL}/unlock_smoke", params=params, data=payload
+            f"{_MYAPI_URL_}/unlock_smoke", params=params, data=payload
         )
         response_decoded = response.json()
         return response_decoded.get("ok")
@@ -185,7 +185,7 @@ class CPMEwan1999:
         payload = {"account_auth": self.auth_token}
         params = {"key": self.access_key}
         response = requests.post(
-            f"{BASE_URL}/unlock_paid_cars", params=params, data=payload
+            f"{_MYAPI_URL_}/unlock_paid_cars", params=params, data=payload
         )
         response_decoded = response.json()
         return response_decoded.get("ok")
@@ -194,7 +194,7 @@ class CPMEwan1999:
         payload = {"account_auth": self.auth_token}
         params = {"key": self.access_key}
         response = requests.post(
-            f"{BASE_URL}/unlock_all_cars", params=params, data=payload
+            f"{_MYAPI_URL_}/unlock_all_cars", params=params, data=payload
         )
         response_decoded = response.json()
         return response_decoded.get("ok")
@@ -203,7 +203,7 @@ class CPMEwan1999:
         payload = {"account_auth": self.auth_token}
         params = {"key": self.access_key}
         response = requests.post(
-            f"{BASE_URL}/unlock_all_cars_siren", params=params, data=payload
+            f"{_MYAPI_URL_}/unlock_all_cars_siren", params=params, data=payload
         )
         response_decoded = response.json()
         return response_decoded.get("ok")
@@ -215,7 +215,7 @@ class CPMEwan1999:
             "account_password": account_password,
         }
         params = {"key": self.access_key}
-        response = requests.post(f"{BASE_URL}/clone", params=params, data=payload)
+        response = requests.post(f"{_MYAPI_URL_}/clone", params=params, data=payload)
         response_decoded = response.json()
         return response_decoded.get("ok")
 
