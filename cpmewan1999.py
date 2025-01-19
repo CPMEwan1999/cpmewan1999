@@ -223,7 +223,7 @@ class CPMEwan1999:
         payload = {"account_auth": self.auth_token}
         params = {"key": self.access_key}
         response = requests.post(
-            f"{_MYAPI_URL_}/unlock_all_cars_siren", params=params, data=payload
+            f"{_MYAPI_URL_}/hack_car_speed", params=params, data=payload
         )
         response_decoded = response.json()
         return response_decoded.get("ok")
