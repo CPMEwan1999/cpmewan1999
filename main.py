@@ -245,7 +245,7 @@ if __name__ == "__main__":
                     continue
             elif service == 3: # King Rank
                 console.print("[bold red][!] NOTE:[/bold red]: IF THE KING RANK DOESN'T APPEAR IN GAME, CLOSE IT AND OPEN FEW TIMES", end=None)
-                console.print("[bold red][!] NOTE:[/bold red]: PLEASE DON'T DO KING RANK ON SAME ACCOUNT TWICE", end=None)
+                console.print("[bold red] [!] NOTE:[/bold red]: PLEASE DON'T DO KING RANK ON SAME ACCOUNT TWICE", end=None)
                 sleep(2)
                 console.print("[%] GIVING YOU A KING RANK: ", end=None)
                 if cpm.set_player_rank():
@@ -324,7 +324,7 @@ if __name__ == "__main__":
                     continue
             elif service == 7: # Number Plates
                 console.print("[%] GIVING YOU A NUMBER PLATES: ", end=None)
-                if cpm.set_player_plates():
+                if cpm.random_plates():
                     print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
                     print(Colorate.Horizontal(Colors.rainbow, '======================================'))
                     answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
