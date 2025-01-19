@@ -322,17 +322,35 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, 'PLEASE USE VALID VALUES'))
                     sleep(2)
                     continue
-            elif service == 7: # Number Plates
-                console.print("[%] GIVING YOU A NUMBER PLATES: ", end=None)
-                if cpm.random_plates():
-                    print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
-                    print(Colorate.Horizontal(Colors.rainbow, '======================================'))
-                    answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
-                    if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
-                    else: continue
+            elif service == 7:  # Number Plates
+                console.print("[%] Giving you a Number Plates: ", end=None)
+                if cpm.set_player_plates():
+                    print(Colorate.Horizontal(Colors.yellow_to_red, "Success (✓)"))
+                    print(
+                        Colorate.Horizontal(
+                            Colors.yellow_to_red,
+                            "======================================",
+                        )
+                    )
+                    answ = Prompt.ask(
+                        "[?] Do You want to Exit ?", choices=["y", "n"], default="n"
+                    )
+                    if answ == "y":
+                        print(
+                            Colorate.Horizontal(
+                                Colors.yellow_to_red,
+                                f"Thank You for using our tool, please join our telegram channe: @{__CHANNEL_USERNAME__}.",
+                            )
+                        )
+                    else:
+                        continue
                 else:
-                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
-                    print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
+                    print(Colorate.Horizontal(Colors.yellow_to_red, "FAILED."))
+                    print(
+                        Colorate.Horizontal(
+                            Colors.yellow_to_red, "Please try again (✖)."
+                        )
+                    )
                     sleep(2)
                     continue
             elif service == 8: # Account Delete
