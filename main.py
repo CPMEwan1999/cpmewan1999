@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import random
 import requests
 from time import sleep
@@ -36,97 +38,97 @@ def gradient_text(text, colors):
     return colorful_text
 
 def banner(console):
-os.system('cls' if os.name == 'nt' else 'clear')
-brand_name =  "▄████▄   ██▓███   ███▄ ▄███▓▓█████  █     █░ ▄▄▄       ███▄    █ \n"
+    os.system('cls' if os.name == 'nt' else 'clear')
+    brand_name =  "▄████▄   ██▓███   ███▄ ▄███▓▓█████  █     █░ ▄▄▄       ███▄    █ \n"
     brand_name += "▒██▀ ▀█  ▓██░  ██▒▓██▒▀█▀ ██▒▓█   ▀ ▓█░ █ ░█░▒████▄     ██ ▀█   █ \n"
     brand_name += "▒▓█    ▄ ▓██░ ██▓▒▓██    ▓██░▒███   ▒█░ █ ░█ ▒██  ▀█▄  ▓██  ▀█ ██▒\n"
     brand_name += "▒▓▓▄ ▄██▒▒██▄█▓▒ ▒▒██    ▒██ ▒▓█  ▄ ░█░ █ ░█ ░██▄▄▄▄██ ▓██▒  ▐▌██▒\n"
     brand_name += "▒ ▓███▀ ░▒██▒ ░  ░▒██▒   ░██▒░▒████▒░░██▒██▓  ▓█   ▓██▒▒██░   ▓██░\n"
     brand_name += "░ ░▒ ▒  ░▒▓▒░ ░  ░░ ▒░   ░  ░░░ ▒░ ░░ ▓░▒ ▒   ▒▒   ▓▒█░░ ▒░   ▒ ▒ \n"
-colors = [
-"rgb(255,0,0)", "rgb(255,69,0)", "rgb(255,140,0)", "rgb(255,215,0)", "rgb(173,255,47)", 
-"rgb(0,255,0)", "rgb(0,255,255)", "rgb(0,191,255)", "rgb(0,0,255)", "rgb(139,0,255)",
-"rgb(255,0,255)"
-]
-colorful_text = gradient_text(brand_name, colors)
-console.print(colorful_text)
-print(Colorate.Horizontal(Colors.rainbow, '=================================================================='))
-print(Colorate.Horizontal(Colors.rainbow, '\t         𝐏𝐋𝐄𝐀𝐒𝐄 𝐋𝐎𝐆𝐎𝐔𝐓 𝐅𝐑𝐎𝐌 𝐂𝐏𝐌 𝐁𝐄𝐅𝐎𝐑𝐄 𝐔𝐒𝐈𝐍𝐆 𝐓𝐇𝐈𝐒 𝐓𝐎𝐎𝐋'))
-print(Colorate.Horizontal(Colors.rainbow, '    𝐒𝐇𝐀𝐑𝐈𝐍𝐆 𝐓𝐇𝐄 𝐀𝐂𝐂𝐄𝐒𝐒 𝐊𝐄𝐘 𝐈𝐒 𝐍𝐎𝐓 𝐀𝐋𝐋𝐎𝐖𝐄𝐃 𝐀𝐍𝐃 𝐖𝐈𝐋𝐋 𝐁𝐄 𝐁𝐋𝐎𝐂𝐊𝐄𝐃'))
-print(Colorate.Horizontal(Colors.rainbow, f' ‌           𝐓𝐞𝐥𝐞𝐠𝐫𝐚𝐦: @{__CHANNEL_USERNAME__} 𝐎𝐫 @{__GROUP_USERNAME__}'))
-print(Colorate.Horizontal(Colors.rainbow, '=================================================================='))
+    colors = [
+        "rgb(255,0,0)", "rgb(255,69,0)", "rgb(255,140,0)", "rgb(255,215,0)", "rgb(173,255,47)", 
+        "rgb(0,255,0)", "rgb(0,255,255)", "rgb(0,191,255)", "rgb(0,0,255)", "rgb(139,0,255)",
+        "rgb(255,0,255)"
+    ]
+    colorful_text = gradient_text(brand_name, colors)
+    console.print(colorful_text)
+    print(Colorate.Horizontal(Colors.rainbow, '=================================================================='))
+    print(Colorate.Horizontal(Colors.rainbow, '\t         𝐏𝐋𝐄𝐀𝐒𝐄 𝐋𝐎𝐆𝐎𝐔𝐓 𝐅𝐑𝐎𝐌 𝐂𝐏𝐌 𝐁𝐄𝐅𝐎𝐑𝐄 𝐔𝐒𝐈𝐍𝐆 𝐓𝐇𝐈𝐒 𝐓𝐎𝐎𝐋'))
+    print(Colorate.Horizontal(Colors.rainbow, '    𝐒𝐇𝐀𝐑𝐈𝐍𝐆 𝐓𝐇𝐄 𝐀𝐂𝐂𝐄𝐒𝐒 𝐊𝐄𝐘 𝐈𝐒 𝐍𝐎𝐓 𝐀𝐋𝐋𝐎𝐖𝐄𝐃 𝐀𝐍𝐃 𝐖𝐈𝐋𝐋 𝐁𝐄 𝐁𝐋𝐎𝐂𝐊𝐄𝐃'))
+    print(Colorate.Horizontal(Colors.rainbow, f' ‌           𝐓𝐞𝐥𝐞𝐠𝐫𝐚𝐦: @{__CHANNEL_USERNAME__} 𝐎𝐫 @{__GROUP_USERNAME__}'))
+    print(Colorate.Horizontal(Colors.rainbow, '=================================================================='))
 
 def load_player_data(cpm):
-response = cpm.get_player_data()
-if response.get('ok'):
-data = response.get('data')
-if 'floats' in data and 'localID' in data and 'money' in data and 'coin' in data:
+    response = cpm.get_player_data()
+    if response.get('ok'):
+        data = response.get('data')
+        if 'floats' in data and 'localID' in data and 'money' in data and 'coin' in data:
         
-print(Colorate.Horizontal(Colors.rainbow, '==========[ PLAYER DETAILS ]=========='))
+            print(Colorate.Horizontal(Colors.rainbow, '==========[ PLAYER DETAILS ]=========='))
             
-print(Colorate.Horizontal(Colors.rainbow, f'Name   : {(data.get("Name") if "Name" in data else "UNDEFINED")}.'))
+            print(Colorate.Horizontal(Colors.rainbow, f'Name   : {(data.get("Name") if "Name" in data else "UNDEFINED")}.'))
                 
-print(Colorate.Horizontal(Colors.rainbow, f'LocalID: {data.get("localID")}.'))
+            print(Colorate.Horizontal(Colors.rainbow, f'LocalID: {data.get("localID")}.'))
             
-print(Colorate.Horizontal(Colors.rainbow, f'Money  : {data.get("money")}.'))
+            print(Colorate.Horizontal(Colors.rainbow, f'Money  : {data.get("money")}.'))
             
-print(Colorate.Horizontal(Colors.rainbow, f'Coins  : {data.get("coin")}.'))
+            print(Colorate.Horizontal(Colors.rainbow, f'Coins  : {data.get("coin")}.'))
             
-else:
-print(Colorate.Horizontal(Colors.rainbow, '! ERROR: new accounts most be signed-in to the game at least once !.'))
-exit(1)
-else:
-print(Colorate.Horizontal(Colors.rainbow, '! ERROR: seems like your login is not properly set !.'))
-exit(1)
+        else:
+            print(Colorate.Horizontal(Colors.rainbow, '! ERROR: new accounts most be signed-in to the game at least once !.'))
+            exit(1)
+    else:
+        print(Colorate.Horizontal(Colors.rainbow, '! ERROR: seems like your login is not properly set !.'))
+        exit(1)
 
 
 def load_key_data(cpm):
 
-data = cpm.get_key_data()
+    data = cpm.get_key_data()
     
-print(Colorate.Horizontal(Colors.rainbow, '========[ ACCESS KEY DETAILS ]========'))
+    print(Colorate.Horizontal(Colors.rainbow, '========[ ACCESS KEY DETAILS ]========'))
     
-print(Colorate.Horizontal(Colors.rainbow, f'Access Key : {data.get("access_key")}.'))
+    print(Colorate.Horizontal(Colors.rainbow, f'Access Key : {data.get("access_key")}.'))
     
-print(Colorate.Horizontal(Colors.rainbow, f'Telegram ID: {data.get("telegram_id")}.'))
+    print(Colorate.Horizontal(Colors.rainbow, f'Telegram ID: {data.get("telegram_id")}.'))
     
-print(Colorate.Horizontal(Colors.rainbow, f'Balance $  : {(data.get("coins") if not data.get("is_unlimited") else "Unlimited")}.'))
+    print(Colorate.Horizontal(Colors.rainbow, f'Balance $  : {(data.get("coins") if not data.get("is_unlimited") else "Unlimited")}.'))
         
     
 
 def prompt_valid_value(content, tag, password=False):
-while True:
-value = Prompt.ask(content, password=password)
-if not value or value.isspace():
-print(Colorate.Horizontal(Colors.rainbow, f'{tag} CANNOT BE EMPTY OR JUST SPACES, PLEASE TRY AGAIN'))
-else:
-return value
+    while True:
+        value = Prompt.ask(content, password=password)
+        if not value or value.isspace():
+            print(Colorate.Horizontal(Colors.rainbow, f'{tag} CANNOT BE EMPTY OR JUST SPACES, PLEASE TRY AGAIN'))
+        else:
+            return value
             
 def load_client_details():
-response = requests.get("http://ip-api.com/json")
-data = response.json()
-print(Colorate.Horizontal(Colors.rainbow, '=============[ 𝐋𝐎𝐂𝐀𝐓𝐈𝐎𝐍 ]============='))
-print(Colorate.Horizontal(Colors.rainbow, f'Ip Address : {data.get("query")}.'))
-print(Colorate.Horizontal(Colors.rainbow, f'Location   : {data.get("city")} {data.get("regionName")} {data.get("countryCode")}.'))
-print(Colorate.Horizontal(Colors.rainbow, f'Country    : {data.get("country")} {data.get("zip")}.'))
-print(Colorate.Horizontal(Colors.rainbow, '===============[ 𝐌𝐄𝐍𝐔 ]==============='))
+    response = requests.get("http://ip-api.com/json")
+    data = response.json()
+    print(Colorate.Horizontal(Colors.rainbow, '=============[ 𝐋𝐎𝐂𝐀𝐓𝐈𝐎𝐍 ]============='))
+    print(Colorate.Horizontal(Colors.rainbow, f'Ip Address : {data.get("query")}.'))
+    print(Colorate.Horizontal(Colors.rainbow, f'Location   : {data.get("city")} {data.get("regionName")} {data.get("countryCode")}.'))
+    print(Colorate.Horizontal(Colors.rainbow, f'Country    : {data.get("country")} {data.get("zip")}.'))
+    print(Colorate.Horizontal(Colors.rainbow, '===============[ 𝐌𝐄𝐍𝐔 ]==============='))
 
 def interpolate_color(start_color, end_color, fraction):
-start_rgb = tuple(int(start_color[i:i+2], 16) for i in (1, 3, 5))
-end_rgb = tuple(int(end_color[i:i+2], 16) for i in (1, 3, 5))
-interpolated_rgb = tuple(int(start + fraction * (end - start)) for start, end in zip(start_rgb, end_rgb))
-return "{:02x}{:02x}{:02x}".format(*interpolated_rgb)
+    start_rgb = tuple(int(start_color[i:i+2], 16) for i in (1, 3, 5))
+    end_rgb = tuple(int(end_color[i:i+2], 16) for i in (1, 3, 5))
+    interpolated_rgb = tuple(int(start + fraction * (end - start)) for start, end in zip(start_rgb, end_rgb))
+    return "{:02x}{:02x}{:02x}".format(*interpolated_rgb)
 
 def rainbow_gradient_string(customer_name):
-modified_string = ""
-num_chars = len(customer_name)
-start_color = "{:06x}".format(random.randint(0, 0xFFFFFF))
-end_color = "{:06x}".format(random.randint(0, 0xFFFFFF))
-for i, char in enumerate(customer_name):
-fraction = i / max(num_chars - 1, 1)
-interpolated_color = interpolate_color(start_color, end_color, fraction)
-modified_string += f'[{interpolated_color}]{char}'
-return modified_string
+    modified_string = ""
+    num_chars = len(customer_name)
+    start_color = "{:06x}".format(random.randint(0, 0xFFFFFF))
+    end_color = "{:06x}".format(random.randint(0, 0xFFFFFF))
+    for i, char in enumerate(customer_name):
+        fraction = i / max(num_chars - 1, 1)
+        interpolated_color = interpolate_color(start_color, end_color, fraction)
+        modified_string += f'[{interpolated_color}]{char}'
+    return modified_string
 
 if __name__ == "__main__":
 console = Console()
