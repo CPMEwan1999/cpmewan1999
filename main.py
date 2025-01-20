@@ -605,22 +605,24 @@ if __name__ == "__main__":
                     continue
                     
                     
-            elif service == 22: # Unlock House 3
-                console.print("[%] UNLOCKING HOUSE 3: ", end=None)
-                if cpm.hack_car_speed():
+                    
+            elif service == 22: # Hack Car Speed (299hp)
+                print(Colorate.Horizontal(Colors.rainbow, '[!] NOTE: ORIGINAL SPEED CAN NOT BE RESTORED'))
+                console.print("[%] HACKING CAR SPEED: ", end=None)
+                if cpm.hack_car_speed(car_id):
                     print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
-                    print(Colorate.Horizontal(Colors.rainbow, '======================================'))
+                    console.print("==================================")
                     answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
-                    if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
+                    if answ == "y": console.print("[!] THANK YOU FOR USING OUR TOOL")
                     else: continue
                 else:
                     print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
-                    print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
+                    print(Colorate.Horizontal(Colors.rainbow, '[!] PLEASE TRY AGAIN'))
                     sleep(2)
-                    continue
+                    continue                    
                     
-                                        
-                                                                                
+                    
+                    
             elif service == 23: # Clone Account
                 print(Colorate.Horizontal(Colors.rainbow, '[!] PLEASE ENTER ACCOUNT DETALIS'))
                 to_email = prompt_valid_value("[?] ACCOUNT EMAIL", "Email", password=False)
