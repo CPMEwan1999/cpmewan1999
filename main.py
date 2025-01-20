@@ -26,14 +26,7 @@ def signal_handler():
         "\n\033[93m(＾-＾)ノ~~~\033[0m",  # زرد
         "\n\033[92m(＾-＾)ノ~~~~~~\033[0m" , # سبزl
     ]
-    elif what=='0':
-        signal_handler()
-        time.sleep(1)
-        console.print("""
-[bold magenta]Exiting... Goodbye![/bold magenta]""")
-        
-        
-        exit()
+    sys.exit(0)
 
 def gradient_text(text, colors):
     lines = text.splitlines()
