@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 import random
 import requests
 from time import sleep
@@ -17,25 +15,25 @@ __CHANNEL_USERNAME__ = "Ewan1999Kurd"
 __GROUP_USERNAME__   = "Ewan19_99Kurd"
 
 def signal_handler(sig, frame):
-print("\n Bye Bye...")
-sys.exit(0)
+    print("\n Bye Bye...")
+    sys.exit(0)
 
 def gradient_text(text, colors):
-lines = text.splitlines()
-height = len(lines)
-width = max(len(line) for line in lines)
-colorful_text = Text()
-for y, line in enumerate(lines):
-for x, char in enumerate(line):
-if char != ' ':
-color_index = int(((x / (width - 1 if width > 1 else 1)) + (y / (height - 1 if height > 1 else 1))) * 0.5 * (len(colors) - 1))
-color_index = min(max(color_index, 0), len(colors) - 1)  # Ensure the index is within bounds
-style = Style(color=colors[color_index])
-colorful_text.append(char, style=style)
-else:
-colorful_text.append(char)
-colorful_text.append("\n")
-return colorful_text
+    lines = text.splitlines()
+    height = len(lines)
+    width = max(len(line) for line in lines)
+    colorful_text = Text()
+    for y, line in enumerate(lines):
+        for x, char in enumerate(line):
+            if char != ' ':
+                color_index = int(((x / (width - 1 if width > 1 else 1)) + (y / (height - 1 if height > 1 else 1))) * 0.5 * (len(colors) - 1))
+                color_index = min(max(color_index, 0), len(colors) - 1)  # Ensure the index is within bounds
+                style = Style(color=colors[color_index])
+                colorful_text.append(char, style=style)
+            else:
+                colorful_text.append(char)
+        colorful_text.append("\n")
+    return colorful_text
 
 def banner(console):
 os.system('cls' if os.name == 'nt' else 'clear')
