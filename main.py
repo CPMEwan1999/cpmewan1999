@@ -20,12 +20,10 @@ from cpmewan1999 import CPMEwan1999
 __CHANNEL_USERNAME__ = "Ewan1999Kurd"
 __GROUP_USERNAME__   = "Ewan19_99Kurd"
 
-def signal_handler():
-    frames  = [
+def signal_handler(sig, frame):
         "\n\033[94m(＾-＾)ノ\033[0m",  # آبی
         "\n\033[93m(＾-＾)ノ~~~\033[0m",  # زرد
         "\n\033[92m(＾-＾)ノ~~~~~~\033[0m" , # سبزl
-    ]
     sys.exit(0)
 
 def gradient_text(text, colors):
