@@ -1939,9 +1939,52 @@ def start_menu():
     
     options = {
         "1": "scan ip",
+        "2": "wireguard for Hiddify",
+        "3": "wireguard for Hiddify without ip scanning",
+        "4": "wireguard for Hiddify with a sub link",
+        "5": "wireguard for v2ray and mahsaNG without noise",
+        "6": "wireguard for v2ray and mahsaNG without ip scanning without noise",
+        "7": "WoW for v2ray or mahsaNG without noise",
+        "8": "WoW for v2ray or mahsaNG in sub link without noise",
+        "9": "Add/Delete shortcut",
+        "10":"get wireguard.conf",
+        "11":"wireguard for nikaNg and MahsaNg  with noise",
+        "12":"wireguard for nikaNg and MahsaNg without ip scanning with noise",
+        "13":"WoW with noise for Nikang or MahsaNg ",
+        "14":"WoW with noise for Nikang or MahsaNg in sub link",
+        "15": "wireguard for Sing-box and Hhidify | old | ",
+        "16": "wireguard for Sing-box and Hiddify| old | without ip scanning",
+        "17": "wireguard for Sing-box and Hiddify | old | with a sub link",
+        "00" : "info",
         "0": "Exit"
     }
-
+    rprint("[bold red]by Telegram= @arshiacomplus[/bold red]")
+    for key, value in options.items():
+        rprint(f" [bold yellow]{key}[/bold yellow]: {value}")
+    what = Prompt.ask("Choose an option", choices=list(options.keys()), default="0")
+    return what
+def get_number_of_configs():
+    while True:
+        try:
+            how_many = int(Prompt.ask('\nHow many configs do you need (2 to 4): '))
+            if how_many >= 2 and how_many <= 4:
+                break
+        except ValueError:
+            console.print("[bold red]Please enter a valid number![/bold red]", style="red")
+    return how_many
+def gojo_goodbye_animation():
+    frames  = [
+        "\n\033[94m(＾-＾)ノ\033[0m",  # آبی
+        "\n\033[93m(＾-＾)ノ~~~\033[0m",  # زرد
+        "\n\033[92m(＾-＾)ノ~~~~~~\033[0m" , # سبزl
+    ]
+    
+    for frame in frames:
+      #  os.system('cls' if os.name == 'nt' else 'clear')
+        print(frame)
+        time.sleep(1)
+if __name__ == "__main__":
+    os.system('clear')
 
 
 
