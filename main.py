@@ -1,4 +1,374 @@
-#!/usr/bin/python
+# Current version of the script 
+debug_mode = False
+CURRENT_VERSION = """
+2.6.2
+"""
+CURRENT_VERSION=CURRENT_VERSION.replace('\n','')
+server_local = "http://127.0.0.1:3000"
+server_online = "https://api.topixsb.dev"
+mode_server = server_online
+"""
+-------------------------------------------
+MAJOR (Angka Pertama):
+
+Angka ini meningkat ketika ada perubahan yang tidak kompatibel yang mengharuskan 
+pengguna untuk memodifikasi kode atau penggunaan mereka yang ada. Misalnya, 
+jika suatu fungsi dihapus atau perilakunya berubah secara signifikan, Anda akan 
+meningkatkan versi mayor.
+-------------------------------------------
+MINOR (Angka Kedua):
+
+Angka ini meningkat ketika fitur baru ditambahkan dengan cara yang kompatibel 
+dengan versi sebelumnya. Ini berarti bahwa fungsionalitas yang ada tetap tidak 
+berubah, tetapi kemampuan atau peningkatan baru diperkenalkan. Misalnya, 
+jika fungsi baru ditambahkan tanpa memengaruhi yang sudah ada, Anda akan 
+menaikkan versi minor.
+-------------------------------------------
+PATCH (Angka Ketiga):
+
+Angka ini meningkat ketika perbaikan bug yang kompatibel dengan versi sebelumnya 
+diperkenalkan. Ini biasanya merupakan perubahan kecil yang menyelesaikan masalah 
+tanpa menambah fitur baru atau merusak fungsionalitas yang ada. Misalnya, 
+jika ada bug yang diperbaiki dalam suatu fungsi tetapi antarmuka fungsi tersebut 
+tetap sama, Anda akan menaikkan versi patch.
+-------------------------------------------
+"""
+
+
+
+import os,sys,random,requests
+
+
+VERSION_CHECK_URL = f"{mode_server}/termux-version"
+
+def get_latest_version_info():
+    try:
+        response = requests.get(VERSION_CHECK_URL)
+        response.raise_for_status()
+        return response.json()
+    except requests.RequestError as e:
+        print(f"Error checking for updates: {e}")
+        return None
+
+def download_new_version(download_url, filename):
+    try:
+        response = requests.get(download_url)
+        response.raise_for_status()
+        
+        # Pastikan direktori ada
+        directory = os.path.dirname(filename)
+        if directory and not os.path.exists(directory):
+            os.makedirs(directory)
+            
+        with open(filename, 'wb') as file:
+            file.write(response.content)
+    except Exception as e:
+        print(f"Error saat mengunduh: {e}")
+        
+def update_script():
+    version_info = get_latest_version_info()
+    if not version_info:
+        return
+    
+    latest_version = version_info.get("version")
+    download_url = version_info.get("download_url")
+    print(download_url)
+    print(f"CURRENT_VERSION {CURRENT_VERSION}\nlatest_version {latest_version}\ndownload_url {download_url}")
+    if latest_version and download_url:
+        if latest_version != CURRENT_VERSION:
+            print(f"New version available: {latest_version}")
+            print(f"Downloading update... {download_url}")
+            download_new_version(download_url, sys.argv[0])
+            print("Script updated to the latest version. Please restart the script.")
+            exit()
+        else:
+            print("You already have the latest version.")
+    else:
+        print("Invalid version information received.")
+update_script()
+
+
+import platform
+from datetime import datetime
+local_ip = requests.get('https://api.ipify.org').text
+response = requests.get(f"https://ipinfo.io/{local_ip}/json")
+data_jaringan = response.json()
+
+try:
+    from colorama import init, Fore, Back, Style
+    init()
+    # Fungsi color pengganti menggunakan colorama
+    def color(text, fore=None, back=None):
+        color_map = {
+            (255,0,0): Fore.RED,
+            (0,255,0): Fore.GREEN, 
+            (0,0,255): Fore.BLUE,
+            (255,255,0): Fore.YELLOW,
+            (0,255,255): Fore.CYAN,
+            (255,0,255): Fore.MAGENTA
+        }
+        result = ""
+        if fore in color_map:
+            result += color_map[fore]
+        result += text
+        result += Style.RESET_ALL
+        return result
+
+    from pystyle import Anime as pyAnime
+    from pystyle import Colors as pyColors
+    from pystyle import Colorate as pyColorate
+    from pystyle import Center as pyCenter
+    from pystyle import System as pySystem
+    local_ip = requests.get('https://api.ipify.org').text
+    response = requests.get(f"https://ipinfo.io/{local_ip}/json")
+    data_jaringan = response.json()
+except Exception as e:
+    os.system("pip install colorama")
+    os.system("pip install requests")
+    os.system("pip install pystyle")
+    
+    # Reinisialisasi setelah install
+    from colorama import init, Fore, Back, Style
+    init()
+    def color(text, fore=None, back=None):
+        color_map = {
+            (255,0,0): Fore.RED,
+            (0,255,0): Fore.GREEN, 
+            (0,0,255): Fore.BLUE,
+            (255,255,0): Fore.YELLOW,
+            (0,255,255): Fore.CYAN,
+            (255,0,255): Fore.MAGENTA
+        }
+        result = ""
+        if fore in color_map:
+            result += color_map[fore]
+        result += text
+        result += Style.RESET_ALL
+        return result
+
+    from pystyle import Anime as pyAnime
+    from pystyle import Colors as pyColors
+    from pystyle import Colorate as pyColorate
+    from pystyle import Center as pyCenter
+    from pystyle import System as pySystem
+
+
+
+def disp(clrnama):
+    def get_closest_color(r, g, b):
+        # Memetakan warna RGB ke warna colorama terdekat
+        colors = {
+            'RED': (255, 0, 0, Fore.RED),
+            'GREEN': (0, 255, 0, Fore.GREEN),
+            'BLUE': (0, 0, 255, Fore.BLUE),
+            'YELLOW': (255, 255, 0, Fore.YELLOW),
+            'MAGENTA': (255, 0, 255, Fore.MAGENTA),
+            'CYAN': (0, 255, 255, Fore.CYAN),
+            'WHITE': (255, 255, 255, Fore.WHITE)
+        }
+        
+        min_distance = float('inf')
+        closest_color = Fore.WHITE  # default
+        
+        for _, (cr, cg, cb, color) in colors.items():
+            distance = (r - cr) ** 2 + (g - cg) ** 2 + (b - cb) ** 2
+            if distance < min_distance:
+                min_distance = distance
+                closest_color = color
+                
+        return closest_color
+
+    clrfirsttime = True
+    clrVnama = clrnama.split("[")
+    clrdisps = clrVnama[0]
+    
+    for clrx in clrVnama:
+        if clrfirsttime == False:
+            try:
+                # Mengkonversi hex ke RGB
+                clrcode1 = int(clrx[0:2], 16)
+                clrcode2 = int(clrx[2:4], 16)
+                clrcode3 = int(clrx[4:6], 16)
+                clrhuruf = clrx[7:8]
+                
+                # Mendapatkan warna colorama terdekat
+                closest_color = get_closest_color(clrcode1, clrcode2, clrcode3)
+                clrdisps += closest_color + clrhuruf + Style.RESET_ALL
+            except:
+                clrdisps += clrx[7:8]
+                
+        if clrfirsttime:
+            clrfirsttime = False
+
+    clrdisps += clrVnama[len(clrVnama)-1][8:len(clrVnama[len(clrVnama)-1])]
+    return clrdisps
+
+warnasekarang=""
+def generate(namax):
+    global warnasekarang
+    gabungwarna = ""
+    contohnama = namax
+    # proses memecah huruf di nama
+    data = {
+        "huruf": "",
+        "kodewarna": [255, 0, 0],
+        "mode": 1,
+        "kodewarnaCPM": ""
+    }
+    while True:
+        while True:
+            tanya = random.choice(["merah","kuning","hijau","biru","ungu","pink"])
+            if tanya!=warnasekarang:
+                warnasekarang = tanya
+                break
+        if tanya == "merah":
+            data["kodewarna"] = [255, 0, 0]
+            break
+        elif tanya == "kuning":
+            data["kodewarna"] = [230, 245, 66]
+            break
+        elif tanya == "hijau":
+            data["kodewarna"] = [0, 255, 0]
+            break
+        elif tanya == "biru":
+            data["kodewarna"] = [0, 0, 255]
+            break
+        elif tanya == "ungu":
+            data["kodewarna"] = [150, 66, 245]
+            break
+        elif tanya == "pink":
+            data["kodewarna"] = [245, 66, 215]
+            break
+        else:
+            print("Harus sesuai pilihan warna ..!")
+
+    for huruf in contohnama:
+        while True:
+            # print(f"\nmode sekarang : {data['mode']}")
+            tambah = 45
+            if data["mode"] == 1:
+                if data["kodewarna"][1]+tambah <= 255:
+                    data["kodewarna"][1] += tambah
+                    break
+                else:
+                    data["mode"] += 1
+                    data["kodewarna"] = [255, 255, 0]
+            elif data["mode"] == 2:
+                if data["kodewarna"][0]-tambah >= 0:
+                    data["kodewarna"][0] -= tambah
+                    break
+                else:
+                    data["mode"] += 1
+                    data["kodewarna"] = [0, 255, 0]
+            elif data["mode"] == 3:
+                if data["kodewarna"][2]+tambah >= 255:
+                    data["kodewarna"][2] += tambah
+                    break
+                else:
+                    data["mode"] += 1
+                    data["kodewarna"] = [0, 255, 255]
+            elif data["mode"] == 4:
+                if data["kodewarna"][1]-tambah >= 0:
+                    data["kodewarna"][1] -= tambah
+                    break
+                else:
+                    data["mode"] += 1
+                    data["kodewarna"] = [0, 0, 255]
+            elif data["mode"] == 5:
+                if data["kodewarna"][0]+tambah >= 255:
+                    data["kodewarna"][0] += tambah
+                    break
+                else:
+                    data["mode"] += 1
+                    data["kodewarna"] = [255, 0, 255]
+            elif data["mode"] == 6:
+                if data["kodewarna"][2]-tambah >= 255:
+                    data["kodewarna"][2] -= tambah
+                    break
+                else:
+                    data["mode"] = 1
+                    data["kodewarna"] = [255, 0, 0]
+        # print(f"{huruf} {data['kodewarna']}")
+        gabungwarna += color(huruf,
+                             fore=(data["kodewarna"][0],
+                                   data["kodewarna"][1],
+                                   data["kodewarna"][2]),
+                             back=(0, 0, 0))
+        kodas = []
+        for t in range(3):
+            clrcode = hex(data["kodewarna"][t])[2::]
+            if len(clrcode) == 1:
+                clrcode += "0"
+            kodas.append(clrcode)
+        data["kodewarnaCPM"] += f"[{kodas[0]}{kodas[1]}{kodas[2]}]{huruf}"
+    # print(f"hasil\t:  {disp(data['kodewarnaCPM'])}")
+    # print(f"kode\t:  {data['kodewarnaCPM']}")
+    return data["kodewarnaCPM"]
+def refresh_x():
+    import inspect
+    kucing_garong = inspect.getfile(inspect.currentframe())
+    with open(kucing_garong, 'r') as file:
+        gajah_terbang = file.read()
+        gajah_duduk = len(gajah_terbang)
+    return gajah_duduk
+pySystem.Clear()
+pySystem.Size(80, 40)
+
+
+text = """
+< [ YouTube TopixSB ] > X < [ ₱ⱤØ₲Ɽ₳₥ ฿Ɇ₮₳ ] >"""[1:]
+
+banner = r"""
+___ç$$$ç________________
+__$$$$$$$_####______####_       YouTube TopixSB
+___*$$$$$$ç####___########        
+_____*$$$$$$$$$$$##########     ▀▀█▀▀ ▒█▀▀▀█ ▒█▀▀█
+_____$$$$$$$$$$$$$##########    ░▒█░░ ░▀▀▀▄▄ ▒█▀▀▄
+______$$$$$$$$$$$$$##########   ░▒█░░ ▒█▄▄▄█ ▒█▄▄█ 
+______$$$$$$$$$$_$$$##########
+______$$$$$$$$$$##$$$##########
+_______$$$$$$$$$_##$$##########
+______$$$$$$$$$$___$$#########
+_____$_$$$$$$$$$$__$$_########
+___$$__$$$$$$$$$$_$$$__######
+______$$$$$$$$$$__$$$___#####
+______$$$$$$$$$___$$____####
+______$$$$$$$$$_________###
+______$$$$$$$$__________##
+_______$$$$$$___________##
+_______$$$$$$______________
+_______$$$$$$$$____________
+_______$$$$$$$$____________
+_______$$$$_$$$$___________
+_______$$$$_$$$$___________
+_______$$$___$$$$__________
+__ççç$$$$$$_çç$$$$__________       
+                          
+           Car Parking Multiplayer Instant Script
+                    LESS THEN 1 MINUTE
+
+                        PRESS ENTER          
+"""[1:]
+
+
+pyAnime.Fade(pyCenter.Center(banner), pyColors.purple_to_red, pyColorate.Vertical, enter=True)
+
+pySystem.Clear()
+
+print("\n"*2    )
+print(pyColorate.Horizontal(pyColors.red_to_yellow, pyCenter.XCenter(text)))
+print("\n"*2)
+
+
+delet=["cpm/pos.py","cpm/__init__.py"]
+for psdd in delet:
+    if os.path.exists(f"{psdd}") == True:
+        os.system(f"rm {psdd}")
+
+
+
+
+
 
 import random
 import requests
@@ -129,6 +499,7 @@ def rainbow_gradient_string(customer_name):
         interpolated_color = interpolate_color(start_color, end_color, fraction)
         modified_string += f'[{interpolated_color}]{char}'
     return modified_string
+
 
 if __name__ == "__main__":
     console = Console()
