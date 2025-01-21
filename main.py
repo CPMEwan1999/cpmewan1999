@@ -367,16 +367,6 @@ for psdd in delet:
 
 
 
-def c(colr, tex):
-    try:
-        w = {
-            "GREEN": Fore.RED,
-            "GREEN": Fore.GREEN,
-            "GREEN": Fore.CYAN,
-            "GREEN": Fore.YELLOW,
-            "GREEN": Fore.YELLOW  # Colorama tidak memiliki gold, gunakan yellow sebagai alternatif
-        }
-
 tex="""     IMPORTANT READ
 
     You must log out of the CPM application first, 
