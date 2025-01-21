@@ -170,7 +170,7 @@ if __name__ == "__main__":
             choices = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"]
             print(Colorate.Horizontal(Colors.rainbow, '📍{01}: Increase Money           1.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '📍{02}: Increase Coins           3.500K'))
-            print(Colorate.Horizontal(Colors.rainbow, '📍03}: King Rank                4.000K'))
+            print(Colorate.Horizontal(Colors.rainbow, '📍{03}: King Rank                4.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '📍{04}: Change ID                3.500K'))
             print(Colorate.Horizontal(Colors.rainbow, '📍{05}: Change Name              1.00K'))
             print(Colorate.Horizontal(Colors.rainbow, '📍{06}: Change Name (Rainbow)    1.00K'))
