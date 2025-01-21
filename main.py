@@ -10,13 +10,13 @@ from rich.text import Text
 from rich.style import Style
 import pystyle
 from pystyle import Colors, Colorate
-
+from turtle import* 
 from cpmewan1999 import CPMEwan1999
 
 __CHANNEL_USERNAME__ = "Ewan1999Kurd"
 __GROUP_USERNAME__   = "Ewan19_99Kurd"
 
-from turtle import* 
+
 
 bgcolor( '#36454f') #Charcoal Color
 pencolor('#f5f5f5') #wWhite Smoke
@@ -30,7 +30,7 @@ pendown()
 
 left(90) 
 
-for i in range(4): 
+for i in range(4):
 forward(250)
 circle(34,90) 
 
