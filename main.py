@@ -51,7 +51,7 @@ def gojo_goodbye_animation():
         print(frame)
         time.sleep(1)
 if __name__ == "__main__":
-    os.system('clear')
+    
     
     
     what=start_menu()
