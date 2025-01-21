@@ -21,7 +21,6 @@
 #
 # -----------------------------------------------------------------------
 from __future__ import absolute_import
-from waptutils import __version__
 
 import os
 import sys
