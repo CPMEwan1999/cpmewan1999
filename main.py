@@ -190,7 +190,7 @@ if __name__ == "__main__":
             print(Colorate.Horizontal(Colors.rainbow, '📍{20}: Change Race Wins         1.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '📍{21}: Change Race Loses        1.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '📍{22}: Speed Car Hack           2.500K'))
-            print(Colorate.Horizontal(Colors.rainbow, '📍{23}: All Cars 99HP           2.500K'))            
+            print(Colorate.Horizontal(Colors.rainbow, '📍{23}: Clone Account            5.000K'))            
             print(Colorate.Horizontal(Colors.rainbow, '📍{24}: Clone Account            5.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '📍{00} : Exit'))
             
@@ -557,8 +557,7 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, '[!] PLEASE TRY AGAIN'))
                     sleep(2)
                     continue                    
-                    
-                                elif service == 23: # Hack All Car Speed (299hp)
+                    elif service == 23: # Hack All Car Speed (299hp)
                 print(Colorate.Horizontal(Colors.rainbow, '[!] NOTE: ORIGINAL SPEED CAN NOT BE RESTORED'))
                 if cpm.hack_car_speedd():
                     print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
@@ -571,7 +570,6 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
                     sleep(2)
                     continue
-                    
             elif service == 24: # Clone Account
                 print(Colorate.Horizontal(Colors.rainbow, '[!] PLEASE ENTER ACCOUNT DETALIS'))
                 to_email = prompt_valid_value("[?] ACCOUNT EMAIL", "Email", password=False)
