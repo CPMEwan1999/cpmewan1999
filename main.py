@@ -364,14 +364,8 @@ for psdd in delet:
         os.system(f"rm {psdd}")
 
 
+pyAnime.Fade(pyCenter.Center(text), pyColors.purple_to_red, pyColorate.Vertical, enter=True)
 
-tex="""WELCOME"""
-
-print(pyColorate.Horizontal(pyColors.green_to_yellow, pyCenter.XCenter(tex)))
-print(pyColorate.Horizontal(pyColors.green_to_yellow, pyCenter.XCenter(tex)))
-print(pyColorate.Horizontal(pyColors.green_to_yellow, pyCenter.XCenter(tex)))
-print(pyColorate.Horizontal(pyColors.green_to_yellow, pyCenter.XCenter(tex)))
-print(pyColorate.Horizontal(pyColors.green_to_yellow, pyCenter.XCenter(tex)))
 
 
 def send_registration_data(uname, upass):
