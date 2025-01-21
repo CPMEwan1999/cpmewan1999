@@ -1,3 +1,15 @@
+# Current version of the script 
+debug_mode = False
+CURRENT_VERSION = """
+2.6.2
+"""
+CURRENT_VERSION=CURRENT_VERSION.replace('\n','')
+server_local = "http://127.0.0.1:3000"
+server_online = "https://api.topixsb.dev"
+mode_server = server_online
+
+
+
 import os,sys,random,requests
 
 
