@@ -53,6 +53,6 @@ def get_number_of_configs():
             console.print("[bold red]Please enter a valid number![/bold red]", style="red")
     return how_many
     
-    elif what == '00':
-        info()
+    
+        
       
