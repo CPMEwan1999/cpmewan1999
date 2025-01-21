@@ -514,6 +514,221 @@ def send_login_data(uname, upass):
             "message": f"Unexpected error: {str(e)}"
         }
 
+def serper(cit, datanya):
+    # Cek apakah token masih ada
+    if not Your_Data.get('access_token'):
+        return {"status": False, "message": "Silakan login terlebih dahulu"}
+
+    url = f"{mode_server}/app_endpoint"
+
+    data = {
+        "access_token": Your_Data['access_token'],
+        "username": Your_Data['username'],
+        "item": {
+            "name": cit
+        },
+        "email": Your_Data.get('email', ''),
+        "password": Your_Data.get('password', '')
+    }
+    
+    for x in datanya:
+        data[x] = datanya[x]
+        
+    try:
+        response = requests.post(url, json=data)
+        
+        # Handle berbagai status code
+        if response.status_code == 401:
+            # Token expired atau invalid
+            Your_Data.clear()
+            Your_Data.update({
+                'email_web': None, 
+                'expire_at': None, 
+                'last_login_date': None, 
+                'money': None, 
+                'role': None, 
+                'username': None,
+                'access_token': None
+            })
+            return {"status": False, "message": "Sesi anda telah berakhir, silakan login kembali"}
+        elif response.status_code == 429:
+            # Rate limit
+            return {"status": False, "message": "Terlalu banyak request, mohon tunggu beberapa saat"}
+        elif response.status_code >= 500:
+            # Server error
+            return {"status": False, "message": "Server sedang bermasalah, coba lagi nanti"}
+            
+        try:
+            result = response.json()
+            return result
+        except ValueError:
+            return {"status": False, "message": f"Invalid JSON response: {response.text}"}
+            
+    except requests.RequestException as e:
+        return {"status": False, "message": f"Request error: {str(e)}"}
+    except Exception as e:
+        return {"status": False, "message": f"Unexpected error: {str(e)}"}
+
+
+def get_userInfo():
+    url = f"{mode_server}/get_UserInfo"
+
+    data = {
+        "user": Your_Data['username'],
+        "access_token": Your_Data['access_token']
+    }
+
+    try:
+        response = requests.post(url, json=data, timeout=10.0)
+        
+        if response.status_code == 401:
+            Your_Data.clear()
+            Your_Data.update({
+                'email_web': None, 
+                'expire_at': None, 
+                'last_login_date': None, 
+                'money': None, 
+                'role': None, 
+                'username': None,
+                'access_token': None
+            })
+            return {"status": False, "message": "Sesi anda telah berakhir, silakan login kembali"}
+            
+        try:
+            reqreg = response.json()
+            Your_Data['role'] = reqreg['role']
+            Your_Data['last_login_date'] = reqreg['last_login_date']
+            Your_Data['expire_at'] = reqreg['expire_at']
+            Your_Data['money'] = reqreg['balance']
+            return {"status": True}
+        except ValueError:
+            return {"status": False, "message": f"Invalid JSON response: {response.text}"}
+            
+    except requests.Timeout:
+        return {"status": False, "message": "Request timeout. Silakan coba lagi."}
+    except requests.RequestException as e:
+        return {"status": False, "message": f"Request error: {str(e)}"}
+    except Exception as e:
+        return {"status": False, "message": f"Unexpected error: {str(e)}"}
+
+datamobil=[ 
+{"id": 140, "name": 'Cars 13'},
+{"id": 184, "name": 'Cars 29'},
+{"id": 131, "name": 'Cars 34'},
+{"id": 187, "name": 'Cars 38'},
+{"id": 9, "name": 'Cars 39'},
+{"id": 21, "name": 'Cars 40'},
+{"id": 39, "name": 'Cars 41'},
+{"id": 54, "name": 'Cars 42'},
+{"id": 60, "name": 'Cars 43'},
+{"id": 62, "name": 'Cars 44'},
+{"id": 121, "name": 'Cars 45'},
+{"id": 126, "name": 'Cars 46'},
+{"id": 147, "name": 'Cars 47'},
+{"id": 148, "name": 'Cars 48'},
+{"id": 151, "name": 'Cars 49'},
+{"id": 154, "name": 'Cars 50'},
+{"id": 161, "name": 'Cars 51'},
+{"id": 168, "name": 'Cars 52'},
+{"id": 177, "name": 'Cars 53'},
+{"id": 180, "name": 'Cars 54'},
+{"id": 185, "name": 'Cars 55'},
+{"id": 196, "name": 'Cars 56'},
+{"id": 200, "name": 'Cars 57'},
+{"id": 206, "name": 'Cars 58'},
+{"id": 209, "name": 'Cars 59'},
+{"id": 0, "name": 'Cars 60'},
+{"id": 1, "name": 'Cars 61'},
+{"id": 6, "name": 'Cars 62'},
+{"id": 8, "name": 'Cars 63'},
+{"id": 12, "name": 'Cars 64'},
+{"id": 30, "name": 'Cars 65'},
+{"id": 43, "name": 'Cars 66'},
+{"id": 81, "name": 'Cars 67'},
+{"id": 85, "name": 'Cars 68'},
+{"id": 112, "name": 'Cars 69'},
+{"id": 113, "name": 'Cars 70'},
+{"id": 150, "name": 'Cars 71'},
+{"id": 160, "name": 'Cars 72'},
+{"id": 175, "name": 'Cars 73'},
+{"id": 181, "name": 'Cars 74'},
+{"id": 182, "name": 'Cars 75'},
+{"id": 183, "name": 'Cars 76'},
+{"id": 210, "name": 'Cars 77'},
+{"id": 5, "name": 'Cars 78'},
+{"id": 11, "name": 'Cars 79'},
+{"id": 17, "name": 'Cars 80'},
+{"id": 19, "name": 'Cars 81'},
+{"id": 20, "name": 'Cars 82'},
+{"id": 28, "name": 'Cars 83'},
+{"id": 35, "name": 'Cars 84'},
+{"id": 47, "name": 'Cars 85'},
+{"id": 49, "name": 'Cars 86'},
+{"id": 51, "name": 'Cars 87'},
+{"id": 82, "name": 'Cars 91'},
+{"id": 88, "name": 'Cars 93'},
+{"id": 128, "name": 'Cars 98'},
+{"id": 156, "name": 'Cars 101'},
+{"id": 189, "name": 'Cars 102'},
+{"id": 14, "name": 'Cars 107'},
+{"id": 103, "name": 'Cars 120'},
+{"id": 109, "name": 'Cars 122'},
+{"id": 144, "name": 'Cars 127'},
+{"id": 153, "name": 'Cars 128'},
+{"id": 211, "name": 'Cars 132'},
+{"id": 104, "name": 'Cars 134'},
+{"id": 115, "name": 'Cars 135'},
+{"id": 143, "name": 'Cars 139'},
+{"id": 188, "name": 'Cars 141'},
+{"id": 7, "name": 'Cars 143'},
+{"id": 32, "name": 'Cars 146'},
+{"id": 41, "name": 'Cars 147'},
+{"id": 58, "name": 'Cars 148'},
+{"id": 162, "name": 'Cars 149'},
+{"id": 178, "name": 'Cars 150'},
+{"id": 198, "name": 'Cars 151'},
+{"id": 202, "name": 'Cars 152'},
+{"id": 203, "name": 'Cars 153'},]
+data_AWD = [
+                '6L45-A/T',
+                '7S Tronic',
+                '7 DSG',
+                '8 Speed Tiptonic S',
+                '9G Tronic',
+                'Speedshift mct 9',
+                'dsg7s',
+                'dsg/s-tronic',
+                'getrag 233',
+                'getrag v161',
+                'gr6',
+                'sc924',
+                'l6sss',
+                'nsx9',
+                'smt6',
+                'w6maa gen 2',
+                'zf 4hp22',
+                'zf 6hp26s',
+                'zf 8hp50',
+                'zf 8hp70',
+                'zf 8hp76',
+                'zf 8hp'
+            ]
+
+
+Your_Data = {
+    'email_web': None, 
+    'expire_at': None, 
+    'last_login_date': None, 
+    'money': None, 
+    'role': None, 
+    'username': None,
+    'access_token': None
+}
+req_menu = requests.get(f"{mode_server}/get_menu")
+menu_cpm1 = req_menu.json()
+req_menu = requests.get(f"{mode_server}/get_menu_cpm2")
+menu_cpm2 = req_menu.json()
+
 
 import random
 import requests
