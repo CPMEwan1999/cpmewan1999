@@ -217,7 +217,7 @@ def generate(namax):
     }
     while True:
         while True:
-            tanya = random.choice(["merah","kuning","hijau","biru","ungu","pink"])
+            tanya = random.choice(["pink","pink","pink","pink","pink","pink"])
             if tanya!=warnasekarang:
                 warnasekarang = tanya
                 break
