@@ -201,8 +201,11 @@ if __name__ == "__main__":
             
             if service == 0: # Exit
                 print("\n \n\033[94m(＾-＾)ノ\033[0m")
+                        sleep(50)                
                 print("\n\033[93m(＾-＾)ノ~~~\033[0m")
+                        sleep(40)                
                 print("\n\033[92m(＾-＾)ノ~~~~~~\033[0m")        
+                        sleep(30)                
             elif service == 1: # Increase Money
                 print(Colorate.Horizontal(Colors.rainbow, '[?] INSERT HOW MUCH MONEY DO YOU WANT'))
                 amount = IntPrompt.ask("[?] AMOUNT")
