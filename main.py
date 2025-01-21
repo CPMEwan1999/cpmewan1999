@@ -367,7 +367,9 @@ for psdd in delet:
 
 tex="""WELCOME"""
 
-print(pyColorate.Horizontal(pyColors.green_to_yellow, pyCenter.XCenter(tex)))
+pyAnime.Fade(pyCenter.Center(tex), pyColors.green_to_yellow, pyCenter.XCenter, enter=True)
+
+
 
 
 
