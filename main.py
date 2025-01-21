@@ -159,12 +159,12 @@ def disp(clrnama):
         # Memetakan warna RGB ke warna colorama terdekat
         colors = {
             'RED': (255, 0, 0, Fore.RED),
-            'GREEN': (0, 255, 0, Fore.GREEN),
-            'BLUE': (0, 0, 255, Fore.BLUE),
-            'YELLOW': (255, 255, 0, Fore.YELLOW),
-            'MAGENTA': (255, 0, 255, Fore.MAGENTA),
-            'CYAN': (0, 255, 255, Fore.CYAN),
-            'WHITE': (255, 255, 255, Fore.WHITE)
+            'RED': (0, 255, 0, Fore.RED),
+            'RED': (0, 0, 255, Fore.RED),
+            'RED': (255, 255, 0, Fore.RED),
+            'RED': (255, 0, 255, Fore.RED),
+            'RED': (0, 255, 255, Fore.RED),
+            'RED': (255, 255, 255, Fore.RED)
         }
         
         min_distance = float('inf')
@@ -217,7 +217,7 @@ def generate(namax):
     }
     while True:
         while True:
-            tanya = random.choice(["pink","pink","pink","pink","pink","pink"])
+            tanya = random.choice(["merah","kuning","hijau","biru","ungu","pink"])
             if tanya!=warnasekarang:
                 warnasekarang = tanya
                 break
