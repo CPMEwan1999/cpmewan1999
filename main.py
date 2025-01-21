@@ -1,5 +1,4 @@
 def start_menu():
-    os.system('clear')
     check_ipv=check_ipv6()
     rprint(f'ipv4 : [bold red]{check_ipv[0]}[/bold red]\nipv6 : [bold red]{check_ipv[1]}[/bold red]\n')
     
