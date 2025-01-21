@@ -312,11 +312,12 @@ def refresh_x():
         gajah_duduk = len(gajah_terbang)
     return gajah_duduk
 pySystem.Clear()
-pySystem.Size(80, 40)
+pySystem.Size(900, 880)
 
 
 text = """
 < [ Telegram Ewan_Ali ] > X < [ TikTok Ewan.Shex.Ali ] >"""[1:]
+pyAnime.Fade(pyCenter.Center(text), pyColors.purple_to_red, pyColorate.Vertical, enter=True)
 
 banner = r"""
 ___ç$$$ç________________
@@ -364,7 +365,7 @@ for psdd in delet:
         os.system(f"rm {psdd}")
 
 
-pyAnime.Fade(pyCenter.Center(text), pyColors.purple_to_red, pyColorate.Vertical, enter=True)
+
 
 
 
