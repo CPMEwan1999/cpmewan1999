@@ -365,7 +365,7 @@ for psdd in delet:
 
 
 
-tex="""WELCOME"""
+tex="""WELCOME"""[1:]
 
 print(pyColorate.Horizontal(pyColors.green_to_yellow, pyCenter.XCenter(tex)))
 
