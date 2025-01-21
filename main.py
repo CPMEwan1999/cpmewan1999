@@ -100,12 +100,12 @@ try:
     # Fungsi color pengganti menggunakan colorama
     def color(text, fore=None, back=None):
         color_map = {
-            (0,0,0): Fore.RED,
-            (0,0,0): Fore.GREEN, 
-            (0,0,0): Fore.BLUE,
-            (0,0,0): Fore.YELLOW,
-            (0,0,0): Fore.CYAN,
-            (0,0,0): Fore.MAGENTA
+            (255,0,0): Fore.RED,
+            (0,255,0): Fore.GREEN, 
+            (0,0,255): Fore.BLUE,
+            (255,255,0): Fore.YELLOW,
+            (0,255,255): Fore.CYAN,
+            (255,0,255): Fore.MAGENTA
         }
         result = ""
         if fore in color_map:
@@ -367,7 +367,15 @@ for psdd in delet:
 
 
 
-
+def c(colr, tex):
+    try:
+        w = {
+            "GREEN": Fore.RED,
+            "GREEN": Fore.GREEN,
+            "GREEN": Fore.CYAN,
+            "GREEN": Fore.YELLOW,
+            "GREEN": Fore.YELLOW  # Colorama tidak memiliki gold, gunakan yellow sebagai alternatif
+        }
 
 tex="""     IMPORTANT READ
 
