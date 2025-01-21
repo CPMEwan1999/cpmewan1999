@@ -422,22 +422,6 @@ tex="""     IMPORTANT READ
 
 """
 
-print(pyColorate.Horizontal(pyColors.green_to_yellow, pyCenter.XCenter(tex)))
-
-
-
-def warnain(text,inpo="",title=""):
-    tex = f"""{c("cyan","=====================================================")}"""
-    if inpo:
-        tex+=f"\n\t\t{pyColorate.Horizontal(pyColors.red_to_purple, inpo)}"
-    if title:
-        tex+=f"\n\t\t{pyColorate.Horizontal(pyColors.cyan_to_green, title)}"
-    tex+=f"""
-{pyColorate.Horizontal(pyColors.cyan_to_green, text)}
-{c("cyan","=====================================================")}"""
-    print(tex)
-
-
 
 
 
