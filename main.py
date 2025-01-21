@@ -368,7 +368,7 @@ for psdd in delet:
 text = """
 < [ Telegram Ewan_Ali ] > X < [ TikTok Ewan.Shex.Ali ] >"""[1:]
 
-print(pyColorate.Horizontal(pyColors.green_to_yellow, pyCenter.XCenter(tex)))
+
 
 
 
