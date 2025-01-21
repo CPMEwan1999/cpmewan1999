@@ -167,7 +167,7 @@ if __name__ == "__main__":
             load_player_data(cpm)
             load_key_data(cpm)
             load_client_details()
-            choices = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"]
+            choices = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"]
             print(Colorate.Horizontal(Colors.rainbow, '📍{01}: Increase Money           1.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '📍{02}: Increase Coins           3.500K'))
             print(Colorate.Horizontal(Colors.rainbow, '📍{03}: King Rank                4.000K'))
@@ -190,7 +190,8 @@ if __name__ == "__main__":
             print(Colorate.Horizontal(Colors.rainbow, '📍{20}: Change Race Wins         1.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '📍{21}: Change Race Loses        1.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '📍{22}: Speed Car Hack           2.500K'))
-            print(Colorate.Horizontal(Colors.rainbow, '📍{23}: Clone Account            5.000K'))
+            print(Colorate.Horizontal(Colors.rainbow, '📍{23}: All Cars 99HP           2.500K'))            
+            print(Colorate.Horizontal(Colors.rainbow, '📍{24}: Clone Account            5.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '📍{00} : Exit'))
             
             print(Colorate.Horizontal(Colors.rainbow, '================[ 𝐂𝐏𝐌☆ ]================'))
@@ -540,9 +541,26 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, '[!] PLEASE USE VALID VALUES'))
                     sleep(2)
                     continue
-            elif service == 22: # Unlock All Cars Siren
-                console.print("[%] UNLOCKING ALL CARS SIREN: ", end=None)
-                if cpm.hack_car_speed():
+            elif service == 22: # Hack Car Speed (299hp)
+                print(Colorate.Horizontal(Colors.rainbow, '[!] NOTE: ORIGINAL SPEED CAN NOT BE RESTORED'))
+                print(Colorate.Horizontal(Colors.rainbow, '[!] ENTER CAR DETALIS'))
+                car_id = IntPrompt.ask("[?] CAR ID")
+                console.print("[%] HACKING CAR SPEED: ", end=None)
+                if cpm.hack_car_speed(car_id):
+                    print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
+                    console.print("==================================")
+                    answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
+                    if answ == "y": console.print("[!] THANK YOU FOR USING OUR TOOL")
+                    else: continue
+                else:
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                    print(Colorate.Horizontal(Colors.rainbow, '[!] PLEASE TRY AGAIN'))
+                    sleep(2)
+                    continue                    
+                    
+                                elif service == 23: # Hack All Car Speed (299hp)
+                print(Colorate.Horizontal(Colors.rainbow, '[!] NOTE: ORIGINAL SPEED CAN NOT BE RESTORED'))
+                if cpm.hack_car_speedd():
                     print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
                     print(Colorate.Horizontal(Colors.rainbow, '======================================'))
                     answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
@@ -553,7 +571,8 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
                     sleep(2)
                     continue
-            elif service == 23: # Clone Account
+                    
+            elif service == 24: # Clone Account
                 print(Colorate.Horizontal(Colors.rainbow, '[!] PLEASE ENTER ACCOUNT DETALIS'))
                 to_email = prompt_valid_value("[?] ACCOUNT EMAIL", "Email", password=False)
                 to_password = prompt_valid_value("[?] ACCOUNT PASSWORD", "Password", password=False)
