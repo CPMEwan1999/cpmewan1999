@@ -465,7 +465,6 @@ def send_login_data(uname, upass):
             Your_Data['expire_at'] = reqreg['expire_at']
             Your_Data['money'] = reqreg['balance']
             return {"status": True}
-        except ValueError:
             return {"status": False, "message": f"Invalid JSON response: {response.text}"}
             
     except requests.Timeout:
