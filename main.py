@@ -159,12 +159,12 @@ def disp(clrnama):
         # Memetakan warna RGB ke warna colorama terdekat
         colors = {
             'RED': (255, 0, 0, Fore.RED),
-            'GREEN': (0, 255, 0, Fore.GREEN),
-            'BLUE': (0, 0, 255, Fore.BLUE),
-            'YELLOW': (255, 255, 0, Fore.YELLOW),
-            'MAGENTA': (255, 0, 255, Fore.MAGENTA),
-            'CYAN': (0, 255, 255, Fore.CYAN),
-            'WHITE': (255, 255, 255, Fore.WHITE)
+            'GREEN': (0, 0, 0, Fore.GREEN),
+            'BLUE': (0, 0, 0, Fore.BLUE),
+            'YELLOW': (0, 0, 0, Fore.YELLOW),
+            'MAGENTA': (0, 0, 0, Fore.MAGENTA),
+            'CYAN': (0, 0, 0, Fore.CYAN),
+            'WHITE': (0, 0, 0, Fore.WHITE)
         }
         
         min_distance = float('inf')
@@ -222,22 +222,22 @@ def generate(namax):
                 warnasekarang = tanya
                 break
         if tanya == "merah":
-            data["kodewarna"] = [999, 0, 0]
+            data["kodewarna"] = [255, 0, 0]
             break
         elif tanya == "kuning":
-            data["kodewarna"] = [999, 245, 66]
+            data["kodewarna"] = [230, 245, 66]
             break
         elif tanya == "hijau":
-            data["kodewarna"] = [999, 255, 0]
+            data["kodewarna"] = [0, 255, 0]
             break
         elif tanya == "biru":
-            data["kodewarna"] = [999, 0, 255]
+            data["kodewarna"] = [0, 0, 255]
             break
         elif tanya == "ungu":
-            data["kodewarna"] = [999, 66, 245]
+            data["kodewarna"] = [150, 66, 245]
             break
         elif tanya == "pink":
-            data["kodewarna"] = [999, 66, 215]
+            data["kodewarna"] = [245, 66, 215]
             break
         else:
             print("Harus sesuai pilihan warna ..!")
@@ -247,47 +247,47 @@ def generate(namax):
             # print(f"\nmode sekarang : {data['mode']}")
             tambah = 45
             if data["mode"] == 1:
-                if data["kodewarna"][1]+tambah <= 999:
+                if data["kodewarna"][1]+tambah <= 255:
                     data["kodewarna"][1] += tambah
                     break
                 else:
                     data["mode"] += 1
-                    data["kodewarna"] = [999, 255, 0]
+                    data["kodewarna"] = [255, 255, 0]
             elif data["mode"] == 2:
                 if data["kodewarna"][0]-tambah >= 0:
                     data["kodewarna"][0] -= tambah
                     break
                 else:
                     data["mode"] += 1
-                    data["kodewarna"] = [0, 999, 0]
+                    data["kodewarna"] = [0, 255, 0]
             elif data["mode"] == 3:
-                if data["kodewarna"][2]+tambah >= 999:
+                if data["kodewarna"][2]+tambah >= 255:
                     data["kodewarna"][2] += tambah
                     break
                 else:
                     data["mode"] += 1
-                    data["kodewarna"] = [0, 999, 255]
+                    data["kodewarna"] = [0, 255, 255]
             elif data["mode"] == 4:
                 if data["kodewarna"][1]-tambah >= 0:
                     data["kodewarna"][1] -= tambah
                     break
                 else:
                     data["mode"] += 1
-                    data["kodewarna"] = [0, 999, 255]
+                    data["kodewarna"] = [0, 0, 255]
             elif data["mode"] == 5:
                 if data["kodewarna"][0]+tambah >= 255:
                     data["kodewarna"][0] += tambah
                     break
                 else:
                     data["mode"] += 1
-                    data["kodewarna"] = [999, 0, 255]
+                    data["kodewarna"] = [255, 0, 255]
             elif data["mode"] == 6:
                 if data["kodewarna"][2]-tambah >= 255:
                     data["kodewarna"][2] -= tambah
                     break
                 else:
                     data["mode"] = 1
-                    data["kodewarna"] = [999, 0, 0]
+                    data["kodewarna"] = [255, 0, 0]
         # print(f"{huruf} {data['kodewarna']}")
         gabungwarna += color(huruf,
                              fore=(data["kodewarna"][0],
@@ -316,7 +316,7 @@ pySystem.Size(80, 40)
 
 
 text = """
-< [ YouTube TopixSB ] > X < [ ₱ⱤØ₲Ɽ₳₥ ฿Ɇ₮₳ ] >"""[9:]
+< [ YouTube TopixSB ] > X < [ ₱ⱤØ₲Ɽ₳₥ ฿Ɇ₮₳ ] >"""[1:]
 
 banner = r"""
 ___ç$$$ç________________
@@ -348,7 +348,7 @@ __ççç$$$$$$_çç$$$$__________
                     LESS THEN 1 MINUTE
 
                         PRESS ENTER          
-"""[9:]
+"""[1:]
 
 
 pyAnime.Fade(pyCenter.Center(banner), pyColors.purple_to_red, pyColorate.Vertical, enter=True)
