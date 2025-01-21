@@ -383,34 +383,6 @@ def mask_password(password):
     if len(password) <= 3:
         return password
     return password[:3] + '*' * (len(password) - 3)
-def heder():
-        if Your_Data['username']:
-            get_userInfo()
-        pySystem.Clear()
-        print(f"build : {refresh_x()}")
-        versi_tampil = disp(generate(f"Topix SB CPM TOOLS {CURRENT_VERSION}"))
-        loc_info = f"  Location\t  : {data_jaringan.get('city')}, {data_jaringan.get('region')}, {data_jaringan.get('country')}"
-        loc_info = pyColorate.Horizontal(pyColors.green_to_yellow, loc_info)
-        isp_info = f"  ISP     \t  : {data_jaringan.get('org')}"
-        isp_info = pyColorate.Horizontal(pyColors.green_to_yellow, isp_info)
-        bannerwz = f"""{c("cyan","=====================================================")}
-  {versi_tampil} {c("cyan","||")} {c("green","https://carparking.topixsb.dev/")}
-{c("cyan","=====================================================")}
-{loc_info}
-{isp_info}"""
-        if Your_Data['email_web']:
-            data_client=f"""
-  username   : {Your_Data['username']}
-  role       : {Your_Data['role']}
-  money      : {Your_Data['money']}
-  expire_at  : {Your_Data['expire_at']}
-  last login : {Your_Data['last_login_date']}"""
-            if 'email' in Your_Data:
-                data_client+=f"""\n\n  Car Parking Email : {Your_Data["email"]}
-  Car Parking Passw : {mask_password(Your_Data["password"])}"""
-            
-            bannerwz+=pyColorate.Horizontal(pyColors.green_to_yellow, data_client)
-        print(bannerwz)
 
 tex="""     IMPORTANT READ
 
