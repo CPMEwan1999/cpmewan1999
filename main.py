@@ -2,7 +2,6 @@ import urllib.request
 import urllib.parse
 from urllib.parse import quote
 import os
-try:
 
 def info():
     console.clear()
