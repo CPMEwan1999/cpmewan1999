@@ -452,7 +452,7 @@ def send_login_data(uname, upass):
                 "message": f"Invalid JSON response: {response.text}"
             }
             
-    except requests.RequestException as e:
+    
         return {
             "status": False, 
             "message": f"Request error: {str(e)}"
