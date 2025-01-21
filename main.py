@@ -453,7 +453,7 @@ def send_login_data(uname, upass):
             }
             
     
-        return {
+         {
             "status": False, 
             "message": f"Request error: {str(e)}"
         }
