@@ -598,7 +598,6 @@ def get_userInfo():
 
 
 
-menu_cpm1 = req_menu.json()
 req_menu = requests.get(f"{mode_server}/get_menu_cpm2")
 menu_cpm2 = req_menu.json()
 
