@@ -429,22 +429,7 @@ print(pyColorate.Horizontal(pyColors.green_to_yellow, pyCenter.XCenter(tex)))
 
 
 
-def send_registration_data(uname, upass):
-    url = f"{mode_server}/register-acc"
-    
-    data = {
-        "username": uname,
-        "password": upass
-    }
-    
-    try:
-        response = requests.post(url, data=data)
-        
-        # Pastikan untuk memanggil .json() untuk mendapatkan data JSON
-        response_data = response.json()
-        return response_data
-    except Exception as e:
-        return f"An error occurred: {e}"
+
 def send_login_data(uname, upass):
     url = f"{mode_server}/login-acc"
     
