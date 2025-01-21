@@ -154,56 +154,7 @@ except Exception as e:
 
 
 
-def disp(clrnama):
-    def get_closest_color(r, g, b):
-        # Memetakan warna RGB ke warna colorama terdekat
-        colors = {
-            'RED': (255, 0, 0, Fore.RED),
-            'GREEN': (0, 0, 0, Fore.GREEN),
-            'BLUE': (0, 0, 0, Fore.BLUE),
-            'YELLOW': (0, 0, 0, Fore.YELLOW),
-            'MAGENTA': (0, 0, 0, Fore.MAGENTA),
-            'CYAN': (0, 0, 0, Fore.CYAN),
-            'WHITE': (0, 0, 0, Fore.WHITE)
-        }
-        
-        min_distance = float('inf')
-        closest_color = Fore.WHITE  # default
-        
-        for _, (cr, cg, cb, color) in colors.items():
-            distance = (r - cr) ** 2 + (g - cg) ** 2 + (b - cb) ** 2
-            if distance < min_distance:
-                min_distance = distance
-                closest_color = color
-                
-        return closest_color
 
-    clrfirsttime = True
-    clrVnama = clrnama.split("[")
-    clrdisps = clrVnama[0]
-    
-    for clrx in clrVnama:
-        if clrfirsttime == False:
-            try:
-                # Mengkonversi hex ke RGB
-                clrcode1 = int(clrx[0:2], 16)
-                clrcode2 = int(clrx[2:4], 16)
-                clrcode3 = int(clrx[4:6], 16)
-                clrhuruf = clrx[7:8]
-                
-                # Mendapatkan warna colorama terdekat
-                closest_color = get_closest_color(clrcode1, clrcode2, clrcode3)
-                clrdisps += closest_color + clrhuruf + Style.RESET_ALL
-            except:
-                clrdisps += clrx[7:8]
-                
-        if clrfirsttime:
-            clrfirsttime = False
-
-    clrdisps += clrVnama[len(clrVnama)-1][8:len(clrVnama[len(clrVnama)-1])]
-    return clrdisps
-
-warnasekarang=""
 def generate(namax):
     global warnasekarang
     gabungwarna = ""
