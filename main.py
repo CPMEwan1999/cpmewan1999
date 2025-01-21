@@ -167,7 +167,7 @@ if __name__ == "__main__":
             load_player_data(cpm)
             load_key_data(cpm)
             load_client_details()
-            choices = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"]
+            options = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"}
             print(Colorate.Horizontal(Colors.rainbow, '🔓{01}: Increase Money           1.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '🔓{02}: Increase Coins           3.500K'))
             print(Colorate.Horizontal(Colors.rainbow, '🔓{03}: King Rank                4.000K'))
@@ -201,7 +201,7 @@ if __name__ == "__main__":
             
             if service == 0: # Exit
                 print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
-            elif service == 1: # Increase Money
+            elif service == '1': # Increase Money
                 print(Colorate.Horizontal(Colors.rainbow, '[?] INSERT HOW MUCH MONEY DO YOU WANT'))
                 amount = IntPrompt.ask("[?] AMOUNT")
                 console.print("[%] SAVING YOUR DATA: ", end=None)
