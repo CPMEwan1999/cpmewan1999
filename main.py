@@ -138,7 +138,7 @@ if __name__ == "__main__":
         acc_email = prompt_valid_value("[bold][?] ACCOUNT EMAIL[/bold]", "Email", password=False)
         acc_password = prompt_valid_value("[bold][?] ACCOUNT PASSWORD[/bold]", "Password", password=False)
         acc_access_key = prompt_valid_value("[bold][?] ACCESS KEY[/bold]", "Access Key", password=False)
-                print(Colorate.Horizontal(Colors.rainbow, 'TRY AGAIN'))        
+console.print("[bold cyan][%] TRYING TO LOGIN[/bold cyan]: ", end=None)
         console.print("[bold cyan][%] TRYING TO LOGIN[/bold cyan]: ", end=None)
         cpm = CPMEwan1999(acc_access_key)
         login_response = cpm.login(acc_email, acc_password)
