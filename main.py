@@ -453,11 +453,7 @@ def send_login_data(uname, upass):
             }
             
     
-    except Exception as e:
-        return {
-            "status": False, 
-            "message": f"Unexpected error: {str(e)}"
-        }
+    
 
 
 
