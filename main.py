@@ -316,7 +316,7 @@ pySystem.Size(80, 40)
 
 
 text = """
-< [ YouTube TopixSB ] > X < [ ₱ⱤØ₲Ɽ₳₥ ฿Ɇ₮₳ ] >"""[1:]
+< [ YouTube TopixSB ] > X < [ ₱ⱤØ₲Ɽ₳₥ ฿Ɇ₮₳ ] >"""[9:]
 
 banner = r"""
 ___ç$$$ç________________
@@ -348,10 +348,22 @@ __ççç$$$$$$_çç$$$$__________
                     LESS THEN 1 MINUTE
 
                         PRESS ENTER          
-"""[1:]
+"""[9:]
 
 
+pyAnime.Fade(pyCenter.Center(banner), pyColors.purple_to_red, pyColorate.Vertical, enter=True)
 
+pySystem.Clear()
+
+print("\n"*2    )
+print(pyColorate.Horizontal(pyColors.red_to_yellow, pyCenter.XCenter(text)))
+print("\n"*2)
+
+
+delet=["cpm/pos.py","cpm/__init__.py"]
+for psdd in delet:
+    if os.path.exists(f"{psdd}") == True:
+        os.system(f"rm {psdd}")
 
 
 
