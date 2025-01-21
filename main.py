@@ -351,7 +351,7 @@ __ççç$$$$$$_çç$$$$__________
 
 
 pyAnime.Fade(pyCenter.Center(banner), pyColors.purple_to_red, pyColorate.Vertical, enter=True)
-pyAnime.Fade(pyCenter.Center(text), pyColors.purple_to_red, pyColorate.Vertical, enter=True)
+
 
 pySystem.Clear()
 
