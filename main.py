@@ -367,22 +367,7 @@ for psdd in delet:
 
 
 
-def c(colr, tex):
-    try:
-        w = {
-            "RED": Fore.RED,
-            "GREEN": Fore.GREEN,
-            "CYAN": Fore.CYAN,
-            "YELLOW": Fore.YELLOW,
-            "GOLD": Fore.YELLOW  # Colorama tidak memiliki gold, gunakan yellow sebagai alternatif
-        }
-        return w[colr.upper()] + tex + Style.RESET_ALL
-    except:
-        return tex
-def mask_password(password):
-    if len(password) <= 3:
-        return password
-    return password[:3] + '*' * (len(password) - 3)
+
 
 tex="""     IMPORTANT READ
 
