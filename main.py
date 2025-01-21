@@ -190,8 +190,8 @@ if __name__ == "__main__":
             print(Colorate.Horizontal(Colors.rainbow, '📍{20}: Change Race Wins         1.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '📍{21}: Change Race Loses        1.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '📍{22}: Speed Car Hack           2.500K'))
-            print(Colorate.Horizontal(Colors.rainbow, '📍{23}: Clone Account            5.000K'))            
-            print(Colorate.Horizontal(Colors.rainbow, '📍{24}: Clone Account            5.000K'))
+            print(Colorate.Horizontal(Colors.rainbow, '📍{23}: Clone Account            2.500K'))
+            print(Colorate.Horizontal(Colors.rainbow, '📍{24}: Clone Account            5.000K'))            
             print(Colorate.Horizontal(Colors.rainbow, '📍{00} : Exit'))
             
             print(Colorate.Horizontal(Colors.rainbow, '================[ 𝐂𝐏𝐌☆ ]================'))
@@ -557,19 +557,6 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, '[!] PLEASE TRY AGAIN'))
                     sleep(2)
                     continue                    
-                    elif service == 23: # Hack All Car Speed (299hp)
-                print(Colorate.Horizontal(Colors.rainbow, '[!] NOTE: ORIGINAL SPEED CAN NOT BE RESTORED'))
-                if cpm.hack_car_speedd():
-                    print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
-                    print(Colorate.Horizontal(Colors.rainbow, '======================================'))
-                    answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
-                    if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
-                    else: continue
-                else:
-                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
-                    print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
-                    sleep(2)
-                    continue
             elif service == 24: # Clone Account
                 print(Colorate.Horizontal(Colors.rainbow, '[!] PLEASE ENTER ACCOUNT DETALIS'))
                 to_email = prompt_valid_value("[?] ACCOUNT EMAIL", "Email", password=False)
