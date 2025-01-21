@@ -17,9 +17,7 @@ __CHANNEL_USERNAME__ = "Ewan1999Kurd"
 __GROUP_USERNAME__   = "Ewan19_99Kurd"
 
 def signal_handler(sig, frame):
-    print("\n \n\033[94m(＾-＾)ノ\033[0m")
-    print("\n\033[93m(＾-＾)ノ~~~\033[0m")
-    print("\n\033[92m(＾-＾)ノ~~~~~~\033[0m")        
+    print("\n Bye Bye...")
     sys.exit(0)
 
 def gradient_text(text, colors):
