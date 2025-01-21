@@ -570,29 +570,7 @@ def serper(cit, datanya):
         return {"status": False, "message": f"Unexpected error: {str(e)}"}
 
 
-def get_userInfo():
-    url = f"{mode_server}/get_UserInfo"
 
-    data = {
-        "user": Your_Data['username'],
-        "access_token": Your_Data['access_token']
-    }
-
-    try:
-        response = requests.post(url, json=data, timeout=10.0)
-        
-        if response.status_code == 401:
-            Your_Data.clear()
-            Your_Data.update({
-                'email_web': None, 
-                'expire_at': None, 
-                'last_login_date': None, 
-                'money': None, 
-                'role': None, 
-                'username': None,
-                'access_token': None
-            })
-            return {"status": False, "message": "Sesi anda telah berakhir, silakan login kembali"}
             
         try:
             reqreg = response.json()
