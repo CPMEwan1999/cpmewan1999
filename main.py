@@ -1,704 +1,733 @@
-#!/usr/bin/python
+# Current version of the script 
+debug_mode = False
+CURRENT_VERSION = """
+2.6.2
+"""
+CURRENT_VERSION=CURRENT_VERSION.replace('\n','')
+server_local = "http://127.0.0.1:3000"
+server_online = "https://api.topixsb.dev"
+mode_server = server_online
+"""
+-------------------------------------------
+MAJOR (Angka Pertama):
 
-import random
-import requests
-from time import sleep
-import os, signal, sys
-from rich.console import Console
-from rich.prompt import Prompt, IntPrompt
-from rich.text import Text
-from rich.style import Style
-import pystyle
-from pystyle import Colors, Colorate
+Angka ini meningkat ketika ada perubahan yang tidak kompatibel yang mengharuskan 
+pengguna untuk memodifikasi kode atau penggunaan mereka yang ada. Misalnya, 
+jika suatu fungsi dihapus atau perilakunya berubah secara signifikan, Anda akan 
+meningkatkan versi mayor.
+-------------------------------------------
+MINOR (Angka Kedua):
 
-from cpmewan1999 import CPMEwan1999
+Angka ini meningkat ketika fitur baru ditambahkan dengan cara yang kompatibel 
+dengan versi sebelumnya. Ini berarti bahwa fungsionalitas yang ada tetap tidak 
+berubah, tetapi kemampuan atau peningkatan baru diperkenalkan. Misalnya, 
+jika fungsi baru ditambahkan tanpa memengaruhi yang sudah ada, Anda akan 
+menaikkan versi minor.
+-------------------------------------------
+PATCH (Angka Ketiga):
 
-__CHANNEL_USERNAME__ = "Ewan1999Kurd"
-__GROUP_USERNAME__   = "Ewan19_99Kurd"
+Angka ini meningkat ketika perbaikan bug yang kompatibel dengan versi sebelumnya 
+diperkenalkan. Ini biasanya merupakan perubahan kecil yang menyelesaikan masalah 
+tanpa menambah fitur baru atau merusak fungsionalitas yang ada. Misalnya, 
+jika ada bug yang diperbaiki dalam suatu fungsi tetapi antarmuka fungsi tersebut 
+tetap sama, Anda akan menaikkan versi patch.
+-------------------------------------------
+"""
 
-# bmw-symbol-in-python
-wn=turtle
-turtle.bgcolor("#8b8682")
-turtle.speed(0)
-wn.setup(1530,780)
-turtle.penup()
-turtle.left(90)
-turtle.forward(375)
-turtle.left(90)
-turtle.pendown()
-turtle.begin_fill()
-turtle.fillcolor("#9ac0cd")
-turtle.penup()
-turtle.circle(375,-30)
-turtle.left(90)
-turtle.forward(16)
-turtle.pendown()
-turtle.right(90)
-turtle.penup()
-turtle.circle(375-16,200)
-turtle.pendown()
-turtle.right(90)
-turtle.penup()
-turtle.forward(16)
-turtle.pendown()
-turtle.right(90)
-turtle.penup()
-turtle.circle(-375,200)
-turtle.pendown()
-turtle.end_fill()
-turtle.begin_fill()
-turtle.fillcolor("#607b8b")
-turtle.penup()
-turtle.circle(-375,160)
-turtle.right(90)
-turtle.forward(16)
-turtle.right(90)
-turtle.circle(375-16,160)
-turtle.right(90)
-turtle.forward(16)
-turtle.right(90)
-turtle.end_fill()
-turtle.pendown()
-turtle.right(90)
-turtle.forward(16)
-turtle.right(90)
-turtle.circle(359,30)
-turtle.circle(359)
-turtle.right(-90)
-turtle.forward(120)
-turtle.right(90)
-turtle.begin_fill()
-turtle.fillcolor("#0f0f0f")
-turtle.circle(239,-240)
-turtle.right(90)
-turtle.forward(120)
-turtle.right(-90)
-turtle.circle(359,120*2)
-turtle.right(-90)
-turtle.forward(120)
-turtle.right(-90)
-turtle.end_fill()
-turtle.left(90)
-turtle.forward(120)
-turtle.left(90)
-for i in range(1):
-    for  color0 in ('#1a1a1a','#2b2b2b','#3d3d3d','#4d4d4d','#595959','#737373','#7f7f7f','#a1a1a1','#ababab','#c2c2c2','#cfcfcf','#d9d9d9','#d9d9d9','#cfcfcf','#c2c2c2','#ababab','#a1a1a1','#7f7f7f','#737373','#595959','#4d4d4d','#3d3d3d','#2d2d2d','#1a1a1a',):
-        turtle.begin_fill()
-        turtle.fillcolor(color0)
-        turtle.penup()
-        turtle.circle(359,10-5)
-        turtle.left(90)
-        turtle.penup()
-        turtle.forward(120)
-        turtle.pendown()
-        turtle.left(90)
-        turtle.penup()
-        turtle.circle(-239,10-5)
-        turtle.pendown()
-        turtle.left(90)
-        turtle.penup()
-        turtle.forward(120)
-        turtle.pendown()
-        turtle.left(90)
-        turtle.circle(359,10-5)
-        turtle.end_fill()
-turtle.left(60+180)
-turtle.pencolor("black")
-turtle.penup()
-turtle.goto(0,228.5)
-turtle.pendown()
-turtle.pensize(7+3)
-turtle.circle(226+1.9)
-turtle.left(90)
-turtle.forward(228*2+1)
-turtle.left(90)
-turtle.circle(227.9,90.5)
-turtle.left(89.5)
-turtle.forward(228*2+1)
-turtle.pencolor("black")
-turtle.penup()
-turtle.goto(0,228.5)
-turtle.pendown()
-turtle.pensize(5)
-turtle.circle(226+1.9)
-turtle.left(90)
-turtle.forward(228*2+1)
-turtle.left(90)
-turtle.circle(227.9,90.5)
-turtle.left(89.5)
-turtle.forward(228*2+1)
-turtle.pensize(1)
-turtle.pencolor("#7d26cd")
-turtle.penup()
-turtle.goto(-5-0.5,5-0.2)
-turtle.pendown()
-turtle.begin_fill()
-turtle.fillcolor("#3399cc")
-turtle.forward(220)
-turtle.right(90+0.5)
-turtle.circle(-220,90-0.5)
-turtle.right(90)
-turtle.forward(220)
-turtle.end_fill()
-turtle.right(90)
-turtle.penup()
-turtle.goto(5,5)
-turtle.pendown()
-turtle.begin_fill()
-turtle.fillcolor("#f7f7f7")
-turtle.right(90)
-turtle.forward(220)
-turtle.right(90.5)
-turtle.circle(-220,90-0.5)
-turtle.right(90)
-turtle.forward(220)
-turtle.end_fill()
-turtle.penup()
-turtle.goto(-5,-5)
-turtle.pendown()
-turtle.begin_fill()
-turtle.fillcolor("#f7f7f7")
-turtle.forward(220)
-turtle.left(90+1)
-turtle.circle(220,89)
-turtle.right(-90)
-turtle.forward(220)
-turtle.end_fill()
-turtle.penup()
-turtle.goto(5,-5)
-turtle.pendown()
-turtle.begin_fill()
-turtle.fillcolor("#3399cc")
-turtle.right(90)
-turtle.forward(220-0.5)
-turtle.right(91)
-turtle.circle(-220,90-1)
-turtle.right(90)
-turtle.forward(220)
-turtle.end_fill()
-# MAKING BORDER'S
-turtle.pencolor("black")
-turtle.right(90)
-turtle.penup()
-turtle.goto(6,4)
-turtle.pendown()
-for i in range(1):
-    for color2 in('#575757','#5c5c5c','#6b6b6b','#787878','#8a8a8a','#9c9c9c','#bababa','#adadad','#c9c9c9','#d1d1d1','#d9d9d9'):
-        turtle.begin_fill()
-        turtle.fillcolor(color2)
-        turtle.penup()
-        turtle.forward(20)
-        turtle.left(90)
-        turtle.penup()
-        turtle.forward(4)
-        turtle.pendown()
-        turtle.left(90)
-        turtle.forward(20)
-        turtle.left(90)
-        turtle.penup()
-        turtle.forward(4)
-        turtle.pendown()
-        turtle.left(90)
-        turtle.forward(20)
-        turtle.pendown()
-        turtle.end_fill()
-turtle.left(90)
-turtle.penup()
-turtle.goto(6.5,7)
-turtle.pendown()
-for i in range(1):
-    for color3 in('#575757','#5c5c5c','#6b6b6b','#787878','#8a8a8a','#9c9c9c','#bababa','#adadad','#c9c9c9','#d1d1d1','#d9d9d9'):
-        turtle.begin_fill()
-        turtle.fillcolor(color3)
-        turtle.penup()
-        turtle.forward(19.8)
-        turtle.left(90)
-        turtle.penup()
-        turtle.forward(4)
-        turtle.pendown()
-        turtle.left(90)
-        turtle.forward(19.8)
-        turtle.left(90)
-        turtle.penup()
-        turtle.forward(4)
-        turtle.pendown()
-        turtle.left(90)
-        turtle.forward(19.8)
-        turtle.pendown()
-        turtle.end_fill()
-turtle.begin_fill()
-turtle.fillcolor("#d9d9d9")
-turtle.right(90)
-turtle.penup()
-turtle.circle(-220,90)
-turtle.right(90)
-turtle.forward(5-0.5)
-turtle.right(90)
-turtle.circle(215,90)
-turtle.right(90)
-turtle.forward(5)
-turtle.right(90)
-turtle.pendown()
-turtle.end_fill()
-turtle.penup()
-turtle.goto(4,-4)
-turtle.pendown()
-for i in range(1):
-    for color4 in('#575757','#5c5c5c','#6b6b6b','#787878','#8a8a8a','#9c9c9c','#bababa','#adadad','#c9c9c9','#d1d1d1','#d9d9d9'):
-        turtle.begin_fill()
-        turtle.fillcolor(color4)
-        turtle.forward(20)
-        turtle.right(90)
-        turtle.penup()
-        turtle.forward(4)
-        turtle.pendown()
-        turtle.right(90)
-        turtle.forward(20)
-        turtle.right(90)
-        turtle.penup()
-        turtle.forward(4)
-        turtle.pendown()
-        turtle.right(90)
-        turtle.forward(20)
-        turtle.end_fill()
-turtle.penup()
-turtle.goto(4,-4)
-turtle.pendown()
-turtle.right(90)
-for i in range(1):
-    for color5 in('#575757','#5c5c5c','#6b6b6b','#787878','#8a8a8a','#9c9c9c','#bababa','#adadad','#c9c9c9','#d1d1d1','#d9d9d9'):
-        turtle.begin_fill()
-        turtle.fillcolor(color5)
-        turtle.forward(20)
-        turtle.left(90)
-        turtle.penup()
-        turtle.forward(4)
-        turtle.pendown()
-        turtle.left(90)
-        turtle.forward(20)
-        turtle.left(90)
-        turtle.penup()
-        turtle.forward(4)
-        turtle.pendown()
-        turtle.left(90)
-        turtle.forward(20)
-        turtle.end_fill()
-turtle.begin_fill()
-turtle.fillcolor("#d9d9d9")
-turtle.left(90)
-turtle.circle(220,89.1)
-turtle.left(90)
-turtle.forward(5)
-turtle.left(90)
-turtle.circle(-215,90-1.1)
-turtle.left(90)
-turtle.forward(5)
-turtle.left(90)
-turtle.end_fill()
-turtle.right(90)
-turtle.penup()
-turtle.goto(-5,-4)
-turtle.pendown()
-for i in range(1):
-    for color9 in('#575757','#5c5c5c','#6b6b6b','#787878','#8a8a8a','#9c9c9c','#bababa','#adadad','#c9c9c9','#d1d1d1','#d9d9d9'):
-        turtle.begin_fill()
-        turtle.fillcolor(color9)
 
-        turtle.forward(20)
-        turtle.right(90)
-        turtle.penup()
-        turtle.forward(4)
-        turtle.pendown()
-        turtle.right(90)
-        turtle.forward(20)
-        turtle.right(90)
-        turtle.penup()
-        turtle.forward(4)
-        turtle.pendown()
-        turtle.right(90)
-        turtle.forward(20)
-        turtle.end_fill()
-turtle.penup()
-turtle.goto(-5+0.4,-4)
-turtle.pendown()
-turtle.right(90)
-for i in range(1):
-    for color11 in('#575757','#5c5c5c','#6b6b6b','#787878','#8a8a8a','#9c9c9c','#bababa','#adadad','#c9c9c9','#d1d1d1','#d9d9d9'):
-        turtle.begin_fill()
-        turtle.fillcolor(color11)
-        turtle.penup()
-        turtle.forward(20)
-        turtle.left(90)
-        turtle.penup()
-        turtle.forward(4)
-        turtle.pendown()
-        turtle.left(90)
-        turtle.forward(20)
-        turtle.left(90)
-        turtle.penup()
-        turtle.forward(4)
-        turtle.pendown()
-        turtle.left(90)
-        turtle.forward(20)
-        turtle.pendown()
-        turtle.end_fill()
-turtle.begin_fill()
-turtle.fillcolor("#d9d9d9")
-turtle.left(91-0.5)
-turtle.circle(220,89.1)
-turtle.left(90)
-turtle.forward(5)
-turtle.left(90)
-turtle.circle(-215,90-1.1)
-turtle.left(90)
-turtle.forward(5)
-turtle.left(90)
-turtle.end_fill()
-#making left white boarder
-turtle.penup()
-turtle.goto(-6,5-0.1)
-turtle.pendown()
-turtle.left(179.5)
-for i in range(1):
-    for color11 in('#575757','#5c5c5c','#6b6b6b','#787878','#8a8a8a','#9c9c9c','#bababa','#adadad','#c9c9c9','#d1d1d1',):
-        turtle.begin_fill()
-        turtle.fillcolor(color11)
-        turtle.penup()
-        turtle.forward(21.3)
-        turtle.right(90)
-        turtle.penup()
-        turtle.forward(4)
-        turtle.pendown()
-        turtle.right(90)
-        turtle.forward(21.3)
-        turtle.right(90)
-        turtle.penup()
-        turtle.forward(4)
-        turtle.pendown()
-        turtle.right(90)
-        turtle.forward(21.3)
-        turtle.pendown()
-        turtle.end_fill()
-turtle.penup()
-turtle.goto(-6,5-1)
-turtle.pendown()
-turtle.left(90)
-for i in range(1):
-    for color8 in('#575757','#5c5c5c','#6b6b6b','#787878','#8a8a8a','#9c9c9c','#bababa','#adadad','#c9c9c9','#d1d1d1',):
-        turtle.begin_fill()
-        turtle.fillcolor(color8)
-        turtle.forward(21.3)
-        turtle.right(90)
-        turtle.penup()
-        turtle.forward(4)
-        turtle.pendown()
-        turtle.right(90)
-        turtle.forward(21.3)
-        turtle.right(90)
-        turtle.penup()
-        turtle.forward(4)
-        turtle.pendown()
-        turtle.right(90)
-        turtle.forward(21.3)
-        turtle.end_fill()
-turtle.penup()
-turtle.goto(-5.3,5.4)
-turtle.forward(220)
-turtle.pendown()
-turtle.begin_fill()
-turtle.fillcolor("#d9d9d9")
-turtle.right(91-0.6)
-turtle.circle(-220,90)
-turtle.right(90)
-turtle.forward(5)
-turtle.right(90)
-turtle.circle(215,90)
-turtle.right(90)
-turtle.forward(5)
-turtle.right(90)
-turtle.end_fill()
-# END BORDER'S
-turtle.penup()
-turtle.left(-90)
-turtle.goto(0,239)
-turtle.left(180)
-turtle.circle(239,-40)
-turtle.pendown()
-for i in range(1):
-    for  color1 in ('#c7c7c7','#8a8a8a','#7f7f7f','#6e6e6e','#595959','#4d4d4d','#3d3d3d','#242424','#242424','#3d3d3d','#4d4d4d','#595959','#6e6e6e','#7f7f7f','#8a8a8a','#c7c7c7'):
-        turtle.begin_fill()
-        turtle.fillcolor(color1)
-        turtle.circle(239,10)
-        turtle.left(90)
-        turtle.penup()
-        turtle.forward(8)
-        turtle.pendown()
-        turtle.left(90)
-        turtle.circle(-231,10)
-        turtle.left(90)
-        turtle.penup()
-        turtle.forward(8)
-        turtle.pendown()
-        turtle.left(90)
-        turtle.circle(239,10)
-        turtle.end_fill()
-turtle.right(90+30)
-turtle.penup()
-turtle.goto(0,239)
-turtle.pendown()
-turtle.circle(239,-40)
-turtle.fillcolor("#a4d3ee")
-turtle.begin_fill()
-turtle.left(90)
-turtle.forward(8)
-turtle.left(90)
-turtle.circle(-231,200)
-turtle.left(90)
-turtle.forward(8)
-turtle.left(90)
-turtle.circle(239,200)
-turtle.end_fill()
-turtle.left(40)
-# making "B"
-turtle.penup()
-turtle.goto(0,239)
-turtle.circle(239,60)
-turtle.right(90)
-turtle.forward(15)
-turtle.right(10)
-turtle.pendown()
-turtle.begin_fill()
-turtle.fillcolor("#ffffff")
-turtle.forward(95)
-turtle.right(90)
-turtle.forward(75)
-for i in range(8+1):
-    turtle.forward(8)
-    turtle.right(18)
-turtle.left(30+100)
-for i in range(8+1):
-    turtle.forward(8)
-    turtle.right(18)
-turtle.left(20-7)
-turtle.forward(80)
-turtle.end_fill()
-turtle.penup()
-turtle.back(27)
-turtle.right(90)
-turtle.forward(17+2)
-turtle.pendown()
-turtle.begin_fill()
-turtle.fillcolor("#bfbfbf")
-turtle.forward(23)
-turtle.right(90)
-turtle.forward(45)
-for i in range(5):
-    turtle.forward(8/3)
-    turtle.right(18)
-for i in range(5):
-    turtle.forward(8/2+0.5)
-    turtle.right(18)
-turtle.forward(43)
-turtle.end_fill()
-turtle.penup()
-turtle.right(90)
-turtle.forward(40)
-turtle.pendown()
-turtle.begin_fill()
-turtle.fillcolor("#bfbfbf")
-turtle.forward(21)
-turtle.right(90)
-turtle.forward(40)
-for i in range(10):
-    turtle.forward(7/2)
-    turtle.right(18)
-turtle.forward(40)
-turtle.end_fill()
-#making "m" letter
-turtle.penup()
-turtle.goto(-50-5,239)
-turtle.left(42-1+180)
-turtle.forward(10)
-turtle.pendown()
-turtle.begin_fill()
-turtle.fillcolor("#ffffff")
-turtle.forward(93)
-turtle.right(90)
-turtle.forward(30-1)
-turtle.right(68)
-turtle.forward(70)
-turtle.left(140)
-turtle.forward(70)
-turtle.right(74-0.3)
-turtle.forward(33)
-turtle.right(90)
-turtle.forward(95)
-turtle.right(90)
-turtle.forward(20-1)
-turtle.right(90)
-turtle.forward(70-5)
-turtle.left(160)
-turtle.forward(70)
-turtle.right(70)
-turtle.forward(20)
-turtle.right(70-3)
-turtle.forward(70)
-turtle.left(160)
-turtle.forward(60+5)
-turtle.right(90)
-turtle.forward(20)
-turtle.end_fill()
-# MAKING LETTER "W"
-turtle.penup()
-turtle.goto(0,239)
-turtle.circle(239,-59-0.7)
-turtle.right(90+5)
-turtle.forward(14)
-turtle.pendown()
-turtle.begin_fill()
-turtle.fillcolor("#ffffff")
-turtle.forward(87)
-turtle.left(100+3)
-turtle.forward(21)
-turtle.left(80-5)
-turtle.forward(55)
-turtle.right(150)
-turtle.forward(55)
-turtle.left(77)
-turtle.forward(25-1)
-turtle.left(80-7)
-turtle.forward(55)
-turtle.right(150)
-turtle.forward(55)
-turtle.left(76)
-turtle.forward(22)
-turtle.left(103)
-turtle.forward(89)
-turtle.left(90-13)
-turtle.forward(24)
-turtle.left(70+1)
-turtle.forward(55+2)
-turtle.right(140+5+0.5)
-turtle.forward(57-0.5)
-turtle.left(70+4)
-turtle.hideturtle()
-turtle.forward(25)
-turtle.end_fill()
-turtle.done()
 
-def signal_handler(sig, frame):
-    print("\n Bye Bye...")
-    sys.exit(0)
+import os,sys,random,requests
 
-def gradient_text(text, colors):
-    lines = text.splitlines()
-    height = len(lines)
-    width = max(len(line) for line in lines)
-    colorful_text = Text()
-    for y, line in enumerate(lines):
-        for x, char in enumerate(line):
-            if char != ' ':
-                color_index = int(((x / (width - 1 if width > 1 else 1)) + (y / (height - 1 if height > 1 else 1))) * 0.5 * (len(colors) - 1))
-                color_index = min(max(color_index, 0), len(colors) - 1)  # Ensure the index is within bounds
-                style = Style(color=colors[color_index])
-                colorful_text.append(char, style=style)
-            else:
-                colorful_text.append(char)
-        colorful_text.append("\n")
-    return colorful_text
 
-def banner(console):
-    os.system('cls' if os.name == 'nt' else 'clear')
-    brand_name =  "▄████▄   ██▓███   ███▄ ▄███▓▓█████  █     █░ ▄▄▄       ███▄    █ \n"
-    brand_name += "▒██▀ ▀█  ▓██░  ██▒▓██▒▀█▀ ██▒▓█   ▀ ▓█░ █ ░█░▒████▄     ██ ▀█   █ \n"
-    brand_name += "▒▓█    ▄ ▓██░ ██▓▒▓██    ▓██░▒███   ▒█░ █ ░█ ▒██  ▀█▄  ▓██  ▀█ ██▒\n"
-    brand_name += "▒▓▓▄ ▄██▒▒██▄█▓▒ ▒▒██    ▒██ ▒▓█  ▄ ░█░ █ ░█ ░██▄▄▄▄██ ▓██▒  ▐▌██▒\n"
-    brand_name += "▒ ▓███▀ ░▒██▒ ░  ░▒██▒   ░██▒░▒████▒░░██▒██▓  ▓█   ▓██▒▒██░   ▓██░\n"
-    brand_name += "░ ░▒ ▒  ░▒▓▒░ ░  ░░ ▒░   ░  ░░░ ▒░ ░░ ▓░▒ ▒   ▒▒   ▓▒█░░ ▒░   ▒ ▒ \n"
-    colors = [
-        "rgb(255,0,0)", "rgb(255,69,0)", "rgb(255,140,0)", "rgb(255,215,0)", "rgb(173,255,47)", 
-        "rgb(0,255,0)", "rgb(0,255,255)", "rgb(0,191,255)", "rgb(0,0,255)", "rgb(139,0,255)",
-        "rgb(255,0,255)"
-    ]
-    colorful_text = gradient_text(brand_name, colors)
-    console.print(colorful_text)
-    print(Colorate.Horizontal(Colors.rainbow, '=================================================================='))
-    print(Colorate.Horizontal(Colors.rainbow, '\t         𝐏𝐋𝐄𝐀𝐒𝐄 𝐋𝐎𝐆𝐎𝐔𝐓 𝐅𝐑𝐎𝐌 𝐂𝐏𝐌 𝐁𝐄𝐅𝐎𝐑𝐄 𝐔𝐒𝐈𝐍𝐆 𝐓𝐇𝐈𝐒 𝐓𝐎𝐎𝐋'))
-    print(Colorate.Horizontal(Colors.rainbow, '    𝐒𝐇𝐀𝐑𝐈𝐍𝐆 𝐓𝐇𝐄 𝐀𝐂𝐂𝐄𝐒𝐒 𝐊𝐄𝐘 𝐈𝐒 𝐍𝐎𝐓 𝐀𝐋𝐋𝐎𝐖𝐄𝐃 𝐀𝐍𝐃 𝐖𝐈𝐋𝐋 𝐁𝐄 𝐁𝐋𝐎𝐂𝐊𝐄𝐃'))
-    print(Colorate.Horizontal(Colors.rainbow, f' ‌           𝐓𝐞𝐥𝐞𝐠𝐫𝐚𝐦: @{__CHANNEL_USERNAME__} 𝐎𝐫 @{__GROUP_USERNAME__}'))
-    print(Colorate.Horizontal(Colors.rainbow, '=================================================================='))
+VERSION_CHECK_URL = f"{mode_server}/termux-version"
 
-def load_player_data(cpm):
-    response = cpm.get_player_data()
-    if response.get('ok'):
-        data = response.get('data')
-        if 'floats' in data and 'localID' in data and 'money' in data and 'coin' in data:
+def get_latest_version_info():
+    try:
+        response = requests.get(VERSION_CHECK_URL)
+        response.raise_for_status()
+        return response.json()
+    except requests.RequestError as e:
+        print(f"Error checking for updates: {e}")
+        return None
+
+def download_new_version(download_url, filename):
+    try:
+        response = requests.get(download_url)
+        response.raise_for_status()
         
-            print(Colorate.Horizontal(Colors.rainbow, '===========[ 𝙿𝙻𝙰𝚈𝙴𝚁 𝙳𝙴𝚃𝙰𝙸𝙻𝚂 ]==========='))
+        # Pastikan direktori ada
+        directory = os.path.dirname(filename)
+        if directory and not os.path.exists(directory):
+            os.makedirs(directory)
             
-            print(Colorate.Horizontal(Colors.rainbow, f'📍Name   : {(data.get("Name") if "Name" in data else "UNDEFINED")}.'))
-                
-            print(Colorate.Horizontal(Colors.rainbow, f'📍LocalID: {data.get("localID")}.'))
-            
-            print(Colorate.Horizontal(Colors.rainbow, f'📍Money  : {data.get("money")}.'))
-            
-            print(Colorate.Horizontal(Colors.rainbow, f'📍Coins  : {data.get("coin")}.'))
-            
+        with open(filename, 'wb') as file:
+            file.write(response.content)
+    except Exception as e:
+        print(f"Error saat mengunduh: {e}")
+        
+def update_script():
+    version_info = get_latest_version_info()
+    if not version_info:
+        return
+    
+    latest_version = version_info.get("version")
+    download_url = version_info.get("download_url")
+    print(download_url)
+    print(f"CURRENT_VERSION {CURRENT_VERSION}\nlatest_version {latest_version}\ndownload_url {download_url}")
+    if latest_version and download_url:
+        if latest_version != CURRENT_VERSION:
+            print(f"New version available: {latest_version}")
+            print(f"Downloading update... {download_url}")
+            download_new_version(download_url, sys.argv[0])
+            print("Script updated to the latest version. Please restart the script.")
+            exit()
         else:
-            print(Colorate.Horizontal(Colors.rainbow, '! ERROR: new accounts most be signed-in to the game at least once !.'))
-            exit(1)
+            print("You already have the latest version.")
     else:
-        print(Colorate.Horizontal(Colors.rainbow, '! ERROR: seems like your login is not properly set !.'))
-        exit(1)
+        print("Invalid version information received.")
+update_script()
 
 
-def load_key_data(cpm):
+import platform
+from datetime import datetime
+local_ip = requests.get('https://api.ipify.org').text
+response = requests.get(f"https://ipinfo.io/{local_ip}/json")
+data_jaringan = response.json()
 
-    data = cpm.get_key_data()
+try:
+    from colorama import init, Fore, Back, Style
+    init()
+    # Fungsi color pengganti menggunakan colorama
+    def color(text, fore=None, back=None):
+        color_map = {
+            (255,0,0): Fore.RED,
+            (0,255,0): Fore.GREEN, 
+            (0,0,255): Fore.BLUE,
+            (255,255,0): Fore.YELLOW,
+            (0,255,255): Fore.CYAN,
+            (255,0,255): Fore.MAGENTA
+        }
+        result = ""
+        if fore in color_map:
+            result += color_map[fore]
+        result += text
+        result += Style.RESET_ALL
+        return result
+
+    from pystyle import Anime as pyAnime
+    from pystyle import Colors as pyColors
+    from pystyle import Colorate as pyColorate
+    from pystyle import Center as pyCenter
+    from pystyle import System as pySystem
+    local_ip = requests.get('https://api.ipify.org').text
+    response = requests.get(f"https://ipinfo.io/{local_ip}/json")
+    data_jaringan = response.json()
+except Exception as e:
+    os.system("pip install colorama")
+    os.system("pip install requests")
+    os.system("pip install pystyle")
     
-    print(Colorate.Horizontal(Colors.rainbow, '=========[ 𝙰𝙲𝙲𝙴𝚂𝚂 𝙺𝙴𝚈 𝙳𝙴𝚃𝙰𝙸𝙻𝚂 ]========='))
-    
-    print(Colorate.Horizontal(Colors.rainbow, f'📍Access Key : {data.get("access_key")}.'))
-    
-    print(Colorate.Horizontal(Colors.rainbow, f'📍Telegram ID: {data.get("telegram_id")}.'))
-    
-    print(Colorate.Horizontal(Colors.rainbow, f'📍Balance $  : {(data.get("coins") if not data.get("is_unlimited") else "Unlimited")}.'))
+    # Reinisialisasi setelah install
+    from colorama import init, Fore, Back, Style
+    init()
+    def color(text, fore=None, back=None):
+        color_map = {
+            (255,0,0): Fore.RED,
+            (0,255,0): Fore.GREEN, 
+            (0,0,255): Fore.BLUE,
+            (255,255,0): Fore.YELLOW,
+            (0,255,255): Fore.CYAN,
+            (255,0,255): Fore.MAGENTA
+        }
+        result = ""
+        if fore in color_map:
+            result += color_map[fore]
+        result += text
+        result += Style.RESET_ALL
+        return result
+
+    from pystyle import Anime as pyAnime
+    from pystyle import Colors as pyColors
+    from pystyle import Colorate as pyColorate
+    from pystyle import Center as pyCenter
+    from pystyle import System as pySystem
+
+
+
+def disp(clrnama):
+    def get_closest_color(r, g, b):
+        # Memetakan warna RGB ke warna colorama terdekat
+        colors = {
+            'RED': (255, 0, 0, Fore.RED),
+            'GREEN': (0, 255, 0, Fore.GREEN),
+            'BLUE': (0, 0, 255, Fore.BLUE),
+            'YELLOW': (255, 255, 0, Fore.YELLOW),
+            'MAGENTA': (255, 0, 255, Fore.MAGENTA),
+            'CYAN': (0, 255, 255, Fore.CYAN),
+            'WHITE': (255, 255, 255, Fore.WHITE)
+        }
         
+        min_distance = float('inf')
+        closest_color = Fore.WHITE  # default
+        
+        for _, (cr, cg, cb, color) in colors.items():
+            distance = (r - cr) ** 2 + (g - cg) ** 2 + (b - cb) ** 2
+            if distance < min_distance:
+                min_distance = distance
+                closest_color = color
+                
+        return closest_color
+
+    clrfirsttime = True
+    clrVnama = clrnama.split("[")
+    clrdisps = clrVnama[0]
     
+    for clrx in clrVnama:
+        if clrfirsttime == False:
+            try:
+                # Mengkonversi hex ke RGB
+                clrcode1 = int(clrx[0:2], 16)
+                clrcode2 = int(clrx[2:4], 16)
+                clrcode3 = int(clrx[4:6], 16)
+                clrhuruf = clrx[7:8]
+                
+                # Mendapatkan warna colorama terdekat
+                closest_color = get_closest_color(clrcode1, clrcode2, clrcode3)
+                clrdisps += closest_color + clrhuruf + Style.RESET_ALL
+            except:
+                clrdisps += clrx[7:8]
+                
+        if clrfirsttime:
+            clrfirsttime = False
 
-def prompt_valid_value(content, tag, password=False):
+    clrdisps += clrVnama[len(clrVnama)-1][8:len(clrVnama[len(clrVnama)-1])]
+    return clrdisps
+
+warnasekarang=""
+def generate(namax):
+    global warnasekarang
+    gabungwarna = ""
+    contohnama = namax
+    # proses memecah huruf di nama
+    data = {
+        "huruf": "",
+        "kodewarna": [255, 0, 0],
+        "mode": 1,
+        "kodewarnaCPM": ""
+    }
     while True:
-        value = Prompt.ask(content, password=password)
-        if not value or value.isspace():
-            print(Colorate.Horizontal(Colors.rainbow, f'{tag} CANNOT BE EMPTY OR JUST SPACES, PLEASE TRY AGAIN'))
+        while True:
+            tanya = random.choice(["merah","kuning","hijau","biru","ungu","pink"])
+            if tanya!=warnasekarang:
+                warnasekarang = tanya
+                break
+        if tanya == "merah":
+            data["kodewarna"] = [255, 0, 0]
+            break
+        elif tanya == "kuning":
+            data["kodewarna"] = [230, 245, 66]
+            break
+        elif tanya == "hijau":
+            data["kodewarna"] = [0, 255, 0]
+            break
+        elif tanya == "biru":
+            data["kodewarna"] = [0, 0, 255]
+            break
+        elif tanya == "ungu":
+            data["kodewarna"] = [150, 66, 245]
+            break
+        elif tanya == "pink":
+            data["kodewarna"] = [245, 66, 215]
+            break
         else:
-            return value
+            print("Harus sesuai pilihan warna ..!")
+
+    for huruf in contohnama:
+        while True:
+            # print(f"\nmode sekarang : {data['mode']}")
+            tambah = 45
+            if data["mode"] == 1:
+                if data["kodewarna"][1]+tambah <= 255:
+                    data["kodewarna"][1] += tambah
+                    break
+                else:
+                    data["mode"] += 1
+                    data["kodewarna"] = [255, 255, 0]
+            elif data["mode"] == 2:
+                if data["kodewarna"][0]-tambah >= 0:
+                    data["kodewarna"][0] -= tambah
+                    break
+                else:
+                    data["mode"] += 1
+                    data["kodewarna"] = [0, 255, 0]
+            elif data["mode"] == 3:
+                if data["kodewarna"][2]+tambah >= 255:
+                    data["kodewarna"][2] += tambah
+                    break
+                else:
+                    data["mode"] += 1
+                    data["kodewarna"] = [0, 255, 255]
+            elif data["mode"] == 4:
+                if data["kodewarna"][1]-tambah >= 0:
+                    data["kodewarna"][1] -= tambah
+                    break
+                else:
+                    data["mode"] += 1
+                    data["kodewarna"] = [0, 0, 255]
+            elif data["mode"] == 5:
+                if data["kodewarna"][0]+tambah >= 255:
+                    data["kodewarna"][0] += tambah
+                    break
+                else:
+                    data["mode"] += 1
+                    data["kodewarna"] = [255, 0, 255]
+            elif data["mode"] == 6:
+                if data["kodewarna"][2]-tambah >= 255:
+                    data["kodewarna"][2] -= tambah
+                    break
+                else:
+                    data["mode"] = 1
+                    data["kodewarna"] = [255, 0, 0]
+        # print(f"{huruf} {data['kodewarna']}")
+        gabungwarna += color(huruf,
+                             fore=(data["kodewarna"][0],
+                                   data["kodewarna"][1],
+                                   data["kodewarna"][2]),
+                             back=(0, 0, 0))
+        kodas = []
+        for t in range(3):
+            clrcode = hex(data["kodewarna"][t])[2::]
+            if len(clrcode) == 1:
+                clrcode += "0"
+            kodas.append(clrcode)
+        data["kodewarnaCPM"] += f"[{kodas[0]}{kodas[1]}{kodas[2]}]{huruf}"
+    # print(f"hasil\t:  {disp(data['kodewarnaCPM'])}")
+    # print(f"kode\t:  {data['kodewarnaCPM']}")
+    return data["kodewarnaCPM"]
+def refresh_x():
+    import inspect
+    kucing_garong = inspect.getfile(inspect.currentframe())
+    with open(kucing_garong, 'r') as file:
+        gajah_terbang = file.read()
+        gajah_duduk = len(gajah_terbang)
+    return gajah_duduk
+pySystem.Clear()
+pySystem.Size(80, 40)
+
+
+text = """
+< [ YouTube TopixSB ] > X < [ ₱ⱤØ₲Ɽ₳₥ ฿Ɇ₮₳ ] >"""[1:]
+
+banner = r"""
+___ç$$$ç________________
+__$$$$$$$_####______####_       YouTube TopixSB
+___*$$$$$$ç####___########        
+_____*$$$$$$$$$$$##########     ▀▀█▀▀ ▒█▀▀▀█ ▒█▀▀█
+_____$$$$$$$$$$$$$##########    ░▒█░░ ░▀▀▀▄▄ ▒█▀▀▄
+______$$$$$$$$$$$$$##########   ░▒█░░ ▒█▄▄▄█ ▒█▄▄█ 
+______$$$$$$$$$$_$$$##########
+______$$$$$$$$$$##$$$##########
+_______$$$$$$$$$_##$$##########
+______$$$$$$$$$$___$$#########
+_____$_$$$$$$$$$$__$$_########
+___$$__$$$$$$$$$$_$$$__######
+______$$$$$$$$$$__$$$___#####
+______$$$$$$$$$___$$____####
+______$$$$$$$$$_________###
+______$$$$$$$$__________##
+_______$$$$$$___________##
+_______$$$$$$______________
+_______$$$$$$$$____________
+_______$$$$$$$$____________
+_______$$$$_$$$$___________
+_______$$$$_$$$$___________
+_______$$$___$$$$__________
+__ççç$$$$$$_çç$$$$__________       
+                          
+           Car Parking Multiplayer Instant Script
+                    LESS THEN 1 MINUTE
+
+                        PRESS ENTER          
+"""[1:]
+
+
+pyAnime.Fade(pyCenter.Center(banner), pyColors.purple_to_red, pyColorate.Vertical, enter=True)
+
+pySystem.Clear()
+
+print("\n"*2    )
+print(pyColorate.Horizontal(pyColors.red_to_yellow, pyCenter.XCenter(text)))
+print("\n"*2)
+
+
+delet=["cpm/pos.py","cpm/__init__.py"]
+for psdd in delet:
+    if os.path.exists(f"{psdd}") == True:
+        os.system(f"rm {psdd}")
+
+
+
+def c(colr, tex):
+    try:
+        w = {
+            "RED": Fore.RED,
+            "GREEN": Fore.GREEN,
+            "CYAN": Fore.CYAN,
+            "YELLOW": Fore.YELLOW,
+            "GOLD": Fore.YELLOW  # Colorama tidak memiliki gold, gunakan yellow sebagai alternatif
+        }
+        return w[colr.upper()] + tex + Style.RESET_ALL
+    except:
+        return tex
+def mask_password(password):
+    if len(password) <= 3:
+        return password
+    return password[:3] + '*' * (len(password) - 3)
+def heder():
+        if Your_Data['username']:
+            get_userInfo()
+        pySystem.Clear()
+        print(f"build : {refresh_x()}")
+        versi_tampil = disp(generate(f"Topix SB CPM TOOLS {CURRENT_VERSION}"))
+        loc_info = f"  Location\t  : {data_jaringan.get('city')}, {data_jaringan.get('region')}, {data_jaringan.get('country')}"
+        loc_info = pyColorate.Horizontal(pyColors.green_to_yellow, loc_info)
+        isp_info = f"  ISP     \t  : {data_jaringan.get('org')}"
+        isp_info = pyColorate.Horizontal(pyColors.green_to_yellow, isp_info)
+        bannerwz = f"""{c("cyan","=====================================================")}
+  {versi_tampil} {c("cyan","||")} {c("green","https://carparking.topixsb.dev/")}
+{c("cyan","=====================================================")}
+{loc_info}
+{isp_info}"""
+        if Your_Data['email_web']:
+            data_client=f"""
+  username   : {Your_Data['username']}
+  role       : {Your_Data['role']}
+  money      : {Your_Data['money']}
+  expire_at  : {Your_Data['expire_at']}
+  last login : {Your_Data['last_login_date']}"""
+            if 'email' in Your_Data:
+                data_client+=f"""\n\n  Car Parking Email : {Your_Data["email"]}
+  Car Parking Passw : {mask_password(Your_Data["password"])}"""
             
-def load_client_details():
-    response = requests.get("http://ip-api.com/json")
-    data = response.json()
-    print(Colorate.Horizontal(Colors.rainbow, '==============[ 𝐋𝐎𝐂𝐀𝐓𝐈𝐎𝐍 ]=============='))
-    print(Colorate.Horizontal(Colors.rainbow, f'📍Country : {data.get("country")}.'))    
-    print(Colorate.Horizontal(Colors.rainbow, f'📍Region  : {data.get("regionName")}.'))
-    print(Colorate.Horizontal(Colors.rainbow, f'📍City    : {data.get("city")}.'))
-    print(Colorate.Horizontal(Colors.rainbow, '================[ 𝐌𝐄𝐍𝐔 ]================'))
+            bannerwz+=pyColorate.Horizontal(pyColors.green_to_yellow, data_client)
+        print(bannerwz)
 
-def interpolate_color(start_color, end_color, fraction):
-    start_rgb = tuple(int(start_color[i:i+2], 16) for i in (1, 3, 5))
-    end_rgb = tuple(int(end_color[i:i+2], 16) for i in (1, 3, 5))
-    interpolated_rgb = tuple(int(start + fraction * (end - start)) for start, end in zip(start_rgb, end_rgb))
-    return "{:02x}{:02x}{:02x}".format(*interpolated_rgb)
+tex="""     IMPORTANT READ
 
-def rainbow_gradient_string(customer_name):
-    modified_string = ""
-    num_chars = len(customer_name)
-    start_color = "{:06x}".format(random.randint(0, 0xFFFFFF))
-    end_color = "{:06x}".format(random.randint(0, 0xFFFFFF))
-    for i, char in enumerate(customer_name):
-        fraction = i / max(num_chars - 1, 1)
-        interpolated_color = interpolate_color(start_color, end_color, fraction)
-        modified_string += f'[{interpolated_color}]{char}'
-    return modified_string
+    You must log out of the CPM application first, 
+    unless you only want to use the "Inject Rank" and "Instant Rank" features, 
+    as these two features do not require you to log out.
+
+    Please refill your cash only at https://carparking.topixsb.dev
+
+"""
+
+print(pyColorate.Horizontal(pyColors.green_to_yellow, pyCenter.XCenter(tex)))
+
+
+
+def warnain(text,inpo="",title=""):
+    tex = f"""{c("cyan","=====================================================")}"""
+    if inpo:
+        tex+=f"\n\t\t{pyColorate.Horizontal(pyColors.red_to_purple, inpo)}"
+    if title:
+        tex+=f"\n\t\t{pyColorate.Horizontal(pyColors.cyan_to_green, title)}"
+    tex+=f"""
+{pyColorate.Horizontal(pyColors.cyan_to_green, text)}
+{c("cyan","=====================================================")}"""
+    print(tex)
+
+
+def send_registration_data(uname, upass):
+    url = f"{mode_server}/register-acc"
+    
+    data = {
+        "username": uname,
+        "password": upass
+    }
+    
+    try:
+        response = requests.post(url, data=data)
+        
+        # Pastikan untuk memanggil .json() untuk mendapatkan data JSON
+        response_data = response.json()
+        return response_data
+    except Exception as e:
+        return f"An error occurred: {e}"
+def send_login_data(uname, upass):
+    url = f"{mode_server}/login-acc"
+    
+    data = {
+        "username": uname,
+        "password": upass
+    }
+    
+    try:
+        response = requests.post(url, data=data)
+        
+        if debug_mode:
+            print(f"Response status: {response.status_code}")
+            print(f"Response text: {response.text}")
+        
+        if response.status_code != 200:
+            try:
+                error_data = response.json()
+                return {
+                    "status": False, 
+                    "message": error_data.get('message', 'Unknown error occurred')
+                }
+            except:
+                return {
+                    "status": False, 
+                    "message": f"Server error: {response.status_code}"
+                }
+            
+        try:
+            response_data = response.json()
+            
+            if response_data['status']:
+                # Simpan semua data user termasuk token
+                Your_Data.update({
+                    'access_token': response_data['access_token'],
+                    'username': response_data['data']['username'],
+                    'role': response_data['data']['role'],
+                    'money': response_data['data']['money'],
+                    'email_web': response_data['data']['email'],
+                    'last_login': datetime.now().strftime('%Y-%m-%d %H:%M:%S')  # Tambahkan waktu login
+                })
+            return response_data
+            
+        except ValueError as e:
+            return {
+                "status": False, 
+                "message": f"Invalid JSON response: {response.text}"
+            }
+            
+    except requests.RequestException as e:
+        return {
+            "status": False, 
+            "message": f"Request error: {str(e)}"
+        }
+    except Exception as e:
+        return {
+            "status": False, 
+            "message": f"Unexpected error: {str(e)}"
+        }
+
+def serper(cit, datanya):
+    # Cek apakah token masih ada
+    if not Your_Data.get('access_token'):
+        return {"status": False, "message": "Silakan login terlebih dahulu"}
+
+    url = f"{mode_server}/app_endpoint"
+
+    data = {
+        "access_token": Your_Data['access_token'],
+        "username": Your_Data['username'],
+        "item": {
+            "name": cit
+        },
+        "email": Your_Data.get('email', ''),
+        "password": Your_Data.get('password', '')
+    }
+    
+    for x in datanya:
+        data[x] = datanya[x]
+        
+    try:
+        response = requests.post(url, json=data)
+        
+        # Handle berbagai status code
+        if response.status_code == 401:
+            # Token expired atau invalid
+            Your_Data.clear()
+            Your_Data.update({
+                'email_web': None, 
+                'expire_at': None, 
+                'last_login_date': None, 
+                'money': None, 
+                'role': None, 
+                'username': None,
+                'access_token': None
+            })
+            return {"status": False, "message": "Sesi anda telah berakhir, silakan login kembali"}
+        elif response.status_code == 429:
+            # Rate limit
+            return {"status": False, "message": "Terlalu banyak request, mohon tunggu beberapa saat"}
+        elif response.status_code >= 500:
+            # Server error
+            return {"status": False, "message": "Server sedang bermasalah, coba lagi nanti"}
+            
+        try:
+            result = response.json()
+            return result
+        except ValueError:
+            return {"status": False, "message": f"Invalid JSON response: {response.text}"}
+            
+    except requests.RequestException as e:
+        return {"status": False, "message": f"Request error: {str(e)}"}
+    except Exception as e:
+        return {"status": False, "message": f"Unexpected error: {str(e)}"}
+
+
+def get_userInfo():
+    url = f"{mode_server}/get_UserInfo"
+
+    data = {
+        "user": Your_Data['username'],
+        "access_token": Your_Data['access_token']
+    }
+
+    try:
+        response = requests.post(url, json=data, timeout=10.0)
+        
+        if response.status_code == 401:
+            Your_Data.clear()
+            Your_Data.update({
+                'email_web': None, 
+                'expire_at': None, 
+                'last_login_date': None, 
+                'money': None, 
+                'role': None, 
+                'username': None,
+                'access_token': None
+            })
+            return {"status": False, "message": "Sesi anda telah berakhir, silakan login kembali"}
+            
+        try:
+            reqreg = response.json()
+            Your_Data['role'] = reqreg['role']
+            Your_Data['last_login_date'] = reqreg['last_login_date']
+            Your_Data['expire_at'] = reqreg['expire_at']
+            Your_Data['money'] = reqreg['balance']
+            return {"status": True}
+        except ValueError:
+            return {"status": False, "message": f"Invalid JSON response: {response.text}"}
+            
+    except requests.Timeout:
+        return {"status": False, "message": "Request timeout. Silakan coba lagi."}
+    except requests.RequestException as e:
+        return {"status": False, "message": f"Request error: {str(e)}"}
+    except Exception as e:
+        return {"status": False, "message": f"Unexpected error: {str(e)}"}
+
+datamobil=[ 
+{"id": 140, "name": 'Cars 13'},
+{"id": 184, "name": 'Cars 29'},
+{"id": 131, "name": 'Cars 34'},
+{"id": 187, "name": 'Cars 38'},
+{"id": 9, "name": 'Cars 39'},
+{"id": 21, "name": 'Cars 40'},
+{"id": 39, "name": 'Cars 41'},
+{"id": 54, "name": 'Cars 42'},
+{"id": 60, "name": 'Cars 43'},
+{"id": 62, "name": 'Cars 44'},
+{"id": 121, "name": 'Cars 45'},
+{"id": 126, "name": 'Cars 46'},
+{"id": 147, "name": 'Cars 47'},
+{"id": 148, "name": 'Cars 48'},
+{"id": 151, "name": 'Cars 49'},
+{"id": 154, "name": 'Cars 50'},
+{"id": 161, "name": 'Cars 51'},
+{"id": 168, "name": 'Cars 52'},
+{"id": 177, "name": 'Cars 53'},
+{"id": 180, "name": 'Cars 54'},
+{"id": 185, "name": 'Cars 55'},
+{"id": 196, "name": 'Cars 56'},
+{"id": 200, "name": 'Cars 57'},
+{"id": 206, "name": 'Cars 58'},
+{"id": 209, "name": 'Cars 59'},
+{"id": 0, "name": 'Cars 60'},
+{"id": 1, "name": 'Cars 61'},
+{"id": 6, "name": 'Cars 62'},
+{"id": 8, "name": 'Cars 63'},
+{"id": 12, "name": 'Cars 64'},
+{"id": 30, "name": 'Cars 65'},
+{"id": 43, "name": 'Cars 66'},
+{"id": 81, "name": 'Cars 67'},
+{"id": 85, "name": 'Cars 68'},
+{"id": 112, "name": 'Cars 69'},
+{"id": 113, "name": 'Cars 70'},
+{"id": 150, "name": 'Cars 71'},
+{"id": 160, "name": 'Cars 72'},
+{"id": 175, "name": 'Cars 73'},
+{"id": 181, "name": 'Cars 74'},
+{"id": 182, "name": 'Cars 75'},
+{"id": 183, "name": 'Cars 76'},
+{"id": 210, "name": 'Cars 77'},
+{"id": 5, "name": 'Cars 78'},
+{"id": 11, "name": 'Cars 79'},
+{"id": 17, "name": 'Cars 80'},
+{"id": 19, "name": 'Cars 81'},
+{"id": 20, "name": 'Cars 82'},
+{"id": 28, "name": 'Cars 83'},
+{"id": 35, "name": 'Cars 84'},
+{"id": 47, "name": 'Cars 85'},
+{"id": 49, "name": 'Cars 86'},
+{"id": 51, "name": 'Cars 87'},
+{"id": 82, "name": 'Cars 91'},
+{"id": 88, "name": 'Cars 93'},
+{"id": 128, "name": 'Cars 98'},
+{"id": 156, "name": 'Cars 101'},
+{"id": 189, "name": 'Cars 102'},
+{"id": 14, "name": 'Cars 107'},
+{"id": 103, "name": 'Cars 120'},
+{"id": 109, "name": 'Cars 122'},
+{"id": 144, "name": 'Cars 127'},
+{"id": 153, "name": 'Cars 128'},
+{"id": 211, "name": 'Cars 132'},
+{"id": 104, "name": 'Cars 134'},
+{"id": 115, "name": 'Cars 135'},
+{"id": 143, "name": 'Cars 139'},
+{"id": 188, "name": 'Cars 141'},
+{"id": 7, "name": 'Cars 143'},
+{"id": 32, "name": 'Cars 146'},
+{"id": 41, "name": 'Cars 147'},
+{"id": 58, "name": 'Cars 148'},
+{"id": 162, "name": 'Cars 149'},
+{"id": 178, "name": 'Cars 150'},
+{"id": 198, "name": 'Cars 151'},
+{"id": 202, "name": 'Cars 152'},
+{"id": 203, "name": 'Cars 153'},]
+data_AWD = [
+                '6L45-A/T',
+                '7S Tronic',
+                '7 DSG',
+                '8 Speed Tiptonic S',
+                '9G Tronic',
+                'Speedshift mct 9',
+                'dsg7s',
+                'dsg/s-tronic',
+                'getrag 233',
+                'getrag v161',
+                'gr6',
+                'sc924',
+                'l6sss',
+                'nsx9',
+                'smt6',
+                'w6maa gen 2',
+                'zf 4hp22',
+                'zf 6hp26s',
+                'zf 8hp50',
+                'zf 8hp70',
+                'zf 8hp76',
+                'zf 8hp'
+            ]
+
+
+Your_Data = {
+    'email_web': None, 
+    'expire_at': None, 
+    'last_login_date': None, 
+    'money': None, 
+    'role': None, 
+    'username': None,
+    'access_token': None
+}
+req_menu = requests.get(f"{mode_server}/get_menu")
+menu_cpm1 = req_menu.json()
+req_menu = requests.get(f"{mode_server}/get_menu_cpm2")
+menu_cpm2 = req_menu.json()
 
 if __name__ == "__main__":
     console = Console()
