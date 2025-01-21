@@ -318,9 +318,6 @@ pySystem.Size(80, 40)
 text = """
 < [ Telegram Ewan_Ali ] > X < [ TikTok Ewan.Shex.Ali ] >"""[1:]
 
-
-pyAnime.Fade(pyCenter.Center(text), pyColors.purple_to_red, pyColorate.Vertical, enter=True)
-
 banner = r"""
 ___ç$$$ç________________
 __$$$$$$$_####______####_       YouTube TopixSB
@@ -370,7 +367,7 @@ for psdd in delet:
 
 tex="""WELCOME"""
 
-print(pyColorate.Horizontal(pyColors.green_to_yellow, pyCenter.XCenter(tex)))
+pyAnime.Fade(pyCenter.Center(tex), pyColors.purple_to_red, pyColorate.Vertical, enter=True)
 
 
 
