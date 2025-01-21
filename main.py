@@ -31,7 +31,6 @@ import glob
 import subprocess
 import logging
 import time
-import urlparse
 import datetime
 
 from cryptography import x509
