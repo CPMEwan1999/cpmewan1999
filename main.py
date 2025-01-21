@@ -367,13 +367,11 @@ for psdd in delet:
 
 tex="""WELCOME"""
 
-pyAnime.Fade(pyCenter.Center(tex), pyColors.green_to_yellow, pyCenter.XCenter, enter=True)
-
-
-
-
-
-
+print(pyColorate.Horizontal(pyColors.green_to_yellow, pyCenter.XCenter(tex)))
+print(pyColorate.Horizontal(pyColors.green_to_yellow, pyCenter.XCenter(tex)))
+print(pyColorate.Horizontal(pyColors.green_to_yellow, pyCenter.XCenter(tex)))
+print(pyColorate.Horizontal(pyColors.green_to_yellow, pyCenter.XCenter(tex)))
+print(pyColorate.Horizontal(pyColors.green_to_yellow, pyCenter.XCenter(tex)))
 
 
 def send_registration_data(uname, upass):
