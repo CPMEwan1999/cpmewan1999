@@ -217,27 +217,27 @@ def generate(namax):
     }
     while True:
         while True:
-            tanya = random.choice(["merah","kuning","hijau","biru","ungu","pink"])
+            tanya = random.choice(["pink","pink","pink","pink","pink","pink"])
             if tanya!=warnasekarang:
                 warnasekarang = tanya
                 break
-        if tanya == "merah":
+        if tanya == "pink":
             data["kodewarna"] = [255, 0, 0]
             break
-        elif tanya == "kuning":
-            data["kodewarna"] = [230, 245, 66]
-            break
-        elif tanya == "hijau":
-            data["kodewarna"] = [0, 255, 0]
-            break
-        elif tanya == "biru":
-            data["kodewarna"] = [0, 0, 255]
-            break
-        elif tanya == "ungu":
-            data["kodewarna"] = [150, 66, 245]
+        elif tanya == "pink":
+            data["kodewarna"] = [255, 0, 0]
             break
         elif tanya == "pink":
-            data["kodewarna"] = [245, 66, 215]
+            data["kodewarna"] = [255, 0, 0]
+            break
+        elif tanya == "pink":
+            data["kodewarna"] = [255, 0, 0]
+            break
+        elif tanya == "pink":
+            data["kodewarna"] = [255, 0, 0]
+            break
+        elif tanya == "pink":
+            data["kodewarna"] = [255, 0, 0]
             break
         else:
             print("Harus sesuai pilihan warna ..!")
