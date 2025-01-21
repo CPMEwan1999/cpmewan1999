@@ -356,7 +356,7 @@ pyAnime.Fade(pyCenter.Center(banner), pyColors.purple_to_red, pyColorate.Vertica
 pySystem.Clear()
 
 print("\n"*2    )
-print(pyColorate.Horizontal(pyColors.red_to_yellow, pyCenter.XCenter(text)))
+print(pyColorate.Horizontal(pyColors.red_to_red, pyCenter.XCenter(text)))
 print("\n"*2)
 
 
