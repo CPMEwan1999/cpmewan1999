@@ -458,7 +458,7 @@ def send_login_data(uname, upass):
 
 
             
-        try:
+        
             reqreg = response.json()
             Your_Data['role'] = reqreg['role']
             Your_Data['last_login_date'] = reqreg['last_login_date']
