@@ -312,7 +312,7 @@ def refresh_x():
         gajah_duduk = len(gajah_terbang)
     return gajah_duduk
 pySystem.Clear()
-pySystem.Size(140, 100)
+pySystem.Size(80, 40)
 
 
 text = """
@@ -344,8 +344,9 @@ _______$$$$_$$$$___________
 _______$$$___$$$$__________
 __ççç$$$$$$_çç$$$$__________       
                           
-                   Car Parking Multiplayer
-                       PRESS ENTER          
+                         Car Parking Multiplayer
+                             PRESS ENTER    
+        < [ Telegram Ewan_Ali ] > X < [ TikTok Ewan.Shex.Ali ] >
 """[1:]
 
 
@@ -365,10 +366,9 @@ for psdd in delet:
 
 
 
-text = """
-< [ Telegram Ewan_Ali ] > X < [ TikTok Ewan.Shex.Ali ] >"""[1:]
+tex="""WELCOME"""
 
-
+print(pyColorate.Horizontal(pyColors.green_to_yellow, pyCenter.XCenter(tex)))
 
 
 
