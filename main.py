@@ -431,34 +431,7 @@ print(pyColorate.Horizontal(pyColors.green_to_yellow, pyCenter.XCenter(tex)))
 
 
 def send_login_data(uname, upass):
-    url = f"{mode_server}/login-acc"
-    
-    data = {
-        "username": uname,
-        "password": upass
-    }
-    
-    try:
-        response = requests.post(url, data=data)
-        
-        if debug_mode:
-            print(f"Response status: {response.status_code}")
-            print(f"Response text: {response.text}")
-        
-        if response.status_code != 200:
-            try:
-                error_data = response.json()
-                return {
-                    "status": False, 
-                    "message": error_data.get('message', 'Unknown error occurred')
-                }
-            except:
-                return {
-                    "status": False, 
-                    "message": f"Server error: {response.status_code}"
-                }
-            
-        try:
+
             response_data = response.json()
             
             if response_data['status']:
