@@ -100,12 +100,12 @@ try:
     # Fungsi color pengganti menggunakan colorama
     def color(text, fore=None, back=None):
         color_map = {
-            (255,0,0): Fore.RED,
-            (0,255,0): Fore.GREEN, 
-            (0,0,255): Fore.BLUE,
-            (255,255,0): Fore.YELLOW,
-            (0,255,255): Fore.CYAN,
-            (255,0,255): Fore.MAGENTA
+            (0,0,0): Fore.RED,
+            (0,0,0): Fore.GREEN, 
+            (0,0,0): Fore.BLUE,
+            (0,0,0): Fore.YELLOW,
+            (0,0,0): Fore.CYAN,
+            (0,0,0): Fore.MAGENTA
         }
         result = ""
         if fore in color_map:
@@ -159,12 +159,12 @@ def disp(clrnama):
         # Memetakan warna RGB ke warna colorama terdekat
         colors = {
             'RED': (255, 0, 0, Fore.RED),
-            'RED': (0, 255, 0, Fore.RED),
-            'RED': (0, 0, 255, Fore.RED),
-            'RED': (255, 255, 0, Fore.RED),
-            'RED': (255, 0, 255, Fore.RED),
-            'RED': (0, 255, 255, Fore.RED),
-            'RED': (255, 255, 255, Fore.RED)
+            'GREEN': (0, 255, 0, Fore.GREEN),
+            'BLUE': (0, 0, 255, Fore.BLUE),
+            'YELLOW': (255, 255, 0, Fore.YELLOW),
+            'MAGENTA': (255, 0, 255, Fore.MAGENTA),
+            'CYAN': (0, 255, 255, Fore.CYAN),
+            'WHITE': (255, 255, 255, Fore.WHITE)
         }
         
         min_distance = float('inf')
@@ -217,27 +217,27 @@ def generate(namax):
     }
     while True:
         while True:
-            tanya = random.choice(["pink","pink","pink","pink","pink","pink"])
+            tanya = random.choice(["merah","kuning","hijau","biru","ungu","pink"])
             if tanya!=warnasekarang:
                 warnasekarang = tanya
                 break
-        if tanya == "pink":
+        if tanya == "merah":
             data["kodewarna"] = [255, 0, 0]
             break
-        elif tanya == "pink":
-            data["kodewarna"] = [255, 0, 0]
+        elif tanya == "kuning":
+            data["kodewarna"] = [230, 245, 66]
+            break
+        elif tanya == "hijau":
+            data["kodewarna"] = [0, 255, 0]
+            break
+        elif tanya == "biru":
+            data["kodewarna"] = [0, 0, 255]
+            break
+        elif tanya == "ungu":
+            data["kodewarna"] = [150, 66, 245]
             break
         elif tanya == "pink":
-            data["kodewarna"] = [255, 0, 0]
-            break
-        elif tanya == "pink":
-            data["kodewarna"] = [255, 0, 0]
-            break
-        elif tanya == "pink":
-            data["kodewarna"] = [255, 0, 0]
-            break
-        elif tanya == "pink":
-            data["kodewarna"] = [255, 0, 0]
+            data["kodewarna"] = [245, 66, 215]
             break
         else:
             print("Harus sesuai pilihan warna ..!")
