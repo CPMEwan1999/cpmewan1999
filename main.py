@@ -190,7 +190,7 @@ if __name__ == "__main__":
             print(Colorate.Horizontal(Colors.rainbow, '📍{20}: Change Race Wins         1.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '📍{21}: Change Race Loses        1.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '📍{22}: Speed Car Hack           2.500K'))
-            print(Colorate.Horizontal(Colors.rainbow, '📍{23}: Clone Account            2.500K'))
+            print(Colorate.Horizontal(Colors.rainbow, '📍{23}: All Cars 99HP            2.500K'))
             print(Colorate.Horizontal(Colors.rainbow, '📍{24}: Clone Account            5.000K'))            
             print(Colorate.Horizontal(Colors.rainbow, '📍{00} : Exit'))
             
@@ -557,8 +557,9 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, '[!] PLEASE TRY AGAIN'))
                     sleep(2)
                     continue
-            elif service == 23: # Unlock All Cars Siren
-                console.print("[%] UNLOCKING ALL CARS SIREN: ", end=None)
+            elif service == 23: # Hack All Car Speed 99hp
+                print(Colorate.Horizontal(Colors.rainbow, '[!] NOTE: ORIGINAL SPEED CAN NOT BE RESTORED'))            
+                console.print("[%] HACKING All CARS SPEED 99HP: ", end=None)
                 if cpm.hack_car_sexo():
                     print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
                     print(Colorate.Horizontal(Colors.rainbow, '======================================'))
