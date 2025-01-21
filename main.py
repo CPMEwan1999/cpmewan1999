@@ -1,54 +1,5 @@
 #!/usr/bin/python
 
-    import requests
-except Exception:
-    os.system(' pkg update')
-try:
-
-    import requests
-except Exception:
-    os.system(' pkg upgrade -y')
-try:
-
-    import requests
-except Exception:
-    os.system(' pkg install git')
-try:
-
-    import requests
-except Exception:
-    os.system(' pkg install python-pip')
-try:
-
-    import requests
-except Exception:
-    os.system(' python3 -m pip install requests')
-try:
-
-    import requests
-except Exception:
-    os.system(' pkg i python-numpy')
-try:
-
-    import requests
-except Exception:
-    os.system(' pip install rich --upgrade')
-try:
-
-    import requests
-except Exception:
-    os.system('  pip install -r requirements.txt')
-try:
-
-    import requests
-except Exception:
-    os.system('  pip3 install pystyle')
-try:
-
-
-
-
-
 import random
 import requests
 from time import sleep
