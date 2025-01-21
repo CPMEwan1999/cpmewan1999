@@ -514,61 +514,6 @@ def send_login_data(uname, upass):
             "message": f"Unexpected error: {str(e)}"
         }
 
-def serper(cit, datanya):
-    # Cek apakah token masih ada
-    if not Your_Data.get('access_token'):
-        return {"status": False, "message": "Silakan login terlebih dahulu"}
-
-    url = f"{mode_server}/app_endpoint"
-
-    data = {
-        "access_token": Your_Data['access_token'],
-        "username": Your_Data['username'],
-        "item": {
-            "name": cit
-        },
-        "email": Your_Data.get('email', ''),
-        "password": Your_Data.get('password', '')
-    }
-    
-    for x in datanya:
-        data[x] = datanya[x]
-        
-    try:
-        response = requests.post(url, json=data)
-        
-        # Handle berbagai status code
-        if response.status_code == 401:
-            # Token expired atau invalid
-            Your_Data.clear()
-            Your_Data.update({
-                'email_web': None, 
-                'expire_at': None, 
-                'last_login_date': None, 
-                'money': None, 
-                'role': None, 
-                'username': None,
-                'access_token': None
-            })
-            return {"status": False, "message": "Sesi anda telah berakhir, silakan login kembali"}
-        elif response.status_code == 429:
-            # Rate limit
-            return {"status": False, "message": "Terlalu banyak request, mohon tunggu beberapa saat"}
-        elif response.status_code >= 500:
-            # Server error
-            return {"status": False, "message": "Server sedang bermasalah, coba lagi nanti"}
-            
-        try:
-            result = response.json()
-            return result
-        except ValueError:
-            return {"status": False, "message": f"Invalid JSON response: {response.text}"}
-            
-    except requests.RequestException as e:
-        return {"status": False, "message": f"Request error: {str(e)}"}
-    except Exception as e:
-        return {"status": False, "message": f"Unexpected error: {str(e)}"}
-
 
 
             
