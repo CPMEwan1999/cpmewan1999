@@ -108,7 +108,7 @@ def load_client_details():
     response = requests.get("http://ip-api.com/json")
     data = response.json()
     print(Colorate.Horizontal(Colors.rainbow, '==============[ 𝐋𝐎𝐂𝐀𝐓𝐈𝐎𝐍 ]=============='))
-    print(Colorate.Horizontal(Colors.rainbow, f'📍Country : {data.get("id")}.'))    
+    print(Colorate.Horizontal(Colors.rainbow, f'📍Country : {data.get("geoip_country_code")}.'))    
     print(Colorate.Horizontal(Colors.rainbow, f'📍Region  : {data.get("regionName")}.'))
     print(Colorate.Horizontal(Colors.rainbow, f'📍City    : {data.get("city")}.'))
     print(Colorate.Horizontal(Colors.rainbow, '================[ 𝐌𝐄𝐍𝐔 ]================'))
