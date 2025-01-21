@@ -317,7 +317,7 @@ pySystem.Size(900, 880)
 
 text = """
 < [ Telegram Ewan_Ali ] > X < [ TikTok Ewan.Shex.Ali ] >"""[1:]
-pyAnime.Fade(pyCenter.Center(text), pyColors.purple_to_red, pyColorate.Vertical, enter=True)
+
 
 banner = r"""
 ___ç$$$ç________________
@@ -351,12 +351,13 @@ __ççç$$$$$$_çç$$$$__________
 
 
 pyAnime.Fade(pyCenter.Center(banner), pyColors.purple_to_red, pyColorate.Vertical, enter=True)
+pyAnime.Fade(pyCenter.Center(text), pyColors.purple_to_red, pyColorate.Vertical, enter=True)
 
 pySystem.Clear()
 
-print("\n"*2    )
+print("\n"*900    )
 print(pyColorate.Horizontal(pyColors.red_to_yellow, pyCenter.XCenter(text)))
-print("\n"*2)
+print("\n"*900)
 
 
 delet=["cpm/pos.py","cpm/__init__.py"]
