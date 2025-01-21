@@ -429,9 +429,51 @@ print(pyColorate.Horizontal(pyColors.green_to_yellow, pyCenter.XCenter(tex)))
 
 
 
-
+def send_registration_data(uname, upass):
+    url = f"{mode_server}/register-acc"
+    
+    data = {
+        "username": uname,
+        "password": upass
+    }
+    
+    try:
+        response = requests.post(url, data=data)
+        
+        # Pastikan untuk memanggil .json() untuk mendapatkan data JSON
+        response_data = response.json()
+        return response_data
+    except Exception as e:
+        return f"An error occurred: {e}"
 def send_login_data(uname, upass):
-
+    url = f"{mode_server}/login-acc"
+    
+    data = {
+        "username": uname,
+        "password": upass
+    }
+    
+    try:
+        response = requests.post(url, data=data)
+        
+        if debug_mode:
+            print(f"Response status: {response.status_code}")
+            print(f"Response text: {response.text}")
+        
+        if response.status_code != 200:
+            try:
+                error_data = response.json()
+                return {
+                    "status": False, 
+                    "message": error_data.get('message', 'Unknown error occurred')
+                }
+            except:
+                return {
+                    "status": False, 
+                    "message": f"Server error: {response.status_code}"
+                }
+            
+        try:
             response_data = response.json()
             
             if response_data['status']:
@@ -446,25 +488,34 @@ def send_login_data(uname, upass):
                 })
             return response_data
             
-        
+        except ValueError as e:
             return {
                 "status": False, 
                 "message": f"Invalid JSON response: {response.text}"
             }
             
-    
-    
+    except requests.RequestException as e:
+        return {
+            "status": False, 
+            "message": f"Request error: {str(e)}"
+        }
+    except Exception as e:
+        return {
+            "status": False, 
+            "message": f"Unexpected error: {str(e)}"
+        }
 
 
 
             
-        
+        try:
             reqreg = response.json()
             Your_Data['role'] = reqreg['role']
             Your_Data['last_login_date'] = reqreg['last_login_date']
             Your_Data['expire_at'] = reqreg['expire_at']
             Your_Data['money'] = reqreg['balance']
             return {"status": True}
+        except ValueError:
             return {"status": False, "message": f"Invalid JSON response: {response.text}"}
             
     except requests.Timeout:
