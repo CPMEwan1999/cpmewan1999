@@ -446,7 +446,7 @@ def send_login_data(uname, upass):
                 })
             return response_data
             
-        except ValueError as e:
+        
             return {
                 "status": False, 
                 "message": f"Invalid JSON response: {response.text}"
