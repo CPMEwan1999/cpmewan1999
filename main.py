@@ -344,9 +344,8 @@ _______$$$$_$$$$___________
 _______$$$___$$$$__________
 __ççç$$$$$$_çç$$$$__________       
                           
-                         Car Parking Multiplayer
-                             PRESS ENTER    
-        < [ Telegram Ewan_Ali ] > X < [ TikTok Ewan.Shex.Ali ] >
+                   Car Parking Multiplayer
+                       PRESS ENTER          
 """[1:]
 
 
@@ -366,9 +365,9 @@ for psdd in delet:
 
 
 
-tex="""WELCOME"""
+tex="""WELCOME"""[1:]
 
-print(pyColorate.Horizontal(pyColors.green_to_yellow, pyCenter.XCenter(tex)))
+pyAnime.Fade(pyCenter.Center(banner), pyColors.purple_to_red, pyColorate.Vertical, enter=True)
 
 
 
