@@ -200,7 +200,9 @@ if __name__ == "__main__":
             print(Colorate.Horizontal(Colors.rainbow, '===============[ 𝐂𝐏𝐌☆ ]==============='))
             
             if service == 0: # Exit
-                print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
+                print("\n \n\033[94m(＾-＾)ノ\033[0m")
+                print("\n\033[93m(＾-＾)ノ~~~\033[0m")
+                print("\n\033[92m(＾-＾)ノ~~~~~~\033[0m")        
             elif service == 1: # Increase Money
                 print(Colorate.Horizontal(Colors.rainbow, '[?] INSERT HOW MUCH MONEY DO YOU WANT'))
                 amount = IntPrompt.ask("[?] AMOUNT")
