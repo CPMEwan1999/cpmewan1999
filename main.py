@@ -9,7 +9,6 @@ from rich.prompt import Prompt, IntPrompt
 from rich.text import Text
 from rich.style import Style
 import pystyle
-import turtle
 from pystyle import Colors, Colorate
 
 from cpmewan1999 import CPMEwan1999
