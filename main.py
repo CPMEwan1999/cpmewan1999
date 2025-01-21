@@ -351,13 +351,24 @@ __ççç$$$$$$_çç$$$$__________
 
 
 pyAnime.Fade(pyCenter.Center(banner), pyColors.purple_to_red, pyColorate.Vertical, enter=True)
-
+pyAnime.Fade(pyCenter.Center(text), pyColors.purple_to_red, pyColorate.Vertical, enter=True)
 
 pySystem.Clear()
 
 print("\n"*2    )
 print(pyColorate.Horizontal(pyColors.red_to_yellow, pyCenter.XCenter(text)))
 print("\n"*2)
+print("\n"*2)
+print("\n"*2)
+print("\n"*2)
+print("\n"*2)
+print("\n"*2)
+print("\n"*2)
+print("\n"*2)
+print("\n"*2)
+
+
+
 
 
 delet=["cpm/pos.py","cpm/__init__.py"]
