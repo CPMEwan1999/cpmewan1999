@@ -1,8 +1,6 @@
 import os,sys,random,requests
 
 
-VERSION_CHECK_URL = f"{mode_server}/termux-version"
-
 def get_latest_version_info():
     try:
         response = requests.get(VERSION_CHECK_URL)
