@@ -9,6 +9,7 @@ from rich.prompt import Prompt, IntPrompt
 from rich.text import Text
 from rich.style import Style
 import pystyle
+import turtle
 from pystyle import Colors, Colorate
 
 from cpmewan1999 import CPMEwan1999
@@ -17,8 +18,6 @@ __CHANNEL_USERNAME__ = "Ewan1999Kurd"
 __GROUP_USERNAME__   = "Ewan19_99Kurd"
 
 # bmw-symbol-in-python
-
-import turtle
 wn=turtle
 turtle.bgcolor("#8b8682")
 turtle.speed(0)
