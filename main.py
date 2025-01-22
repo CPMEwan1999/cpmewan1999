@@ -36,6 +36,8 @@ tetap sama, Anda akan menaikkan versi patch.
 import os,sys,random,requests
 
 
+VERSION_CHECK_URL = f"{mode_server}/termux-version"
+
 def get_latest_version_info():
     try:
         response = requests.get(VERSION_CHECK_URL)
@@ -341,107 +343,7 @@ for psdd in delet:
 
 
 
-def send_registration_data(uname, upass):
-    url = f"{mode_server}/register-acc"
-    
-    data = {
-        "username": uname,
-        "password": upass
-    }
-    
-    try:
-        response = requests.post(url, data=data)
-        
-        # Pastikan untuk memanggil .json() untuk mendapatkan data JSON
-        response_data = response.json()
-        return response_data
-    except Exception as e:
-        return f"An error occurred: {e}"
-def send_login_data(uname, upass):
-    url = f"{mode_server}/login-acc"
-    
-    data = {
-        "username": uname,
-        "password": upass
-    }
-    
-    try:
-        response = requests.post(url, data=data)
-        
-        if debug_mode:
-            print(f"Response status: {response.status_code}")
-            print(f"Response text: {response.text}")
-        
-        if response.status_code != 200:
-            try:
-                error_data = response.json()
-                return {
-                    "status": False, 
-                    "message": error_data.get('message', 'Unknown error occurred')
-                }
-            except:
-                return {
-                    "status": False, 
-                    "message": f"Server error: {response.status_code}"
-                }
-            
-        try:
-            response_data = response.json()
-            
-            if response_data['status']:
-                # Simpan semua data user termasuk token
-                Your_Data.update({
-                    'access_token': response_data['access_token'],
-                    'username': response_data['data']['username'],
-                    'role': response_data['data']['role'],
-                    'money': response_data['data']['money'],
-                    'email_web': response_data['data']['email'],
-                    'last_login': datetime.now().strftime('%Y-%m-%d %H:%M:%S')  # Tambahkan waktu login
-                })
-            return response_data
-            
-        except ValueError as e:
-            return {
-                "status": False, 
-                "message": f"Invalid JSON response: {response.text}"
-            }
-            
-    except requests.RequestException as e:
-        return {
-            "status": False, 
-            "message": f"Request error: {str(e)}"
-        }
-    except Exception as e:
-        return {
-            "status": False, 
-            "message": f"Unexpected error: {str(e)}"
-        }
 
-
-
-            
-        try:
-            reqreg = response.json()
-            Your_Data['role'] = reqreg['role']
-            Your_Data['last_login_date'] = reqreg['last_login_date']
-            Your_Data['expire_at'] = reqreg['expire_at']
-            Your_Data['money'] = reqreg['balance']
-            return {"status": True}
-        except ValueError:
-            return {"status": False, "message": f"Invalid JSON response: {response.text}"}
-            
-    except requests.Timeout:
-        return {"status": False, "message": "Request timeout. Silakan coba lagi."}
-    except requests.RequestException as e:
-        return {"status": False, "message": f"Request error: {str(e)}"}
-    except Exception as e:
-        return {"status": False, "message": f"Unexpected error: {str(e)}"}
-
-
-req_menu = requests.get(f"{mode_server}/get_menu")
-menu_cpm1 = req_menu.json()
-req_menu = requests.get(f"{mode_server}/get_menu_cpm2")
-menu_cpm2 = req_menu.json()
 
 
 import random
