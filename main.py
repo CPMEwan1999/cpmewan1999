@@ -277,7 +277,6 @@ def refresh_x():
         gajah_terbang = file.read()
         gajah_duduk = len(gajah_terbang)
     return gajah_duduk
-pySystem.Size(80, 40)
 
 
 text = """
