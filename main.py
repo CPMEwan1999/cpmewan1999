@@ -170,6 +170,7 @@ from rich.text import Text
 from rich.style import Style
 import pystyle
 from pystyle import Colors, Colorate
+from pystyle import Write, Colors
 
 from cpmewan1999 import CPMEwan1999
 
@@ -213,7 +214,7 @@ def banner(console):
     colorful_text = gradient_text(brand_name, colors)
     console.print(colorful_text)
     print(Colorate.Horizontal(Colors.rainbow, '================================================================================='))
-    print(Colorate.Horizontal(Colors.yellow_to_red, "                𝐏𝐋𝐄𝐀𝐒𝐄 𝐋𝐎𝐆𝐎𝐔𝐓 𝐅𝐑𝐎𝐌 𝐂𝐏𝐌 𝐁𝐄𝐅𝐎𝐑𝐄 𝐔𝐒𝐈𝐍𝐆 𝐓𝐇𝐈𝐒 𝐓𝐎𝐎𝐋", 1))
+    print(Colorate.Horizontal(Colors.rainbow, '\t                𝐏𝐋𝐄𝐀𝐒𝐄 𝐋𝐎𝐆𝐎𝐔𝐓 𝐅𝐑𝐎𝐌 𝐂𝐏𝐌 𝐁𝐄𝐅𝐎𝐑𝐄 𝐔𝐒𝐈𝐍𝐆 𝐓𝐇𝐈𝐒 𝐓𝐎𝐎𝐋'))
     print(Colorate.Horizontal(Colors.rainbow, '           𝐒𝐇𝐀𝐑𝐈𝐍𝐆 𝐓𝐇𝐄 𝐀𝐂𝐂𝐄𝐒𝐒 𝐊𝐄𝐘 𝐈𝐒 𝐍𝐎𝐓 𝐀𝐋𝐋𝐎𝐖𝐄𝐃 𝐀𝐍𝐃 𝐖𝐈𝐋𝐋 𝐁𝐄 𝐁𝐋𝐎𝐂𝐊𝐄𝐃'))
     print(Colorate.Horizontal(Colors.rainbow, f' ‌                  𝐓𝐞𝐥𝐞𝐠𝐫𝐚𝐦: @{__CHANNEL_USERNAME__} 𝐎𝐫 @{__GROUP_USERNAME__}'))
     print(Colorate.Horizontal(Colors.rainbow, '================================================================================='))
@@ -225,6 +226,9 @@ def load_player_data(cpm):
         if 'floats' in data and 'localID' in data and 'money' in data and 'coin' in data:
         
             print(Colorate.Horizontal(Colors.rainbow, '===========[ 𝙿𝙻𝙰𝚈𝙴𝚁 𝙳𝙴𝚃𝙰𝙸𝙻𝚂 ]==========='))
+            
+            name = Write.Input("coin -> ", Colors.red_to_purple, interval=0.0025)
+Write.Print(f"Nice to meet you, {coin}!", Colors.blue_to_green, interval=0.05)
             
             print(Colorate.Horizontal(Colors.rainbow, f'📍Name   : {(data.get("Name") if "Name" in data else "UNDEFINED")}.'))
                 
