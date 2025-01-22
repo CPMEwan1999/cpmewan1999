@@ -4,10 +4,74 @@ CURRENT_VERSION = """
 2.6.2
 """
 CURRENT_VERSION=CURRENT_VERSION.replace('\n','')
+"""
+-------------------------------------------
+MAJOR (Angka Pertama):
+
+Angka ini meningkat ketika ada perubahan yang tidak kompatibel yang mengharuskan 
+pengguna untuk memodifikasi kode atau penggunaan mereka yang ada. Misalnya, 
+jika suatu fungsi dihapus atau perilakunya berubah secara signifikan, Anda akan 
+meningkatkan versi mayor.
+-------------------------------------------
+MINOR (Angka Kedua):
+
+Angka ini meningkat ketika fitur baru ditambahkan dengan cara yang kompatibel 
+dengan versi sebelumnya. Ini berarti bahwa fungsionalitas yang ada tetap tidak 
+berubah, tetapi kemampuan atau peningkatan baru diperkenalkan. Misalnya, 
+jika fungsi baru ditambahkan tanpa memengaruhi yang sudah ada, Anda akan 
+menaikkan versi minor.
+-------------------------------------------
+PATCH (Angka Ketiga):
+
+Angka ini meningkat ketika perbaikan bug yang kompatibel dengan versi sebelumnya 
+diperkenalkan. Ini biasanya merupakan perubahan kecil yang menyelesaikan masalah 
+tanpa menambah fitur baru atau merusak fungsionalitas yang ada. Misalnya, 
+jika ada bug yang diperbaiki dalam suatu fungsi tetapi antarmuka fungsi tersebut 
+tetap sama, Anda akan menaikkan versi patch.
+-------------------------------------------
+"""
 
 
 
 import os,sys,random,requests
+
+
+def download_new_version(download_url, filename):
+    try:
+        response = requests.get(download_url)
+        response.raise_for_status()
+        
+        # Pastikan direktori ada
+        directory = os.path.dirname(filename)
+        if directory and not os.path.exists(directory):
+            os.makedirs(directory)
+            
+        with open(filename, 'wb') as file:
+            file.write(response.content)
+    except Exception as e:
+        print(f"Error saat mengunduh: {e}")
+        
+
+
+try:
+    from colorama import init, Fore, Back, Style
+    init()
+    # Fungsi color pengganti menggunakan colorama
+    def color(text, fore=None, back=None):
+        color_map = {
+            (255,0,0): Fore.RED,
+            (0,255,0): Fore.GREEN, 
+            (0,0,255): Fore.BLUE,
+            (255,255,0): Fore.YELLOW,
+            (0,255,255): Fore.CYAN,
+            (255,0,255): Fore.MAGENTA
+        }
+        result = ""
+        if fore in color_map:
+            result += color_map[fore]
+        result += text
+        result += Style.RESET_ALL
+        return result
 
     from pystyle import Anime as pyAnime
     from pystyle import Colors as pyColors
