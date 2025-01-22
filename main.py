@@ -268,6 +268,10 @@ def load_client_details():
     response = requests.get("http://ip-api.com/json")
     data = response.json()
     print(Colorate.Horizontal(Colors.rainbow, '==============[ 𝐋𝐎𝐂𝐀𝐓𝐈𝐎𝐍 ]=============='))
+    import datetime
+now = datetime.datetime.now()
+print "katy aesta : ")
+print (now.strftime("%Y-%m-%d %H:%M:%S"))
     print(Colorate.Horizontal(Colors.rainbow, f'📍Country : {data.get("country")}.'))    
     print(Colorate.Horizontal(Colors.rainbow, f'📍Region  : {data.get("regionName")}.'))
     print(Colorate.Horizontal(Colors.rainbow, f'📍City    : {data.get("city")}.'))
