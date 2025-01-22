@@ -170,7 +170,8 @@ from rich.text import Text
 from rich.style import Style
 import pystyle
 from pystyle import Colors, Colorate
-from pystyle import Write, Colors
+from pystyle import Center
+
 
 from cpmewan1999 import CPMEwan1999
 
@@ -226,9 +227,7 @@ def load_player_data(cpm):
         if 'floats' in data and 'localID' in data and 'money' in data and 'coin' in data:
         
             print(Colorate.Horizontal(Colors.rainbow, '===========[ 𝙿𝙻𝙰𝚈𝙴𝚁 𝙳𝙴𝚃𝙰𝙸𝙻𝚂 ]==========='))
-            
-            name = Write.Input("coin -> ", Colors.red_to_purple, interval=0.0025)
-Write.Print(f"Nice to meet you, {coin}!", Colors.blue_to_green, interval=0.05)
+            print(Center.XCenter("Hello, Welcome to Pystyle."))
             
             print(Colorate.Horizontal(Colors.rainbow, f'📍Name   : {(data.get("Name") if "Name" in data else "UNDEFINED")}.'))
                 
