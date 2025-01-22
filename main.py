@@ -65,28 +65,6 @@ def download_new_version(download_url, filename):
     except Exception as e:
         print(f"Error saat mengunduh: {e}")
         
-def update_script():
-    version_info = get_latest_version_info()
-    if not version_info:
-        return
-    
-    latest_version = version_info.get("version")
-    download_url = version_info.get("download_url")
-    print(download_url)
-    print(f"CURRENT_VERSION {CURRENT_VERSION}\nlatest_version {latest_version}\ndownload_url {download_url}")
-    if latest_version and download_url:
-        if latest_version != CURRENT_VERSION:
-            print(f"New version available: {latest_version}")
-            print(f"Downloading update... {download_url}")
-            download_new_version(download_url, sys.argv[0])
-            print("Script updated to the latest version. Please restart the script.")
-            exit()
-        else:
-            print("You already have the latest version.")
-    else:
-        print("Invalid version information received.")
-update_script()
-
 
 
 try:
