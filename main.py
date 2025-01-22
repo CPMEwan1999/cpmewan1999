@@ -89,7 +89,6 @@ def download_new_version(download_url, filename):
     local_ip = requests.get('https://api.ipify.org').text
     response = requests.get(f"https://ipinfo.io/{local_ip}/json")
     data_jaringan = response.json()
-except Exception as e:
     os.system("pip install colorama")
     os.system("pip install requests")
     os.system("pip install pystyle")
