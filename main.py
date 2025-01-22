@@ -113,7 +113,7 @@ text = "This is a beautiful banner\nmade with pystyle"
 print(Add.Add(banner1, text, 4))
 
 
-pyAnime.Fade(pyCenter.Center(banner1), pyColors.red_to_yellow, pyColorate.Vertical, enter=True)
+#pyAnime.Fade(pyCenter.Center(banner1), pyColors.red_to_yellow, pyColorate.Vertical, enter=True)
 
 pySystem.Clear()
 
