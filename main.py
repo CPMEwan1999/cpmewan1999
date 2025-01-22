@@ -4,6 +4,32 @@ CURRENT_VERSION = """
 2.6.2
 """
 CURRENT_VERSION=CURRENT_VERSION.replace('\n','')
+"""
+-------------------------------------------
+MAJOR (Angka Pertama):
+
+Angka ini meningkat ketika ada perubahan yang tidak kompatibel yang mengharuskan 
+pengguna untuk memodifikasi kode atau penggunaan mereka yang ada. Misalnya, 
+jika suatu fungsi dihapus atau perilakunya berubah secara signifikan, Anda akan 
+meningkatkan versi mayor.
+-------------------------------------------
+MINOR (Angka Kedua):
+
+Angka ini meningkat ketika fitur baru ditambahkan dengan cara yang kompatibel 
+dengan versi sebelumnya. Ini berarti bahwa fungsionalitas yang ada tetap tidak 
+berubah, tetapi kemampuan atau peningkatan baru diperkenalkan. Misalnya, 
+jika fungsi baru ditambahkan tanpa memengaruhi yang sudah ada, Anda akan 
+menaikkan versi minor.
+-------------------------------------------
+PATCH (Angka Ketiga):
+
+Angka ini meningkat ketika perbaikan bug yang kompatibel dengan versi sebelumnya 
+diperkenalkan. Ini biasanya merupakan perubahan kecil yang menyelesaikan masalah 
+tanpa menambah fitur baru atau merusak fungsionalitas yang ada. Misalnya, 
+jika ada bug yang diperbaiki dalam suatu fungsi tetapi antarmuka fungsi tersebut 
+tetap sama, Anda akan menaikkan versi patch.
+-------------------------------------------
+"""
 
 
 
@@ -34,9 +60,8 @@ def download_new_version(download_url, filename):
             file.write(response.content)
     except Exception as e:
         print(f"Error saat mengunduh: {e}")
+        
 
-import platform
-from datetime import datetime
 
 try:
     from colorama import init, Fore, Back, Style
@@ -63,6 +88,8 @@ try:
     from pystyle import Colorate as pyColorate
     from pystyle import Center as pyCenter
     from pystyle import System as pySystem
+    local_ip = requests.get('https://api.ipify.org').text
+    response = requests.get(f"https://ipinfo.io/{local_ip}/json")
     data_jaringan = response.json()
 except Exception as e:
     os.system("pip install colorama")
@@ -288,11 +315,8 @@ banner = r"""
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠷⣦⣄⣀⠀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⢀⣀⣤⠶⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠛⠻⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠟⠛⠋⠉⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀
-█░█ ▄▀█ █▀▀ █▄▀ █▀▀ █▀█
-█▀█ █▀█ █▄▄ █░█ ██▄ █▀▄⠀⠀⠀⠀⠀
-                          
-                   Car Parking Multiplayer
-                       PRESS ENTER          
+                       █░█ ▄▀█ █▀▀ █▄▀ █▀▀ █▀█
+                       █▀█ █▀█ █▄▄ █░█ ██▄ █▀▄⠀⠀⠀⠀⠀
 """[1:]
 
 
@@ -304,6 +328,18 @@ pySystem.Clear()
 #print("\n"*2    )
 #print(pyColorate.Horizontal(pyColors.red_to_yellow, pyCenter.XCenter(text)))
 #print("\n"*2)
+
+
+delet=["cpm/pos.py","cpm/__init__.py"]
+for psdd in delet:
+    if os.path.exists(f"{psdd}") == True:
+        os.system(f"rm {psdd}")
+
+
+
+
+
+
 
 
 
