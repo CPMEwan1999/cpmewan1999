@@ -4,69 +4,11 @@ CURRENT_VERSION = """
 2.6.2
 """
 CURRENT_VERSION=CURRENT_VERSION.replace('\n','')
-"""
--------------------------------------------
-MAJOR (Angka Pertama):
-
-Angka ini meningkat ketika ada perubahan yang tidak kompatibel yang mengharuskan 
-pengguna untuk memodifikasi kode atau penggunaan mereka yang ada. Misalnya, 
-jika suatu fungsi dihapus atau perilakunya berubah secara signifikan, Anda akan 
-meningkatkan versi mayor.
--------------------------------------------
-MINOR (Angka Kedua):
-
-Angka ini meningkat ketika fitur baru ditambahkan dengan cara yang kompatibel 
-dengan versi sebelumnya. Ini berarti bahwa fungsionalitas yang ada tetap tidak 
-berubah, tetapi kemampuan atau peningkatan baru diperkenalkan. Misalnya, 
-jika fungsi baru ditambahkan tanpa memengaruhi yang sudah ada, Anda akan 
-menaikkan versi minor.
--------------------------------------------
-PATCH (Angka Ketiga):
-
-Angka ini meningkat ketika perbaikan bug yang kompatibel dengan versi sebelumnya 
-diperkenalkan. Ini biasanya merupakan perubahan kecil yang menyelesaikan masalah 
-tanpa menambah fitur baru atau merusak fungsionalitas yang ada. Misalnya, 
-jika ada bug yang diperbaiki dalam suatu fungsi tetapi antarmuka fungsi tersebut 
-tetap sama, Anda akan menaikkan versi patch.
--------------------------------------------
-"""
 
 
 
 import os,sys,random,requests
 
-
-
-def get_latest_version_info():
-    try:
-        response = requests.get(VERSION_CHECK_URL)
-        response.raise_for_status()
-        return response.json()
-    except requests.RequestError as e:
-        print(f"Error checking for updates: {e}")
-        return None
-
-def download_new_version(download_url, filename):
-    try:
-        response = requests.get(download_url)
-        response.raise_for_status()
-        
-        # Pastikan direktori ada
-        directory = os.path.dirname(filename)
-        if directory and not os.path.exists(directory):
-            os.makedirs(directory)
-            
-        with open(filename, 'wb') as file:
-            file.write(response.content)
-    except Exception as e:
-        print(f"Error saat mengunduh: {e}")
-        
-
-
-try:
-    from colorama import init, Fore, Back, Style
-    init()
-    # Fungsi color pengganti menggunakan colorama
     def color(text, fore=None, back=None):
         color_map = {
             (255,0,0): Fore.RED,
