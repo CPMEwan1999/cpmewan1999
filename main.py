@@ -50,6 +50,65 @@ def get_latest_version_info():
         print(f"Error checking for updates: {e}")
         return None
 
+def download_new_version(download_url, filename):
+    try:
+        response = requests.get(download_url)
+        response.raise_for_status()
+        
+        # Pastikan direktori ada
+        directory = os.path.dirname(filename)
+        if directory and not os.path.exists(directory):
+            os.makedirs(directory)
+            
+        with open(filename, 'wb') as file:
+            file.write(response.content)
+    except Exception as e:
+        print(f"Error saat mengunduh: {e}")
+        
+def update_script():
+    version_info = get_latest_version_info()
+    if not version_info:
+        return
+    
+    latest_version = version_info.get("version")
+    download_url = version_info.get("download_url")
+    print(download_url)
+    print(f"CURRENT_VERSION {CURRENT_VERSION}\nlatest_version {latest_version}\ndownload_url {download_url}")
+    if latest_version and download_url:
+        if latest_version != CURRENT_VERSION:
+            print(f"New version available: {latest_version}")
+            print(f"Downloading update... {download_url}")
+            download_new_version(download_url, sys.argv[0])
+            print("Script updated to the latest version. Please restart the script.")
+            exit()
+        else:
+            print("You already have the latest version.")
+    else:
+        print("Invalid version information received.")
+update_script()
+
+
+
+try:
+    from colorama import init, Fore, Back, Style
+    init()
+    # Fungsi color pengganti menggunakan colorama
+    def color(text, fore=None, back=None):
+        color_map = {
+            (255,0,0): Fore.RED,
+            (0,255,0): Fore.GREEN, 
+            (0,0,255): Fore.BLUE,
+            (255,255,0): Fore.YELLOW,
+            (0,255,255): Fore.CYAN,
+            (255,0,255): Fore.MAGENTA
+        }
+        result = ""
+        if fore in color_map:
+            result += color_map[fore]
+        result += text
+        result += Style.RESET_ALL
+        return result
+
     from pystyle import Anime as pyAnime
     from pystyle import Colors as pyColors
     from pystyle import Colorate as pyColorate
