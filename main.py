@@ -4,7 +4,6 @@ CURRENT_VERSION = """
 2.6.2
 """
 CURRENT_VERSION=CURRENT_VERSION.replace('\n','')
-mode_server = server_online
 """
 -------------------------------------------
 MAJOR (Angka Pertama):
