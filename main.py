@@ -96,8 +96,6 @@ except Exception as e:
     from pystyle import Center as pyCenter
     from pystyle import System as pySystem
     
-text = """
-< [ Telegram Ewan_Ali ] > X < [ TikTok Ewan.Shex.Ali ] >"""[1:]
 
 
 banner1 = '''
@@ -135,9 +133,8 @@ banner1 = '''
                    Car Parking Multiplayer
                           PRESS ENTER                                 '''
 
-text = "This is a beautiful banner\nmade with pystyle"
-
-print(Add.Add(banner1, text, 99))
+text = """
+< [ Telegram Ewan_Ali ] > X < [ TikTok Ewan.Shex.Ali ] >"""[1:]
 
 
 
