@@ -9,22 +9,6 @@ CURRENT_VERSION=CURRENT_VERSION.replace('\n','')
 
 import os,sys,random,requests
 
-    def color(text, fore=None, back=None):
-        color_map = {
-            (255,0,0): Fore.RED,
-            (0,255,0): Fore.GREEN, 
-            (0,0,255): Fore.BLUE,
-            (255,255,0): Fore.YELLOW,
-            (0,255,255): Fore.CYAN,
-            (255,0,255): Fore.MAGENTA
-        }
-        result = ""
-        if fore in color_map:
-            result += color_map[fore]
-        result += text
-        result += Style.RESET_ALL
-        return result
-
     from pystyle import Anime as pyAnime
     from pystyle import Colors as pyColors
     from pystyle import Colorate as pyColorate
