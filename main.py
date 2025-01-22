@@ -137,7 +137,7 @@ banner1 = '''
 
 text = "This is a beautiful banner\nmade with pystyle"
 
-print(Add.Add(banner1, text, 4))
+print(Add.Add(banner1, text, 99))
 
 
 
