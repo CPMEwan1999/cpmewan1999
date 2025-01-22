@@ -139,7 +139,7 @@ banner = r"""
 """[1:]
 
 
-pyAnime.Fade(pyCenter.Center(banner), pyColors.red_to_yellow, pyColorate.Vertical, enter=True)
+pyAnime.Fade(Center.XCenter(banner), pyColors.red_to_yellow, pyColorate.Vertical, enter=True)
 print(pyColorate.Horizontal(pyColors.purple_to_red, pyCenter.XCenter(text)))
 
 
@@ -227,7 +227,6 @@ def load_player_data(cpm):
         if 'floats' in data and 'localID' in data and 'money' in data and 'coin' in data:
         
             print(Colorate.Horizontal(Colors.rainbow, '===========[ 𝙿𝙻𝙰𝚈𝙴𝚁 𝙳𝙴𝚃𝙰𝙸𝙻𝚂 ]==========='))
-            print(Center.XCenter("Hello, Welcome to Pystyle."))
             
             print(Colorate.Horizontal(Colors.rainbow, f'📍Name   : {(data.get("Name") if "Name" in data else "UNDEFINED")}.'))
                 
