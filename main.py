@@ -168,7 +168,6 @@ from pystyle import Colors, Colorate
 from pystyle import Center
 import datetime
 
-
 from cpmewan1999 import CPMEwan1999
 
 __CHANNEL_USERNAME__ = "Ewan1999Kurd"
@@ -269,10 +268,9 @@ def load_client_details():
     response = requests.get("http://ip-api.com/json")
     data = response.json()
     print(Colorate.Horizontal(Colors.rainbow, '==============[ 𝐋𝐎𝐂𝐀𝐓𝐈𝐎𝐍 ]=============='))
-    
-now = datetime.datetime.now()
-print (now.strftime("%Y-%m-%d %H:%M:%S"))
     print(Colorate.Horizontal(Colors.rainbow, f'📍Country : {data.get("country")}.'))    
+    now = datetime.datetime.now()
+    print (now.strftime("%Y-%m-%d %H:%M:%S"))
     print(Colorate.Horizontal(Colors.rainbow, f'📍Region  : {data.get("regionName")}.'))
     print(Colorate.Horizontal(Colors.rainbow, f'📍City    : {data.get("city")}.'))
     print(Colorate.Horizontal(Colors.rainbow, '================[ 𝐌𝐄𝐍𝐔 ]================'))
