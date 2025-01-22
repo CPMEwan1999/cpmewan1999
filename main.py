@@ -68,7 +68,6 @@ def update_script():
         return
     
     latest_version = version_info.get("version")
-            exit()
         else:
             print("You already have the latest version.")
     else:
