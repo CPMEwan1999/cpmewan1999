@@ -68,8 +68,6 @@ def update_script():
         return
     
     latest_version = version_info.get("version")
-            print(f"New version available...")
-            print(f"Downloading update...")
             exit()
         else:
             print("You already have the latest version.")
