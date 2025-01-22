@@ -140,9 +140,11 @@ banner = r"""
 
 
 pyAnime.Fade(pyCenter.Center(banner), pyColors.red_to_yellow, pyColorate.Vertical, enter=True)
-pyAnime.Fade(pyCenter.Center(banner), pyColors.purple_to_red, pyColorate.Vertical, enter=True)
+print(pyColorate.Horizontal(pyColors.purple_to_red, pyCenter.XCenter(text)))
+
+
 pyAnime.Fade(pyCenter.Center(text), pyColors.purple_to_red, pyColorate.Vertical, enter=True)
-pyAnime.Fade(pyCenter.Center(text), pyColors.red_to_yellow, pyColorate.Vertical, enter=True)
+print(pyColorate.Horizontal(pyColors.red_to_yellow, pyCenter.XCenter(text)))
 
 pySystem.Clear()
 
