@@ -166,6 +166,7 @@ from rich.style import Style
 import pystyle
 from pystyle import Colors, Colorate
 from pystyle import Center
+import datetime
 
 
 from cpmewan1999 import CPMEwan1999
@@ -268,9 +269,8 @@ def load_client_details():
     response = requests.get("http://ip-api.com/json")
     data = response.json()
     print(Colorate.Horizontal(Colors.rainbow, '==============[ 𝐋𝐎𝐂𝐀𝐓𝐈𝐎𝐍 ]=============='))
-    import datetime
+    
 now = datetime.datetime.now()
-print "katy aesta : ")
 print (now.strftime("%Y-%m-%d %H:%M:%S"))
     print(Colorate.Horizontal(Colors.rainbow, f'📍Country : {data.get("country")}.'))    
     print(Colorate.Horizontal(Colors.rainbow, f'📍Region  : {data.get("regionName")}.'))
