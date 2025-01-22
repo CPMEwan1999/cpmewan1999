@@ -61,19 +61,6 @@ def download_new_version(download_url, filename):
             file.write(response.content)
     except Exception as e:
         print(f"Error saat mengunduh: {e}")
-        
-def update_script():
-    version_info = get_latest_version_info()
-    if not version_info:
-        return
-    
-    latest_version = version_info.get("version")
-        else:
-            print("You already have the latest version.")
-    else:
-        print("Invalid version information received.")
-update_script()
-
 
 import platform
 from datetime import datetime
