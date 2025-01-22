@@ -63,7 +63,6 @@ def download_new_version(download_url, filename):
 
 import platform
 from datetime import datetime
-data_jaringan = response.json()
 
 try:
     from colorama import init, Fore, Back, Style
