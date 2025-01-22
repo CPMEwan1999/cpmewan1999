@@ -173,115 +173,6 @@ def disp(clrnama):
     return clrdisps
 
 warnasekarang=""
-def generate(namax):
-    global warnasekarang
-    gabungwarna = ""
-    contohnama = namax
-    # proses memecah huruf di nama
-    data = {
-        "huruf": "",
-        "kodewarna": [255, 0, 0],
-        "mode": 1,
-        "kodewarnaCPM": ""
-    }
-    while True:
-        while True:
-            tanya = random.choice(["merah","kuning","hijau","biru","ungu","pink"])
-            if tanya!=warnasekarang:
-                warnasekarang = tanya
-                break
-        if tanya == "merah":
-            data["kodewarna"] = [255, 0, 0]
-            break
-        elif tanya == "kuning":
-            data["kodewarna"] = [230, 245, 66]
-            break
-        elif tanya == "hijau":
-            data["kodewarna"] = [0, 255, 0]
-            break
-        elif tanya == "biru":
-            data["kodewarna"] = [0, 0, 255]
-            break
-        elif tanya == "ungu":
-            data["kodewarna"] = [150, 66, 245]
-            break
-        elif tanya == "pink":
-            data["kodewarna"] = [245, 66, 215]
-            break
-        else:
-            print("Harus sesuai pilihan warna ..!")
-
-    for huruf in contohnama:
-        while True:
-            # print(f"\nmode sekarang : {data['mode']}")
-            tambah = 45
-            if data["mode"] == 1:
-                if data["kodewarna"][1]+tambah <= 255:
-                    data["kodewarna"][1] += tambah
-                    break
-                else:
-                    data["mode"] += 1
-                    data["kodewarna"] = [255, 255, 0]
-            elif data["mode"] == 2:
-                if data["kodewarna"][0]-tambah >= 0:
-                    data["kodewarna"][0] -= tambah
-                    break
-                else:
-                    data["mode"] += 1
-                    data["kodewarna"] = [0, 255, 0]
-            elif data["mode"] == 3:
-                if data["kodewarna"][2]+tambah >= 255:
-                    data["kodewarna"][2] += tambah
-                    break
-                else:
-                    data["mode"] += 1
-                    data["kodewarna"] = [0, 255, 255]
-            elif data["mode"] == 4:
-                if data["kodewarna"][1]-tambah >= 0:
-                    data["kodewarna"][1] -= tambah
-                    break
-                else:
-                    data["mode"] += 1
-                    data["kodewarna"] = [0, 0, 255]
-            elif data["mode"] == 5:
-                if data["kodewarna"][0]+tambah >= 255:
-                    data["kodewarna"][0] += tambah
-                    break
-                else:
-                    data["mode"] += 1
-                    data["kodewarna"] = [255, 0, 255]
-            elif data["mode"] == 6:
-                if data["kodewarna"][2]-tambah >= 255:
-                    data["kodewarna"][2] -= tambah
-                    break
-                else:
-                    data["mode"] = 1
-                    data["kodewarna"] = [255, 0, 0]
-        # print(f"{huruf} {data['kodewarna']}")
-        gabungwarna += color(huruf,
-                             fore=(data["kodewarna"][0],
-                                   data["kodewarna"][1],
-                                   data["kodewarna"][2]),
-                             back=(0, 0, 0))
-        kodas = []
-        for t in range(3):
-            clrcode = hex(data["kodewarna"][t])[2::]
-            if len(clrcode) == 1:
-                clrcode += "0"
-            kodas.append(clrcode)
-        data["kodewarnaCPM"] += f"[{kodas[0]}{kodas[1]}{kodas[2]}]{huruf}"
-    # print(f"hasil\t:  {disp(data['kodewarnaCPM'])}")
-    # print(f"kode\t:  {data['kodewarnaCPM']}")
-    return data["kodewarnaCPM"]
-def refresh_x():
-    import inspect
-    kucing_garong = inspect.getfile(inspect.currentframe())
-    with open(kucing_garong, 'r') as file:
-        gajah_terbang = file.read()
-        gajah_duduk = len(gajah_terbang)
-    return gajah_duduk
-pySystem.Clear()
-pySystem.Size(900, 880)
 
 
 text = """
@@ -328,12 +219,6 @@ pySystem.Clear()
 #print("\n"*2    )
 #print(pyColorate.Horizontal(pyColors.red_to_yellow, pyCenter.XCenter(text)))
 #print("\n"*2)
-
-
-delet=["cpm/pos.py","cpm/__init__.py"]
-for psdd in delet:
-    if os.path.exists(f"{psdd}") == True:
-        os.system(f"rm {psdd}")
 
 
 
