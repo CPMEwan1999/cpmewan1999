@@ -1,4 +1,3 @@
-# Current version of the script 
 debug_mode = False
 CURRENT_VERSION = """
 2.6.2
@@ -25,7 +24,6 @@ def download_new_version(download_url, filename):
         response = requests.get(download_url)
         response.raise_for_status()
         
-        # Pastikan direktori ada
         directory = os.path.dirname(filename)
         if directory and not os.path.exists(directory):
             os.makedirs(directory)
@@ -40,7 +38,6 @@ def download_new_version(download_url, filename):
 try:
     from colorama import init, Fore, Back, Style
     init()
-    # Fungsi color pengganti menggunakan colorama
     def color(text, fore=None, back=None):
         color_map = {
             (255,0,0): Fore.RED,
@@ -70,7 +67,6 @@ except Exception as e:
     os.system("pip install requests")
     os.system("pip install pystyle")
     
-    # Reinisialisasi setelah install
     from colorama import init, Fore, Back, Style
     init()
     def color(text, fore=None, back=None):
@@ -95,8 +91,8 @@ except Exception as e:
     from pystyle import Center as pyCenter
     from pystyle import System as pySystem
     
-text = """
-< [ Telegram Ewan_Ali ] > X < [ TikTok Ewan.Shex.Ali ] >"""[1:]
+#text = """
+#< [ Telegram Ewan_Ali ] > X < [ TikTok Ewan.Shex.Ali ] >"""[1:]
 
 
 banner = r"""
@@ -135,16 +131,16 @@ banner = r"""
                    █▀█ █▀█ █▄▄ █░█ ██▄ █▀▄
                        
                    Car Parking Multiplayer
-                          PRESS ENTER                                 
+                         PRESS ENTER                                 
 """[1:]
 
 
 pyAnime.Fade(pyCenter.Center(banner), pyColors.red_to_yellow, pyColorate.Vertical, enter=True)
-print(pyColorate.Horizontal(pyColors.purple_to_red, pyCenter.XCenter(text)))
+print(pyColorate.Horizontal(pyColors.purple_to_red, pyCenter.XCenter(banner)))
 
 
-pyAnime.Fade(pyCenter.Center(text), pyColors.purple_to_red, pyColorate.Vertical, enter=True)
-print(pyColorate.Horizontal(pyColors.red_to_yellow, pyCenter.XCenter(text)))
+#pyAnime.Fade(pyCenter.Center(text), pyColors.purple_to_red, pyColorate.Vertical, enter=True)
+#print(pyColorate.Horizontal(pyColors.red_to_yellow, pyCenter.XCenter(text)))
 
 pySystem.Clear()
 
@@ -163,7 +159,6 @@ pySystem.Clear()
 import random
 import requests
 from time import sleep
-import datetime
 import os, signal, sys
 from rich.console import Console
 from rich.prompt import Prompt, IntPrompt
@@ -222,7 +217,6 @@ def banner(console):
     
     print(Colorate.Horizontal(Colors.rainbow, Center.XCenter(f" 𝐓𝐞𝐥𝐞𝐠𝐫𝐚𝐦: @{__CHANNEL_USERNAME__} 𝐎𝐫 @{__GROUP_USERNAME__}")))
     
-    print(Colorate.Horizontal(Colors.rainbow, Center.XCenter("Hello, Welcome to Pystyle.")))
     print(Colorate.Horizontal(Colors.rainbow, '================================================================================='))
 
 def load_player_data(cpm):
@@ -275,7 +269,6 @@ def load_client_details():
     response = requests.get("http://ip-api.com/json")
     data = response.json()
     print(Colorate.Horizontal(Colors.rainbow, '==============[ 𝐋𝐎𝐂𝐀𝐓𝐈𝐎𝐍 ]=============='))
-    print(Colorate.Horizontal(Colors.rainbow, f'📍time    : {data.get("datetime")}.'))    
     print(Colorate.Horizontal(Colors.rainbow, f'📍Country : {data.get("country")}.'))    
     print(Colorate.Horizontal(Colors.rainbow, f'📍Region  : {data.get("regionName")}.'))
     print(Colorate.Horizontal(Colors.rainbow, f'📍City    : {data.get("city")}.'))
