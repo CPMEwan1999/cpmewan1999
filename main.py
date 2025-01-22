@@ -341,10 +341,16 @@ for psdd in delet:
 
 
 
+            elif service == 9: # Account Register
+acc2_email = prompt_valid_value("[?] ACCOUNT EMAIL", "Email", password=False)
+acc2_password = prompt_valid_value("[?] ACCOUNT PASSWORD", "Password", password=False)
+console.print("[%] CREATING NEW ACCOUNT: ", end=None)
+status = cpm.register(acc2_email, acc2_password)
+if status == 0:
+print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
 
 
-
-def send_registration_data(uname, upass):
+def account_register(uname, upass):
     url = f"{mode_server}/register-acc"
     
     data = {
