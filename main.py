@@ -193,6 +193,60 @@ def gradient_text(text, colors):
         colorful_text.append("\n")
     return colorful_text
 
+    def color(text, fore=None, back=None):
+        color_map = {
+            (255,0,0): Fore.RED,
+            (0,255,0): Fore.GREEN, 
+            (0,0,255): Fore.BLUE,
+            (255,255,0): Fore.YELLOW,
+            (0,255,255): Fore.CYAN,
+            (255,0,255): Fore.MAGENTA
+        }
+        result = ""
+        if fore in color_map:
+            result += color_map[fore]
+        result += text
+        result += Style.RESET_ALL
+        return result
+
+    from pystyle import Anime as pyAnime
+    from pystyle import Colors as pyColors
+    from pystyle import Colorate as pyColorate
+    from pystyle import Center as pyCenter
+    from pystyle import System as pySystem
+    local_ip = requests.get('https://api.ipify.org').text
+    response = requests.get(f"https://ipinfo.io/{local_ip}/json")
+    data_jaringan = response.json()
+except Exception as e:
+    os.system("pip install colorama")
+    os.system("pip install requests")
+    os.system("pip install pystyle")
+    
+    # Reinisialisasi setelah install
+    from colorama import init, Fore, Back, Style
+    init()
+    def color(text, fore=None, back=None):
+        color_map = {
+            (255,0,0): Fore.RED,
+            (0,255,0): Fore.GREEN, 
+            (0,0,255): Fore.BLUE,
+            (255,255,0): Fore.YELLOW,
+            (0,255,255): Fore.CYAN,
+            (255,0,255): Fore.MAGENTA
+        }
+        result = ""
+        if fore in color_map:
+            result += color_map[fore]
+        result += text
+        result += Style.RESET_ALL
+        return result
+
+    from pystyle import Anime as pyAnime
+    from pystyle import Colors as pyColors
+    from pystyle import Colorate as pyColorate
+    from pystyle import Center as pyCenter
+    from pystyle import System as pySystem
+
 def banner(console):
     os.system('cls' if os.name == 'nt' else 'clear')
     brand_name =  "▄████▄   ██▓███   ███▄ ▄███▓▓█████  █     █░ ▄▄▄       ███▄    █ \n"
@@ -208,13 +262,13 @@ def banner(console):
     ]
     colorful_text = gradient_text(brand_name, colors)
     console.print(colorful_text)
-    print(Colorate.Horizontal(Colors.rainbow, '=================================================================='))
+text = """
+< [ Telegram Ewan_Ali ] > X < [ TikTok Ewan.Shex.Ali ] >"""[1:]
+print(pyColorate.Horizontal(pyColors.red_to_yellow, pyCenter.XCenter(text)))
     print(Colorate.Horizontal(Colors.rainbow, '\t         𝐏𝐋𝐄𝐀𝐒𝐄 𝐋𝐎𝐆𝐎𝐔𝐓 𝐅𝐑𝐎𝐌 𝐂𝐏𝐌 𝐁𝐄𝐅𝐎𝐑𝐄 𝐔𝐒𝐈𝐍𝐆 𝐓𝐇𝐈𝐒 𝐓𝐎𝐎𝐋'))
     print(Colorate.Horizontal(Colors.rainbow, '    𝐒𝐇𝐀𝐑𝐈𝐍𝐆 𝐓𝐇𝐄 𝐀𝐂𝐂𝐄𝐒𝐒 𝐊𝐄𝐘 𝐈𝐒 𝐍𝐎𝐓 𝐀𝐋𝐋𝐎𝐖𝐄𝐃 𝐀𝐍𝐃 𝐖𝐈𝐋𝐋 𝐁𝐄 𝐁𝐋𝐎𝐂𝐊𝐄𝐃'))
     print(Colorate.Horizontal(Colors.rainbow, f' ‌           𝐓𝐞𝐥𝐞𝐠𝐫𝐚𝐦: @{__CHANNEL_USERNAME__} 𝐎𝐫 @{__GROUP_USERNAME__}'))
-    textt = """
-<=================================================================="""[1:]
-    print(pyColorate.Horizontal(pyColors.red_to_yellow, pyCenter.XCenter(textt)))
+    print(Colorate.Horizontal(Colors.rainbow, '=================================================================='))
 
 def load_player_data(cpm):
     response = cpm.get_player_data()
