@@ -4,7 +4,7 @@ CURRENT_VERSION = """
 2.6.2
 """
 CURRENT_VERSION=CURRENT_VERSION.replace('\n','')
-server_local = "http://127.0.0.1:3000"
+server_online = "https://www.cpmewan1999.cpmewan.com/api"
 mode_server = server_online
 """
 -------------------------------------------
