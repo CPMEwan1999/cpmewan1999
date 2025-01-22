@@ -214,7 +214,7 @@ def banner(console):
     print(Colorate.Horizontal(Colors.rainbow, f' ‌           𝐓𝐞𝐥𝐞𝐠𝐫𝐚𝐦: @{__CHANNEL_USERNAME__} 𝐎𝐫 @{__GROUP_USERNAME__}'))
 text = """=================================================================="""[1:]
 
-pyAnime.Fade(pyCenter.Center(text), pyColors.red_to_yellow, pyColorate.Vertical, enter=True)
+print(pyColorate.Horizontal(pyColors.red_to_yellow, pyCenter.XCenter(text)))
 
 def load_player_data(cpm):
     response = cpm.get_player_data()
