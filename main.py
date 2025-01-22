@@ -62,6 +62,7 @@ try:
     from pystyle import Colorate as pyColorate
     from pystyle import Center as pyCenter
     from pystyle import System as pySystem
+    from pystyle import Add
     local_ip = requests.get('https://api.ipify.org').text
     response = requests.get(f"https://ipinfo.io/{local_ip}/json")
     data_jaringan = response.json()
@@ -99,10 +100,7 @@ text = """
 < [ Telegram Ewan_Ali ] > X < [ TikTok Ewan.Shex.Ali ] >"""[1:]
 
 
-banner = r"""
-
-
-
+banner1 = '''
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣤⠶⠶⠚⠛⠛⠛⠛⠛⠛⠛⠷⠶⢦⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣴⠞⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠙⠻⢶⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡴⠟⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⢷⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -135,11 +133,16 @@ banner = r"""
                    █▀█ █▀█ █▄▄ █░█ ██▄ █▀▄
                        
                    Car Parking Multiplayer
-                          PRESS ENTER                                 
-"""[1:]
+                          PRESS ENTER                                 '''
+
+text = "This is a beautiful banner\nmade with pystyle"
+
+print(Add.Add(banner1, text, 4))
 
 
-pyAnime.Fade(pyCenter.Center(banner), pyColors.red_to_yellow, pyColorate.Vertical, enter=True)
+
+
+pyAnime.Fade(pyCenter.Center(banner1), pyColors.red_to_yellow, pyColorate.Vertical, enter=True)
 print(pyColorate.Horizontal(pyColors.purple_to_red, pyCenter.XCenter(text)))
 
 
@@ -171,6 +174,7 @@ from rich.style import Style
 import pystyle
 from pystyle import Colors, Colorate
 from pystyle import Center
+from pystyle import Add
 
 
 from cpmewan1999 import CPMEwan1999
