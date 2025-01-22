@@ -131,11 +131,11 @@ banner = r"""
 
 
 ⠀⠀
-                       █░█ ▄▀█ █▀▀ █▄▀ █▀▀ █▀█
-                       █▀█ █▀█ █▄▄ █░█ ██▄ █▀▄
+                   █░█ ▄▀█ █▀▀ █▄▀ █▀▀ █▀█
+                   █▀█ █▀█ █▄▄ █░█ ██▄ █▀▄
                        
                    Car Parking Multiplayer
-                       PRESS ENTER                                 
+                          PRESS ENTER                                 
 """[1:]
 
 
