@@ -280,7 +280,6 @@ def load_client_details():
 start = datetime.datetime.now()
 expire = start.month + 1
 while True:
-    Run Program
     if datetime.datetime.now().month == expire:
         sys.exit("Your 1 month trial has expired.")
     print(Colorate.Horizontal(Colors.rainbow, (sys.exit("📍DateTime: %d-%m-%Y %H:%M:%S"))))        
