@@ -263,16 +263,7 @@ def load_key_data(cpm):
     
     print(Colorate.Horizontal(Colors.rainbow, f'📍Balance $  : {(data.get("coins") if not data.get("is_unlimited") else "Unlimited")}.'))
         
-    import pendulum
- 
-def calc_expire_date(prodact_date, expiry):
-    prodact_date = pendulum.parse('{:0>2}-{:0>2}-{:0>2}'.format(*prodact_date))
-    target_date = pendulum.duration(**expiry) + prodact_date
-    days_to_expire = (target_date.date() - pendulum.now().date()).days
-    print(f'Product vaild until : {target_date} You have {days_to_expire} days')
- 
- 
-calc_expire_date((2028, 11, 15), expiry = {'days': 15})
+    
 
 def prompt_valid_value(content, tag, password=False):
     while True:
@@ -311,7 +302,35 @@ def rainbow_gradient_string(customer_name):
     return modified_string
 
 
-if __name__ == "__main__":
+import datetime
+import sys
+
+import os
+
+
+first_launch_date_filepath = ".first_launch_date"
+
+
+def is_program_expired():
+# Query date of first lauch in given file
+    if os.path.exists(first_launch_date_filepath):
+        with open(first_launch_date_filepath, 'r') as fileRead:
+            time_as_str = fileRead.read()
+            start_date = datetime.datetime.strptime(time_as_str, "%Y_%m_%d")
+            # Check if current time is greater than time limit
+            expire_date = start_date + datetime.timedelta(days=31)
+            if datetime.datetime.now() > expire_date:
+                sys.exit("Your 1 month trial has expired.")
+    # Supposedly first run
+    else:
+        start_date = datetime.datetime.now()
+        with open(first_launch_date_filepath, 'w') as fileWrite:
+            fileWrite.write(start_date.strftime("%Y_%m_%d"))
+
+
+if __name__ == '__main__':
+    is_program_expired()
+    # YOUR PROGRAM
     console = Console()
     signal.signal(signal.SIGINT, signal_handler)
     while True:
