@@ -204,9 +204,9 @@ def gradient_text(text, colors):
     return colorful_text
     
     
-is_rich_great = Confirm.ask("Do you like rich?")
+cpm.register = Confirm.ask("Do you like rich?")
 
-assert is_rich_great
+assert cpm.register
     
     
 
