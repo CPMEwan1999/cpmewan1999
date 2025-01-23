@@ -237,11 +237,11 @@ class CPMEwan1999:
         response_decoded = response.json()
         return response_decoded.get("ok")                
         
-    def chrome_all_cars(self) -> bool:
-        payload = {"account_auth": self.auth_token}
+    def chrome_all_cars(self, amount) -> bool:
+        payload = {"account_auth": self.auth_token, "amount": amount}
         params = {"key": self.access_key}
         response = requests.post(
             f"{_MYAPI_URL_}/chrome_all_cars", params=params, data=payload
         )
         response_decoded = response.json()
-        return response_decoded.get("ok")                        
+        return response_decoded.get("ok")          
