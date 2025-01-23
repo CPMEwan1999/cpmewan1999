@@ -130,8 +130,8 @@ banner = r"""
                    █░█ ▄▀█ █▀▀ █▄▀ █▀▀ █▀█
                    █▀█ █▀█ █▄▄ █░█ ██▄ █▀▄
                        
-                   Car Parking Multiplayer
-                         PRESS ENTER                                 
+                   𝙲𝙰𝚁 𝙿𝙰𝚁𝙺𝙸𝙽𝙶 𝙼𝚄𝙻𝚃𝙸𝙿𝙻𝙰𝚈𝙴𝚁
+                         𝙿𝚁𝙴𝚂𝚂 𝙴𝙽𝚃𝙴𝚁                                 
 """[1:]
 
 
@@ -150,6 +150,15 @@ pySystem.Clear()
 
 
 
+
+#پرسیار و وەڵام 
+#name = input("What is your name?: ")
+#age = int(input("How old are you?: "))
+#height = float(input("How tall are you?: "))
+
+#print("Hello "+name)
+#print("You are "+str(age)+" years old")
+#print("You are "+str(height)+"cm tall")
 
 
 
@@ -186,7 +195,7 @@ def gradient_text(text, colors):
         for x, char in enumerate(line):
             if char != ' ':
                 color_index = int(((x / (width - 1 if width > 1 else 1)) + (y / (height - 1 if height > 1 else 1))) * 0.5 * (len(colors) - 1))
-                color_index = min(max(color_index, 0), len(colors) - 1)  # Ensure the index is within bounds
+                color_index = min(max(color_index, 0), len(colors) - 1)
                 style = Style(color=colors[color_index])
                 colorful_text.append(char, style=style)
             else:
