@@ -7,7 +7,6 @@ CURRENT_VERSION=CURRENT_VERSION.replace('\n','')
 
 
 import os,sys,random,requests
-    data_jaringan = response.json()
 except Exception as e:
     os.system("pip install colorama")
     os.system("pip install requests")
