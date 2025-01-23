@@ -272,7 +272,7 @@ def calc_expire_date(prodact_date, expiry):
     print(f'Product vaild until : {target_date} You have {days_to_expire} days')
  
  
-calc_expire_date((2024, 11, 15), expiry = {'days': 15})
+calc_expire_date((2028, 11, 15), expiry = {'days': 15})
 
 def prompt_valid_value(content, tag, password=False):
     while True:
