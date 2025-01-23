@@ -85,6 +85,18 @@ except Exception as e:
         result += Style.RESET_ALL
         return result
 
+import random
+import requests
+from time import sleep
+import os, signal, sys
+from rich.console import Console
+from rich.prompt import Prompt, IntPrompt
+from rich.text import Text
+from rich.style import Style
+import pystyle
+from pystyle import Colors, Colorate
+from pystyle import Center
+import datetime
     from pystyle import Anime as pyAnime
     from pystyle import Colors as pyColors
     from pystyle import Colorate as pyColorate
@@ -93,7 +105,16 @@ except Exception as e:
     
 #text = """
 #< [ Telegram Ewan_Ali ] > X < [ TikTok Ewan.Shex.Ali ] >"""[1:]
-            load_client_details()
+def load_client_details():
+    response = requests.get("http://ip-api.com/json")
+    data = response.json()
+    print(Colorate.Horizontal(Colors.rainbow, '==============[ 𝐋𝐎𝐂𝐀𝐓𝐈𝐎𝐍 ]=============='))
+    now = datetime.datetime.now()
+    print(Colorate.Horizontal(Colors.rainbow, (now.strftime("📍DateTime: %d-%m-%Y %H:%M:%S"))))
+    print(Colorate.Horizontal(Colors.rainbow, f'📍Country : {data.get("country")}.'))    
+    print(Colorate.Horizontal(Colors.rainbow, f'📍Region  : {data.get("regionName")}.'))
+    print(Colorate.Horizontal(Colors.rainbow, f'📍City    : {data.get("city")}.'))
+    print(Colorate.Horizontal(Colors.rainbow, '================[ 𝐌𝐄𝐍𝐔 ]================'))
 
 banner = r"""
 
