@@ -163,7 +163,10 @@ pySystem.Clear()
 
 
 
-from rich.prompt import Confirm
+import time
+
+from rich.live import Live
+from rich.table import Table
 import random
 import requests
 from time import sleep
@@ -202,13 +205,6 @@ def gradient_text(text, colors):
                 colorful_text.append(char)
         colorful_text.append("\n")
     return colorful_text
-    
-    
-elif service == 9: = Confirm.ask("Do you like rich?")
-
-assert elif service == 9:
-    
-    
 
 def banner(console):
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -308,6 +304,19 @@ def rainbow_gradient_string(customer_name):
         modified_string += f'[{interpolated_color}]{char}'
     return modified_string
 
+
+
+
+table = Table()
+table.add_column("Row ID")
+table.add_column("Description")
+table.add_column("Level")
+
+with Live(table, refresh_per_second=4) as live:  # update 4 times a second to feel fluid
+    for row in range(12):
+        live.console.print(f"Working on row #{row}")
+        time.sleep(0.4)
+        table.add_row(f"{row}", f"description {row}", "[red]ERROR")
 
 if __name__ == "__main__":
     console = Console()
