@@ -7,7 +7,6 @@ CURRENT_VERSION=CURRENT_VERSION.replace('\n','')
 
 
 import os,sys,random,requests
-except Exception as e:
     os.system("pip install colorama")
     os.system("pip install requests")
     os.system("pip install pystyle")
