@@ -163,7 +163,7 @@ pySystem.Clear()
 
 
 
-
+from rich.prompt import Confirm
 import random
 import requests
 from time import sleep
@@ -202,6 +202,13 @@ def gradient_text(text, colors):
                 colorful_text.append(char)
         colorful_text.append("\n")
     return colorful_text
+    
+    
+is_rich_great = Confirm.ask("Do you like rich?")
+
+assert is_rich_great
+    
+    
 
 def banner(console):
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -382,6 +389,17 @@ if __name__ == "__main__":
                     if cpm.set_player_money(amount):
                         print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
                         print(Colorate.Horizontal(Colors.rainbow, '======================================'))
+                        answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
+                        if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
+                        else: continue
+                    else:
+                        print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                        print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
+                        sleep(2)
+                        continue
+                else:
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                    print(Colorate.Horizontal(Colors.rainbow, 'PLEASE USE VALID VALUES'))
                     sleep(2)
                     continue
             elif service == 2: # Increase Coins
