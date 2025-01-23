@@ -277,12 +277,17 @@ def load_client_details():
     response = requests.get("http://ip-api.com/json")
     data = response.json()
     print(Colorate.Horizontal(Colors.rainbow, '==============[ 𝐋𝐎𝐂𝐀𝐓𝐈𝐎𝐍 ]=============='))
-start = datetime.datetime.now()
-expire = start.month + 1
-while True:
-    if datetime.datetime.now().month == expire:
-        sys.exit("Your 1 month trial has expired.")
-    print(Colorate.Horizontal(Colors.rainbow, (sys.exit("📍DateTime: %d-%m-%Y %H:%M:%S"))))        
+    import pendulum
+ 
+def calc_expire_date(prodact_date, expiry):
+    prodact_date = pendulum.parse('{:0>2}-{:0>2}-{:0>2}'.format(*prodact_date))
+    target_date = pendulum.duration(**expiry) + prodact_date
+    days_to_expire = (target_date.date() - pendulum.now().date()).days
+    print(f'Product vaild until : {target_date} You have {days_to_expire} days')
+ 
+ 
+calc_expire_date((2028, 11, 15), expiry = {'days': 15})
+
     now = datetime.datetime.now()
     print(Colorate.Horizontal(Colors.rainbow, (now.strftime("📍DateTime: %d-%m-%Y %H:%M:%S"))))
     print(Colorate.Horizontal(Colors.rainbow, f'📍Country : {data.get("country")}.'))    
