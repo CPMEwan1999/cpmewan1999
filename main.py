@@ -363,7 +363,7 @@ if __name__ == "__main__":
             print(Colorate.Horizontal(Colors.rainbow, '📍{21}: Change Race Loses        1.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '📍{22}: Speed Car Hack           2.500K'))
             print(Colorate.Horizontal(Colors.rainbow, '📍{23}: All Cars 99HP            2.500K'))
-            print(Colorate.Horizontal(Colors.rainbow, '📍{24}: Chrome All Cars            2.000K'))            
+            print(Colorate.Horizontal(Colors.rainbow, '📍{24}: Chrome All Cars Account            2.000K'))            
             print(Colorate.Horizontal(Colors.rainbow, '📍{25}: Clone Account            5.000K'))            
             print(Colorate.Horizontal(Colors.rainbow, '📍{00} : Exit'))
             
@@ -744,7 +744,7 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
                     sleep(2)
                     continue
-                            elif service == 24: # Chrome All Cars
+                                                elif service == 24: # Chrome All Cars
                 print(Colorate.Horizontal(Colors.rainbow, '[!] NOTE: ORIGINAL SPEED CAN NOT BE RESTORED'))            
                 console.print("[%] HACKING All CARS SPEED 99HP: ", end=None)
                 if cpm.chrome_all_cars():
@@ -758,7 +758,7 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
                     sleep(2)
                     continue    
-            elif service == 24: # Clone Account
+            elif service == 25: # Clone Account
                 print(Colorate.Horizontal(Colors.rainbow, '[!] PLEASE ENTER ACCOUNT DETALIS'))
                 to_email = prompt_valid_value("[?] ACCOUNT EMAIL", "Email", password=False)
                 to_password = prompt_valid_value("[?] ACCOUNT PASSWORD", "Password", password=False)
