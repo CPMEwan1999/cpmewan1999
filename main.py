@@ -84,7 +84,11 @@ except Exception as e:
         result += text
         result += Style.RESET_ALL
         return result
-
+    from pystyle import Anime as pyAnime
+    from pystyle import Colors as pyColors
+    from pystyle import Colorate as pyColorate
+    from pystyle import Center as pyCenter
+    from pystyle import System as pySystem
 import random
 import requests
 from time import sleep
@@ -97,11 +101,6 @@ import pystyle
 from pystyle import Colors, Colorate
 from pystyle import Center
 import datetime
-    from pystyle import Anime as pyAnime
-    from pystyle import Colors as pyColors
-    from pystyle import Colorate as pyColorate
-    from pystyle import Center as pyCenter
-    from pystyle import System as pySystem
     
 #text = """
 #< [ Telegram Ewan_Ali ] > X < [ TikTok Ewan.Shex.Ali ] >"""[1:]
