@@ -10,34 +10,6 @@ import os,sys,random,requests
 
 
 
-def get_latest_version_info():
-    try:
-        response = requests.get(VERSION_CHECK_URL)
-        response.raise_for_status()
-        return response.json()
-    except requests.RequestError as e:
-        print(f"Error checking for updates: {e}")
-        return None
-
-def download_new_version(download_url, filename):
-    try:
-        response = requests.get(download_url)
-        response.raise_for_status()
-        
-        directory = os.path.dirname(filename)
-        if directory and not os.path.exists(directory):
-            os.makedirs(directory)
-            
-        with open(filename, 'wb') as file:
-            file.write(response.content)
-    except Exception as e:
-        print(f"Error saat mengunduh: {e}")
-        
-
-
-try:
-    from colorama import init, Fore, Back, Style
-    init()
     def color(text, fore=None, back=None):
         color_map = {
             (255,0,0): Fore.RED,
@@ -130,8 +102,8 @@ banner = r"""
                    █░█ ▄▀█ █▀▀ █▄▀ █▀▀ █▀█
                    █▀█ █▀█ █▄▄ █░█ ██▄ █▀▄
                        
-                   Car Parking Multiplayer
-                         PRESS ENTER                                 
+                   𝙲𝙰𝚁 𝙿𝙰𝚁𝙺𝙸𝙽𝙶 𝙼𝚄𝙻𝚃𝙸𝙿𝙻𝙰𝚈𝙴𝚁
+                         𝙿𝚁𝙴𝚂𝚂 𝙴𝙽𝚃𝙴𝚁                                 
 """[1:]
 
 
@@ -150,6 +122,15 @@ pySystem.Clear()
 
 
 
+
+#پرسیار و وەڵام 
+#name = input("What is your name?: ")
+#age = int(input("How old are you?: "))
+#height = float(input("How tall are you?: "))
+
+#print("Hello "+name)
+#print("You are "+str(age)+" years old")
+#print("You are "+str(height)+"cm tall")
 
 
 
