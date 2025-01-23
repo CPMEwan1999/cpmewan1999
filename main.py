@@ -204,9 +204,9 @@ def gradient_text(text, colors):
     return colorful_text
     
     
-cpm.register = Confirm.ask("Do you like rich?")
+elif service == 9: = Confirm.ask("Do you like rich?")
 
-assert cpm.register
+assert elif service == 9:
     
     
 
