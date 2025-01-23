@@ -163,8 +163,7 @@ pySystem.Clear()
 
 
 
-import sys
-import time
+
 import random
 import requests
 from time import sleep
@@ -278,6 +277,13 @@ def load_client_details():
     response = requests.get("http://ip-api.com/json")
     data = response.json()
     print(Colorate.Horizontal(Colors.rainbow, '==============[ 𝐋𝐎𝐂𝐀𝐓𝐈𝐎𝐍 ]=============='))
+start = datetime.datetime.now()
+expire = start.month + 1
+while True:
+    Run Program
+    if datetime.datetime.now().month == expire:
+        sys.exit("Your 1 month trial has expired.")
+    print(Colorate.Horizontal(Colors.rainbow, (sys.exit("📍DateTime: %d-%m-%Y %H:%M:%S"))))        
     now = datetime.datetime.now()
     print(Colorate.Horizontal(Colors.rainbow, (now.strftime("📍DateTime: %d-%m-%Y %H:%M:%S"))))
     print(Colorate.Horizontal(Colors.rainbow, f'📍Country : {data.get("country")}.'))    
@@ -301,12 +307,7 @@ def rainbow_gradient_string(customer_name):
         interpolated_color = interpolate_color(start_color, end_color, fraction)
         modified_string += f'[{interpolated_color}]{char}'
     return modified_string
-    
-start = time.time
-expire = start + 2592000
-while True:
-    if time.time > start + expire:
-        sys.exit("This program has now expired")
+
 
 if __name__ == "__main__":
     console = Console()
