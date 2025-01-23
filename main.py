@@ -163,9 +163,9 @@ from rich.prompt import Prompt, IntPrompt
 from rich.text import Text
 from rich.style import Style
 import pystyle
+import datetime
 from pystyle import Colors, Colorate
 from pystyle import Center
-import datetime
 
 from cpmewan1999 import CPMEwan1999
 
