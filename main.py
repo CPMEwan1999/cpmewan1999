@@ -305,7 +305,6 @@ def rainbow_gradient_string(customer_name):
 start = time.time
 expire = start + 2592000
 while True:
-    Run Program
     if time.time > start + expire:
         sys.exit("This program has now expired")
 
