@@ -7,12 +7,6 @@ CURRENT_VERSION=CURRENT_VERSION.replace('\n','')
 
 
 import os,sys,random,requests
-
-    from pystyle import Anime as pyAnime
-    from pystyle import Colors as pyColors
-    from pystyle import Colorate as pyColorate
-    from pystyle import Center as pyCenter
-    from pystyle import System as pySystem
     local_ip = requests.get('https://api.ipify.org').text
     response = requests.get(f"https://ipinfo.io/{local_ip}/json")
     data_jaringan = response.json()
