@@ -93,7 +93,7 @@ except Exception as e:
     
 #text = """
 #< [ Telegram Ewan_Ali ] > X < [ TikTok Ewan.Shex.Ali ] >"""[1:]
-
+            load_client_details()
 
 banner = r"""
 
@@ -150,6 +150,15 @@ pySystem.Clear()
 
 
 
+
+#پرسیار و وەڵام 
+#name = input("What is your name?: ")
+#age = int(input("How old are you?: "))
+#height = float(input("How tall are you?: "))
+
+#print("Hello "+name)
+#print("You are "+str(age)+" years old")
+#print("You are "+str(height)+"cm tall")
 
 
 
