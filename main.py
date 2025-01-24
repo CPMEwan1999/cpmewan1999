@@ -363,7 +363,7 @@ if __name__ == "__main__":
             print(Colorate.Horizontal(Colors.rainbow, '📍{21}: Change Race Loses        1.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '📍{22}: Speed Car Hack           2.500K'))
             print(Colorate.Horizontal(Colors.rainbow, '📍{23}: All Cars 99HP            2.500K'))
-            print(Colorate.Horizontal(Colors.rainbow, '📍{24}: Chrome All Cars Account  2.000K'))            
+            print(Colorate.Horizontal(Colors.rainbow, '📍{24}: Chrome All Cars          2.000K'))            
             print(Colorate.Horizontal(Colors.rainbow, '📍{25}: Clone Account            5.000K'))            
             print(Colorate.Horizontal(Colors.rainbow, '📍{00} : Exit'))
             
