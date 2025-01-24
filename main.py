@@ -760,7 +760,7 @@ if __name__ == "__main__":
                     sleep(2)
                     continue               
             elif service == 25: # ALL CARS MAX MILAGE
-                print(Colorate.Horizontal(Colors.rainbow, '[!] NOTE: ORIGINAL SPEED CAN NOT BE RESTORED'))            
+                print(Colorate.Horizontal(Colors.rainbow, '[!] NOTE: ORIGINAL MILAGE CAN NOT BE RESTORED'))            
                 console.print("[%] HACKING MILAGE: ", end=None)
                 if cpm.hack_car_milage():
                     print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
