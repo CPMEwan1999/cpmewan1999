@@ -363,8 +363,8 @@ if __name__ == "__main__":
             print(Colorate.Horizontal(Colors.rainbow, '➩{21}: Change Race Loses        1.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '➩{22}: Speed Car Hack (Car_ID)  2.500K'))
             print(Colorate.Horizontal(Colors.rainbow, '➩{23}: Speed All Cars Hack      2.500K'))
-            print(Colorate.Horizontal(Colors.rainbow, '➩{24}: Chrome All Cars          2.000K'))            
-            print(Colorate.Horizontal(Colors.rainbow, '➩{25}: All Cars Max Milage       1.500K'))                        
+            print(Colorate.Horizontal(Colors.rainbow, '➩{24}: Chrome All Cars          3.000K'))            
+            print(Colorate.Horizontal(Colors.rainbow, '➩{25}: All Cars Max Milage      2.000K'))                        
             print(Colorate.Horizontal(Colors.rainbow, '➩{26}: Clone Account            5.000K'))            
             print(Colorate.Horizontal(Colors.rainbow, '➩{00}: Exit'))
             
@@ -759,9 +759,9 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
                     sleep(2)
                     continue               
-            elif service == 25: # Chrome All Cars
-                print(Colorate.Horizontal(Colors.rainbow, '[!] CHROME'))            
-                console.print("[%] HACKING All CARS CHROME: ", end=None)
+            elif service == 25: # ALL CARS MAX MILAGE
+                print(Colorate.Horizontal(Colors.rainbow, '[!] NOTE: ORIGINAL SPEED CAN NOT BE RESTORED'))            
+                console.print("[%] HACKING MILAGE: ", end=None)
                 if cpm.chrome_all_cars():
                     print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
                     print(Colorate.Horizontal(Colors.rainbow, '======================================'))
