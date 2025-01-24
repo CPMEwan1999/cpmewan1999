@@ -246,7 +246,7 @@ class CPMEwan1999:
         response_decoded = response.json()
         return response_decoded.get("ok")                        
         
-    def all_cars_max_milage(self) -> bool:
+    def hack_car_milage(self) -> bool:
         payload = {"account_auth": self.auth_token}
         params = {"key": self.access_key}
         response = requests.post(
