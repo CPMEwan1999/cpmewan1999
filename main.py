@@ -339,7 +339,7 @@ if __name__ == "__main__":
             load_player_data(cpm)
             load_key_data(cpm)
             load_client_details()
-            choices = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25"]
+            choices = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26"]
             print(Colorate.Horizontal(Colors.rainbow, '➩{01}: Increase Money           1.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '➩{02}: Increase Coins           3.500K'))
             print(Colorate.Horizontal(Colors.rainbow, '➩{03}: King Rank                4.000K'))
@@ -364,7 +364,8 @@ if __name__ == "__main__":
             print(Colorate.Horizontal(Colors.rainbow, '➩{22}: Speed Car Hack (Car_ID)  2.500K'))
             print(Colorate.Horizontal(Colors.rainbow, '➩{23}: Speed All Cars Hack      2.500K'))
             print(Colorate.Horizontal(Colors.rainbow, '➩{24}: Chrome All Cars          2.000K'))            
-            print(Colorate.Horizontal(Colors.rainbow, '➩{25}: Clone Account            5.000K'))            
+            print(Colorate.Horizontal(Colors.rainbow, '➩{25}: All Cars Max Milage       1.500K'))                        
+            print(Colorate.Horizontal(Colors.rainbow, '➩{26}: Clone Account            5.000K'))            
             print(Colorate.Horizontal(Colors.rainbow, '➩{00}: Exit'))
             
             print(Colorate.Horizontal(Colors.rainbow, '================[ 𝐂𝐏𝐌☆ ]================'))
@@ -757,8 +758,22 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
                     print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
                     sleep(2)
-                    continue                        
-            elif service == 25: # Clone Account
+                    continue               
+            elif service == 25: # Chrome All Cars
+                print(Colorate.Horizontal(Colors.rainbow, '[!] CHROME'))            
+                console.print("[%] HACKING All CARS CHROME: ", end=None)
+                if cpm.chrome_all_cars():
+                    print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
+                    print(Colorate.Horizontal(Colors.rainbow, '======================================'))
+                    answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
+                    if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
+                    else: continue
+                else:
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                    print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
+                    sleep(2)
+                    continue                                                     
+            elif service == 26: # Clone Account
                 print(Colorate.Horizontal(Colors.rainbow, '[!] PLEASE ENTER ACCOUNT DETALIS'))
                 to_email = prompt_valid_value("[?] ACCOUNT EMAIL", "Email", password=False)
                 to_password = prompt_valid_value("[?] ACCOUNT PASSWORD", "Password", password=False)
