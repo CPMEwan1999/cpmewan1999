@@ -762,7 +762,7 @@ if __name__ == "__main__":
             elif service == 25: # ALL CARS MAX MILAGE
                 print(Colorate.Horizontal(Colors.rainbow, '[!] NOTE: ORIGINAL SPEED CAN NOT BE RESTORED'))            
                 console.print("[%] HACKING MILAGE: ", end=None)
-                if cpm.chrome_all_cars():
+                if cpm.hack_car_milage():
                     print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
                     print(Colorate.Horizontal(Colors.rainbow, '======================================'))
                     answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
