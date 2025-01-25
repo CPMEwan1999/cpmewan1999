@@ -377,6 +377,9 @@ if __name__ == "__main__":
             
             if service == 0: # Exit
                 print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
+
+
+
             elif service == 1: # Increase Money
                 print(Colorate.Horizontal(Colors.rainbow, '[?] INSERT HOW MUCH MONEY DO YOU WANT'))
                 amount = IntPrompt.ask("[?] AMOUNT")
@@ -397,6 +400,9 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
                     print(Colorate.Horizontal(Colors.rainbow, 'PLEASE USE VALID VALUES'))
                     sleep(2)
+
+
+
                     continue
             elif service == 2: # Increase Coins
                 print(Colorate.Horizontal(Colors.rainbow, '[?] INSERT HOW MUCH COINS DO YOU WANT'))
@@ -418,6 +424,9 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
                     print(Colorate.Horizontal(Colors.rainbow, 'PLEASE USE VALID VALUES'))
                     sleep(2)
+
+
+
                     continue
             elif service == 3: # King Rank
                 console.print("[bold red][!] NOTE:[/bold red]: IF THE KING RANK DOESN'T APPEAR IN GAME, CLOSE IT AND OPEN FEW TIMES", end=None)
@@ -434,6 +443,9 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
                     print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
                     sleep(2)
+
+
+
                     continue
             elif service == 4: # Change ID
                 print(Colorate.Horizontal(Colors.rainbow, '[?] ENTER YOUR NEW ID'))
@@ -456,6 +468,9 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, 'PLEASE USE VALID ID'))
                     sleep(2)
                     continue
+
+
+
             elif service == 5: # Change Name
                 print(Colorate.Horizontal(Colors.rainbow, '[?] ENTER YOUR NEW NAME'))
                 new_name = Prompt.ask("[?] NAME")
@@ -477,6 +492,9 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, 'PLEASE USE VALID VALUES'))
                     sleep(2)
                     continue
+
+
+
             elif service == 6: # Change Name Rainbow
                 print(Colorate.Horizontal(Colors.rainbow, '[?] ENTER YOUR NEW RAINBOW NAME'))
                 new_name = Prompt.ask("[?] NAME")
@@ -498,6 +516,9 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, 'PLEASE USE VALID VALUES'))
                     sleep(2)
                     continue
+
+
+
             elif service == 7: # Number Plates
                 console.print("[%] GIVING YOU A NUMBER PLATES: ", end=None)
                 if cpm.set_player_plates():
@@ -511,6 +532,9 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
                     sleep(2)
                     continue
+
+
+
             elif service == 8: # Account Delete
                 print(Colorate.Horizontal(Colors.rainbow, '[!] AFTER DELETING YOUR ACCOUNT THERE IS NO GOING BACK'))
                 answ = Prompt.ask("[?] DO YOU WANT TO DELETE THIS ACCOUNT", choices=["y", "n"], default="n")
@@ -520,6 +544,9 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, '======================================'))
                     print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
                 else: continue
+
+
+
             elif service == 9: # Account Register
                 print(Colorate.Horizontal(Colors.rainbow, '[!] REGISTRING NEW ACCOUNT'))
                 acc2_email = prompt_valid_value("[?] ACCOUNT EMAIL", "Email", password=False)
@@ -543,6 +570,9 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
                     sleep(2)
                     continue
+
+
+
             elif service == 10: # Delete Friends
                 console.print("[%] DELETING FRIENDS: ", end=None)
                 if cpm.delete_player_friends():
@@ -556,6 +586,9 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
                     sleep(2)
                     continue
+
+
+
             elif service == 11: # Unlock All Paid Cars
                 console.print("[!] NOTE: THIS FUNCTION TAKES A WHILE TO COMPLETE, PLEASE DON'T CANCEL", end=None)
                 console.print("[%] UNLOCKING ALL PAID CARS: ", end=None)
@@ -570,6 +603,9 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
                     sleep(2)
                     continue
+
+
+
             elif service == 12: # Unlock All Cars
                 console.print("[%] UNLOCKING ALL CARS: ", end=None)
                 if cpm.unlock_all_cars():
@@ -583,6 +619,9 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
                     sleep(2)
                     continue
+
+
+
             elif service == 13: # Unlock All Cars Siren
                 console.print("[%] UNLOCKING ALL CARS SIREN: ", end=None)
                 if cpm.unlock_all_cars_siren():
@@ -596,6 +635,9 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
                     sleep(2)
                     continue
+
+
+
             elif service == 14: # Unlock w16 Engine
                 console.print("[%] UNLOCKING W16 ENGINE: ", end=None)
                 if cpm.unlock_w16():
@@ -609,6 +651,9 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
                     sleep(2)
                     continue
+
+
+
             elif service == 15: # Unlock All Horns
                 console.print("[%] UNLOCKING ALL HORNS: ", end=None)
                 if cpm.unlock_horns():
@@ -622,6 +667,9 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
                     sleep(2)
                     continue
+
+
+
             elif service == 16: # Disable Engine Damage
                 console.print("[%] UNLOCKING DISABLE DAMAGE: ", end=None)
                 if cpm.disable_engine_damage():
@@ -635,6 +683,9 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
                     sleep(2)
                     continue
+
+
+
             elif service == 17: # Unlimited Fuel
                 console.print("[%] UNLOCKING UNLIMITED FUEL: ", end=None)
                 if cpm.unlimited_fuel():
@@ -648,6 +699,9 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
                     sleep(2)
                     continue
+
+
+
             elif service == 18: # Unlock House 3
                 console.print("[%] UNLOCKING HOUSE 3: ", end=None)
                 if cpm.unlock_houses():
@@ -661,6 +715,9 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
                     sleep(2)
                     continue
+
+
+
             elif service == 19: # Unlock Smoke
                 console.print("[%] UNLOCKING SMOKE: ", end=None)
                 if cpm.unlock_smoke():
@@ -674,6 +731,9 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
                     sleep(2)
                     continue
+
+
+
             elif service == 20: # Change Races Wins
                 print(Colorate.Horizontal(Colors.rainbow, '[!] Insert how much races you win.'))
                 amount = IntPrompt.ask("[?] Amount")
@@ -695,6 +755,9 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, '[!] PLEASE USE VALID VALUES'))
                     sleep(2)
                     continue
+
+
+
             elif service == 21: # Change Races Loses
                 print(Colorate.Horizontal(Colors.rainbow, '[!] INSERT HOW MUCH RACES YOU LOSE'))
                 amount = IntPrompt.ask("[?] AMOUNT")
@@ -716,6 +779,9 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, '[!] PLEASE USE VALID VALUES'))
                     sleep(2)
                     continue
+
+
+
             elif service == 22: # Hack Car Speed (299hp)
                 print(Colorate.Horizontal(Colors.rainbow, '[!] NOTE: ORIGINAL SPEED CAN NOT BE RESTORED'))
                 print(Colorate.Horizontal(Colors.rainbow, '[!] ENTER CAR DETALIS'))
@@ -732,6 +798,9 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, '[!] PLEASE TRY AGAIN'))
                     sleep(2)
                     continue
+
+
+
             elif service == 23: # Hack All Car Speed 99hp
                 print(Colorate.Horizontal(Colors.rainbow, '[!] NOTE: ORIGINAL SPEED CAN NOT BE RESTORED'))            
                 console.print("[%] HACKING ALL CARS SPEED: ", end=None)
@@ -746,6 +815,9 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
                     sleep(2)
                     continue
+
+
+
             elif service == 24: # Chrome All Cars
                 print(Colorate.Horizontal(Colors.rainbow, '[!] CHROME'))            
                 console.print("[%] HACKING All CARS CHROME: ", end=None)
@@ -760,6 +832,9 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
                     sleep(2)
                     continue               
+
+
+
             elif service == 25: # ALL CARS MAX MILAGE
                 print(Colorate.Horizontal(Colors.rainbow, '[!] NOTE: ORIGINAL MILAGE CAN NOT BE RESTORED'))            
                 console.print("[%] HACKING MILAGE: ", end=None)
@@ -774,6 +849,9 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
                     sleep(2)
                     continue                           
+
+
+
             elif service == 26: # Unlock Car Wheels
                 console.print("[%] UNLOCKING All Wheels: ", end=None)
                 if cpm.unlock_car_wheel():
@@ -787,6 +865,9 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
                     sleep(2)
                     continue                                  
+
+
+
             elif service == 27: # Clone Account
                 print(Colorate.Horizontal(Colors.rainbow, '[!] PLEASE ENTER ACCOUNT DETALIS'))
                 to_email = prompt_valid_value("[?] ACCOUNT EMAIL", "Email", password=False)
