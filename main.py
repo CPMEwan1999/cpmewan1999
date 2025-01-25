@@ -365,7 +365,7 @@ if __name__ == "__main__":
             print(Colorate.Horizontal(Colors.rainbow, '➩{23}: Speed All Cars Hack      2.500K'))
             print(Colorate.Horizontal(Colors.rainbow, '➩{24}: Chrome All Cars          3.000K'))            
             print(Colorate.Horizontal(Colors.rainbow, '➩{25}: All Cars Max Milage      2.000K'))                        
-            print(Colorate.Horizontal(Colors.rainbow, '➩{26}: Unlock All Wheels           4.000K'))                        
+            print(Colorate.Horizontal(Colors.rainbow, '➩{26}: Unlock All Wheels        4.000K'))                        
             print(Colorate.Horizontal(Colors.rainbow, '➩{27}: Clone Account            5.000K'))            
             print(Colorate.Horizontal(Colors.rainbow, '➩{00}: Exit'))
             
