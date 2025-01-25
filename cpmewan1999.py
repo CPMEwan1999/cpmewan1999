@@ -171,6 +171,15 @@ class CPMEwan1999:
         )
         response_decoded = response.json()
         return response_decoded.get("ok")
+        
+    def unlock_car_wheel(self) -> bool:
+        payload = {"account_auth": self.auth_token}
+        params = {"key": self.access_key}
+        response = requests.post(
+            f"{_MYAPI_URL_}/unlock_car_wheel", params=params, data=payload
+        )
+        response_decoded = response.json()
+        return response_decoded.get("ok")        
 
     def unlock_smoke(self) -> bool:
         payload = {"account_auth": self.auth_token}
