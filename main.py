@@ -283,7 +283,7 @@ def load_client_details():
     print(Colorate.Horizontal(Colors.rainbow, f'📍Country : {data.get("country")}.'))    
     print(Colorate.Horizontal(Colors.rainbow, f'📍Region  : {data.get("regionName")}.'))
     print(Colorate.Horizontal(Colors.rainbow, f'📍City    : {data.get("city")}.'))
-    print(Colorate.Horizontal(Colors.rainbow, '─═════════════[ 𝐌𝐄𝐍𝐔 ]═════════════─'))
+    print(Colorate.Horizontal(Colors.rainbow, '─═══════════════[ 𝐌𝐄𝐍𝐔 ]═══════════════─'))
 
 def interpolate_color(start_color, end_color, fraction):
     start_rgb = tuple(int(start_color[i:i+2], 16) for i in (1, 3, 5))
