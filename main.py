@@ -234,7 +234,7 @@ def load_player_data(cpm):
         data = response.get('data')
         if 'floats' in data and 'localID' in data and 'money' in data and 'coin' in data:
         
-            print(Colorate.Horizontal(Colors.rainbow, '===========[ 𝙿𝙻𝙰𝚈𝙴𝚁 𝙳𝙴𝚃𝙰𝙸𝙻𝚂 ]==========='))
+            print(Colorate.Horizontal(Colors.rainbow, '─══════════[ 𝙿𝙻𝙰𝚈𝙴𝚁 𝙳𝙴𝚃𝙰𝙸𝙻𝚂 ]══════════─'))
             
             print(Colorate.Horizontal(Colors.rainbow, f'📍Name   : {(data.get("Name") if "Name" in data else "UNDEFINED")}.'))
                 
@@ -256,8 +256,7 @@ def load_key_data(cpm):
 
     data = cpm.get_key_data()
     
-    print(Colorate.Horizontal(Colors.rainbow, '=========[ 𝙰𝙲𝙲𝙴𝚂𝚂 𝙺𝙴𝚈 𝙳𝙴𝚃𝙰𝙸𝙻𝚂 ]========='))
-    
+    print(Colorate.Horizontal(Colors.rainbow, '─══════════[ 𝙰𝙲𝙲𝙴𝚂𝚂 𝙺𝙴𝚈 𝙳𝙴𝚃𝙰𝙸𝙻𝚂 ]══════════─
     print(Colorate.Horizontal(Colors.rainbow, f'📍Access Key : {data.get("access_key")}.'))
     
     print(Colorate.Horizontal(Colors.rainbow, f'📍Telegram ID: {data.get("telegram_id")}.'))
@@ -277,13 +276,13 @@ def prompt_valid_value(content, tag, password=False):
 def load_client_details():
     response = requests.get("http://ip-api.com/json")
     data = response.json()
-    print(Colorate.Horizontal(Colors.rainbow, '==============[ 𝐋𝐎𝐂𝐀𝐓𝐈𝐎𝐍 ]=============='))
+    print(Colorate.Horizontal(Colors.rainbow, '─══════════[ 𝐋𝐎𝐂𝐀𝐓𝐈𝐎𝐍 ]══════════─'))
     now = datetime.datetime.now()
     print(Colorate.Horizontal(Colors.rainbow, (now.strftime("📍DateTime: %d-%m-%Y %H:%M:%S"))))
     print(Colorate.Horizontal(Colors.rainbow, f'📍Country : {data.get("country")}.'))    
     print(Colorate.Horizontal(Colors.rainbow, f'📍Region  : {data.get("regionName")}.'))
     print(Colorate.Horizontal(Colors.rainbow, f'📍City    : {data.get("city")}.'))
-    print(Colorate.Horizontal(Colors.rainbow, '================[ 𝐌𝐄𝐍𝐔 ]================'))
+    print(Colorate.Horizontal(Colors.rainbow, '─══════════[ 𝐌𝐄𝐍𝐔 ]══════════─'))
 
 def interpolate_color(start_color, end_color, fraction):
     start_rgb = tuple(int(start_color[i:i+2], 16) for i in (1, 3, 5))
@@ -384,7 +383,7 @@ if __name__ == "__main__":
             elif service == 1: # Increase Money
                 print(Colorate.Horizontal(Colors.rainbow, '[?] INSERT HOW MUCH MONEY DO YOU WANT'))
                 amount = IntPrompt.ask("[?] AMOUNT")
-                console.print(Colorate.Horizontal(Colors.rainbow, "[%] SAVING YOUR DATA: ", end=None))
+                console.print("[%] SAVING YOUR DATA: ", end=None)
                 if amount > 0 and amount <= 999999999999999999999999999999:
                     if cpm.set_player_money(amount):
                         print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
