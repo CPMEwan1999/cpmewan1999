@@ -261,7 +261,7 @@ def load_key_data(cpm):
     
     print(Colorate.Horizontal(Colors.rainbow, f'📍Telegram ID: {data.get("telegram_id")}.'))
     
-    console.print("[bold green]Credits    [/bold green]: " + (str(data.get('coins')) if not data.get('is_unlimited') else 'Unlimited') + ".", end="\n\n")
+    print("Credits : " + (str(data.get('coins')) if not data.get('is_unlimited') else 'Unlimited') + ".", end="\n\n")    
         
     
 
