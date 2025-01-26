@@ -256,7 +256,7 @@ def load_key_data(cpm):
 
     data = cpm.get_key_data()
     
-    print(Colorate.Horizontal(Colors.rainbow, '─════════[ 𝙳𝙴𝚃𝙰𝙸𝙻𝚂 ]════════─'))
+    print(Colorate.Horizontal(Colors.rainbow, '─═════════════[ 𝙳𝙴𝚃𝙰𝙸𝙻𝚂 ]═════════════─'))
     
     print(Colorate.Horizontal(Colors.rainbow, f'📍Access Key : {data.get("access_key")}.'))
     
