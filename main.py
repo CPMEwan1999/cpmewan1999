@@ -256,11 +256,13 @@ def load_key_data(cpm):
     data = cpm.get_key_data()
     
     print(Colorate.Horizontal(Colors.rainbow, '=========[ 𝙰𝙲𝙲𝙴𝚂𝚂 𝙺𝙴𝚈 𝙳𝙴𝚃𝙰𝙸𝙻𝚂 ]========='))
-    print(Colorate.Horizontal(Colors.rainbow, f'📍Balance $  : {(data.get("coins") if not data.get("is_unlimited") else "Unlimited")}.'))    
     
     print(Colorate.Horizontal(Colors.rainbow, f'📍Access Key : {data.get("access_key")}.'))
     
     print(Colorate.Horizontal(Colors.rainbow, f'📍Telegram ID: {data.get("telegram_id")}.'))
+    
+    console.print("[bold green]Credits    [/bold green]: " + (str(data.get('coins')) if not data.get('is_unlimited') else 'Unlimited') + ".", end="\n\n")
+        
     
 
 def prompt_valid_value(content, tag, password=False):
