@@ -1,1041 +1,890 @@
-"""Twilio SendGrid v3/mail/send response body builder"""
-from .bcc_email import Bcc
-from .cc_email import Cc
-from .content import Content
-from .custom_arg import CustomArg
-from .dynamic_template_data import DynamicTemplateData
-from .email import Email
-from .from_email import From
-from .header import Header
-from .mime_type import MimeType
-from .personalization import Personalization
-from .reply_to import ReplyTo
-from .send_at import SendAt
-from .subject import Subject
-from .substitution import Substitution
-from .template_id import TemplateId
-from .to_email import To
-
-
-class Mail(object):
-    """Creates the response body for v3/mail/send"""
-
-    def __init__(
-            self,
-            from_email=None,
-            to_emails=None,
-            subject=None,
-            plain_text_content=None,
-            html_content=None,
-            amp_html_content=None,
-            global_substitutions=None,
-            is_multiple=False):
-        """
-        Creates the response body for a v3/mail/send API call
-
-        :param from_email: The email address of the sender
-        :type from_email: From, tuple, optional
-        :param subject: The subject of the email
-        :type subject: Subject, optional
-        :param to_emails: The email address of the recipient
-        :type to_emails: To, str, tuple, list(str), list(tuple),
-                         list(To), optional
-        :param plain_text_content: The plain text body of the email
-        :type plain_text_content: string, optional
-        :param html_content: The html body of the email
-        :type html_content: string, optional
-        :param amp_html_content: The amp-html body of the email
-        :type amp_html_content: string, optional
-        """
-        self._attachments = None
-        self._categories = None
-        self._contents = None
-        self._custom_args = None
-        self._headers = None
-        self._personalizations = []
-        self._sections = None
-        self._asm = None
-        self._batch_id = None
-        self._from_email = None
-        self._ip_pool_name = None
-        self._mail_settings = None
-        self._reply_to = None
-        self._reply_to_list = None
-        self._send_at = None
-        self._subject = None
-        self._template_id = None
-        self._tracking_settings = None
-
-        # Minimum required data to send a single email
-        if from_email is not None:
-            self.from_email = from_email
-        if to_emails is not None:
-            self.add_to(to_emails, global_substitutions, is_multiple)
-        if subject is not None:
-            self.subject = subject
-        if plain_text_content is not None:
-            self.add_content(plain_text_content, MimeType.text)
-        if amp_html_content is not None:
-            self.add_content(amp_html_content, MimeType.amp)
-        if html_content is not None:
-            self.add_content(html_content, MimeType.html)
-
-    def __str__(self):
-        """A JSON-ready string representation of this Mail object.
-
-        :returns: A JSON-ready string representation of this Mail object.
-        :rtype: string
-        """
-        return str(self.get())
-
-    def _ensure_append(self, new_items, append_to, index=0):
-        """Ensure an item is appended to a list or create a new empty list
-
-        :param new_items: the item(s) to append
-        :type new_items: list(obj)
-        :param append_to: the list on which to append the items
-        :type append_to: list()
-        :param index: index of the list on which to append the items
-        :type index: int
-        """
-        append_to = append_to or []
-        append_to.insert(index, new_items)
-        return append_to
-
-    def _ensure_insert(self, new_items, insert_to):
-        """Ensure an item is inserted to a list or create a new empty list
-
-        :param new_items: the item(s) to insert
-        :type new_items: list(obj)
-        :param insert_to: the list on which to insert the items at index 0
-        :type insert_to: list()
-        """
-        insert_to = insert_to or []
-        insert_to.insert(0, new_items)
-        return insert_to
-
-    def _flatten_dicts(self, dicts):
-        """Flatten a dict
-
-        :param dicts: Flatten a dict
-        :type dicts: list(dict)
-        """
-        d = dict()
-        list_of_dicts = [d.get() for d in dicts or []]
-        return {k: v for d in list_of_dicts for k, v in d.items()}
-
-    def _get_or_none(self, from_obj):
-        """Get the JSON representation of the object, else return None
-
-        :param from_obj: Get the JSON representation of the object,
-        else return None
-        :type from_obj: obj
-        """
-        return from_obj.get() if from_obj is not None else None
-
-    def _set_emails(
-            self, emails, global_substitutions=None, is_multiple=False, p=0):
-        """Adds emails to the Personalization object
-
-        :param emails: An Email or list of Email objects
-        :type emails: Email, list(Email)
-        :param global_substitutions: A dict of substitutions for all recipients
-        :type global_substitutions: dict
-        :param is_multiple: Create a new personalization for each recipient
-        :type is_multiple: bool
-        :param p: p is the Personalization object or Personalization object
-                  index
-        :type p: Personalization, integer, optional
-        """
-        # Send multiple emails to multiple recipients
-        if is_multiple is True:
-            if isinstance(emails, list):
-                for email in emails:
-                    personalization = Personalization()
-                    personalization.add_email(email)
-                    self.add_personalization(personalization)
-            else:
-                personalization = Personalization()
-                personalization.add_email(emails)
-                self.add_personalization(personalization)
-            if global_substitutions is not None:
-                if isinstance(global_substitutions, list):
-                    for substitution in global_substitutions:
-                        for p in self.personalizations:
-                            p.add_substitution(substitution)
-                else:
-                    for p in self.personalizations:
-                        p.add_substitution(global_substitutions)
-        else:
-            try:
-                personalization = self._personalizations[p]
-                has_internal_personalization = True
-            except IndexError:
-                personalization = Personalization()
-                has_internal_personalization = False
-
-            if isinstance(emails, list):
-                for email in emails:
-                    personalization.add_email(email)
-            else:
-                personalization.add_email(emails)
-
-            if global_substitutions is not None:
-                if isinstance(global_substitutions, list):
-                    for substitution in global_substitutions:
-                        personalization.add_substitution(substitution)
-                else:
-                    personalization.add_substitution(global_substitutions)
-
-            if not has_internal_personalization:
-                self.add_personalization(personalization, index=p)
-
-    @property
-    def personalizations(self):
-        """A list of one or more Personalization objects
-
-        :rtype: list(Personalization)
-        """
-        return self._personalizations
-
-    def add_personalization(self, personalization, index=0):
-        """Add a Personalization object
-
-        :param personalization: Add a Personalization object
-        :type personalization: Personalization
-        :param index: The index where to add the Personalization
-        :type index: int
-        """
-        self._personalizations = self._ensure_append(
-            personalization, self._personalizations, index)
-
-    @property
-    def to(self):
-        pass
-
-    @to.setter
-    def to(self, to_emails, global_substitutions=None, is_multiple=False, p=0):
-        """Adds To objects to the Personalization object
-
-        :param to_emails: The email addresses of all recipients
-        :type to_emails: To, str, tuple, list(str), list(tuple), list(To)
-        :param global_substitutions: A dict of substitutions for all recipients
-        :type global_substitutions: dict
-        :param is_multiple: Create a new personalization for each recipient
-        :type is_multiple: bool
-        :param p: p is the Personalization object or Personalization object
-                  index
-        :type p: Personalization, integer, optional
-        """
-        if isinstance(to_emails, list):
-            for email in to_emails:
-                if isinstance(email, str):
-                    email = To(email, None)
-                if isinstance(email, tuple):
-                    email = To(email[0], email[1])
-                self.add_to(email, global_substitutions, is_multiple, p)
-        else:
-            if isinstance(to_emails, str):
-                to_emails = To(to_emails, None)
-            if isinstance(to_emails, tuple):
-                to_emails = To(to_emails[0], to_emails[1])
-            self.add_to(to_emails, global_substitutions, is_multiple, p)
-
-    def add_to(
-            self, to_email, global_substitutions=None, is_multiple=False, p=0):
-        """Adds a To object to the Personalization object
-
-        :param to_email: A To object
-        :type to_email: To, str, tuple, list(str), list(tuple), list(To)
-        :param global_substitutions: A dict of substitutions for all recipients
-        :type global_substitutions: dict
-        :param is_multiple: Create a new personalization for each recipient
-        :type is_multiple: bool
-        :param p: p is the Personalization object or Personalization object
-                  index
-        :type p: Personalization, integer, optional
-        """
-
-        if isinstance(to_email, list):
-            for email in to_email:
-                if isinstance(email, str):
-                    email = To(email, None)
-                elif isinstance(email, tuple):
-                    email = To(email[0], email[1])
-                elif not isinstance(email, Email):
-                    raise ValueError(
-                        'Please use a To/Cc/Bcc, tuple, or a str for a to_email list.'
-                    )
-                self._set_emails(email, global_substitutions, is_multiple, p)
-        else:
-            if isinstance(to_email, str):
-                to_email = To(to_email, None)
-            if isinstance(to_email, tuple):
-                to_email = To(to_email[0], to_email[1])
-            if isinstance(to_email, Email):
-                p = to_email.personalization
-            self._set_emails(to_email, global_substitutions, is_multiple, p)
-
-    @property
-    def cc(self):
-        pass
-
-    @cc.setter
-    def cc(self, cc_emails, global_substitutions=None, is_multiple=False, p=0):
-        """Adds Cc objects to the Personalization object
-
-        :param cc_emails: An Cc or list of Cc objects
-        :type cc_emails: Cc, list(Cc), tuple
-        :param global_substitutions: A dict of substitutions for all recipients
-        :type global_substitutions: dict
-        :param is_multiple: Create a new personalization for each recipient
-        :type is_multiple: bool
-        :param p: p is the Personalization object or Personalization object
-                  index
-        :type p: Personalization, integer, optional
-        """
-        if isinstance(cc_emails, list):
-            for email in cc_emails:
-                if isinstance(email, str):
-                    email = Cc(email, None)
-                if isinstance(email, tuple):
-                    email = Cc(email[0], email[1])
-                self.add_cc(email, global_substitutions, is_multiple, p)
-        else:
-            if isinstance(cc_emails, str):
-                cc_emails = Cc(cc_emails, None)
-            if isinstance(cc_emails, tuple):
-                cc_emails = To(cc_emails[0], cc_emails[1])
-            self.add_cc(cc_emails, global_substitutions, is_multiple, p)
-
-    def add_cc(
-            self, cc_email, global_substitutions=None, is_multiple=False, p=0):
-        """Adds a Cc object to the Personalization object
-
-        :param to_emails: An Cc object
-        :type to_emails: Cc
-        :param global_substitutions: A dict of substitutions for all recipients
-        :type global_substitutions: dict
-        :param is_multiple: Create a new personalization for each recipient
-        :type is_multiple: bool
-        :param p: p is the Personalization object or Personalization object
-                  index
-        :type p: Personalization, integer, optional
-        """
-        if isinstance(cc_email, str):
-            cc_email = Cc(cc_email, None)
-        if isinstance(cc_email, tuple):
-            cc_email = Cc(cc_email[0], cc_email[1])
-        if isinstance(cc_email, Email):
-            p = cc_email.personalization
-        self._set_emails(
-            cc_email, global_substitutions, is_multiple=is_multiple, p=p)
-
-    @property
-    def bcc(self):
-        pass
-
-    @bcc.setter
-    def bcc(
-            self,
-            bcc_emails,
-            global_substitutions=None,
-            is_multiple=False,
-            p=0):
-        """Adds Bcc objects to the Personalization object
-
-        :param bcc_emails: An Bcc or list of Bcc objects
-        :type bcc_emails: Bcc, list(Bcc), tuple
-        :param global_substitutions: A dict of substitutions for all recipients
-        :type global_substitutions: dict
-        :param is_multiple: Create a new personalization for each recipient
-        :type is_multiple: bool
-        :param p: p is the Personalization object or Personalization object
-                  index
-        :type p: Personalization, integer, optional
-        """
-        if isinstance(bcc_emails, list):
-            for email in bcc_emails:
-                if isinstance(email, str):
-                    email = Bcc(email, None)
-                if isinstance(email, tuple):
-                    email = Bcc(email[0], email[1])
-                self.add_bcc(email, global_substitutions, is_multiple, p)
-        else:
-            if isinstance(bcc_emails, str):
-                bcc_emails = Bcc(bcc_emails, None)
-            if isinstance(bcc_emails, tuple):
-                bcc_emails = Bcc(bcc_emails[0], bcc_emails[1])
-            self.add_bcc(bcc_emails, global_substitutions, is_multiple, p)
-
-    def add_bcc(
-            self,
-            bcc_email,
-            global_substitutions=None,
-            is_multiple=False,
-            p=0):
-        """Adds a Bcc object to the Personalization object
-
-        :param to_emails: An Bcc object
-        :type to_emails: Bcc
-        :param global_substitutions: A dict of substitutions for all recipients
-        :type global_substitutions: dict
-        :param is_multiple: Create a new personalization for each recipient
-        :type is_multiple: bool
-        :param p: p is the Personalization object or Personalization object
-                  index
-        :type p: Personalization, integer, optional
-        """
-        if isinstance(bcc_email, str):
-            bcc_email = Bcc(bcc_email, None)
-        if isinstance(bcc_email, tuple):
-            bcc_email = Bcc(bcc_email[0], bcc_email[1])
-        if isinstance(bcc_email, Email):
-            p = bcc_email.personalization
-        self._set_emails(
-            bcc_email,
-            global_substitutions,
-            is_multiple=is_multiple,
-            p=p)
-
-    @property
-    def subject(self):
-        """The global Subject object
-
-        :rtype: Subject
-        """
-        return self._subject
-
-    @subject.setter
-    def subject(self, value):
-        """The subject of the email(s)
-
-        :param value: The subject of the email(s)
-        :type value: Subject, string
-        """
-        if isinstance(value, Subject):
-            if value.personalization is not None:
-                try:
-                    personalization = \
-                        self._personalizations[value.personalization]
-                    has_internal_personalization = True
-                except IndexError:
-                    personalization = Personalization()
-                    has_internal_personalization = False
-                personalization.subject = value.subject
-
-                if not has_internal_personalization:
-                    self.add_personalization(
-                        personalization,
-                        index=value.personalization)
-            else:
-                self._subject = value
-        else:
-            self._subject = Subject(value)
-
-    @property
-    def headers(self):
-        """A list of global Header objects
-
-        :rtype: list(Header)
-        """
-        return self._headers
-
-    @property
-    def header(self):
-        pass
-
-    @header.setter
-    def header(self, headers):
-        """Add headers to the email
-
-        :param value: A list of Header objects or a dict of header key/values
-        :type value: Header, list(Header), dict
-        """
-        if isinstance(headers, list):
-            for h in headers:
-                self.add_header(h)
-        else:
-            self.add_header(headers)
-
-    def add_header(self, header):
-        """Add headers to the email globaly or to a specific Personalization
-
-        :param value: A Header object or a dict of header key/values
-        :type value: Header, dict
-        """
-        if header.personalization is not None:
-            try:
-                personalization = \
-                    self._personalizations[header.personalization]
-                has_internal_personalization = True
-            except IndexError:
-                personalization = Personalization()
-                has_internal_personalization = False
-            if isinstance(header, dict):
-                (k, v) = list(header.items())[0]
-                personalization.add_header(Header(k, v))
-            else:
-                personalization.add_header(header)
-
-            if not has_internal_personalization:
-                self.add_personalization(
-                    personalization,
-                    index=header.personalization)
-        else:
-            if isinstance(header, dict):
-                (k, v) = list(header.items())[0]
-                self._headers = self._ensure_append(
-                    Header(k, v), self._headers)
-            else:
-                self._headers = self._ensure_append(header, self._headers)
-
-    @property
-    def substitution(self):
-        pass
-
-    @substitution.setter
-    def substitution(self, substitution):
-        """Add substitutions to the email
-
-        :param value: Add substitutions to the email
-        :type value: Substitution, list(Substitution)
-        """
-        if isinstance(substitution, list):
-            for s in substitution:
-                self.add_substitution(s)
-        else:
-            self.add_substitution(substitution)
-
-    def add_substitution(self, substitution):
-        """Add a substitution to the email
-
-        :param value: Add a substitution to the email
-        :type value: Substitution
-        """
-        if substitution.personalization:
-            try:
-                personalization = \
-                    self._personalizations[substitution.personalization]
-                has_internal_personalization = True
-            except IndexError:
-                personalization = Personalization()
-                has_internal_personalization = False
-            personalization.add_substitution(substitution)
-
-            if not has_internal_personalization:
-                self.add_personalization(
-                    personalization, index=substitution.personalization)
-        else:
-            if isinstance(substitution, list):
-                for s in substitution:
-                    for p in self.personalizations:
-                        p.add_substitution(s)
-            else:
-                for p in self.personalizations:
-                    p.add_substitution(substitution)
-
-    @property
-    def custom_args(self):
-        """A list of global CustomArg objects
-
-        :rtype: list(CustomArg)
-        """
-        return self._custom_args
-
-    @property
-    def custom_arg(self):
-        return self._custom_args
-
-    @custom_arg.setter
-    def custom_arg(self, custom_arg):
-        """Add custom args to the email
-
-        :param value: A list of CustomArg objects or a dict of custom arg
-                      key/values
-        :type value: CustomArg, list(CustomArg), dict
-        """
-        if isinstance(custom_arg, list):
-            for c in custom_arg:
-                self.add_custom_arg(c)
-        else:
-            self.add_custom_arg(custom_arg)
-
-    def add_custom_arg(self, custom_arg):
-        """Add custom args to the email globaly or to a specific Personalization
-
-        :param value: A CustomArg object or a dict of custom arg key/values
-        :type value: CustomArg, dict
-        """
-        if custom_arg.personalization is not None:
-            try:
-                personalization = \
-                    self._personalizations[custom_arg.personalization]
-                has_internal_personalization = True
-            except IndexError:
-                personalization = Personalization()
-                has_internal_personalization = False
-            if isinstance(custom_arg, dict):
-                (k, v) = list(custom_arg.items())[0]
-                personalization.add_custom_arg(CustomArg(k, v))
-            else:
-                personalization.add_custom_arg(custom_arg)
-
-            if not has_internal_personalization:
-                self.add_personalization(
-                    personalization, index=custom_arg.personalization)
-        else:
-            if isinstance(custom_arg, dict):
-                (k, v) = list(custom_arg.items())[0]
-                self._custom_args = self._ensure_append(
-                    CustomArg(k, v), self._custom_args)
-            else:
-                self._custom_args = self._ensure_append(
-                    custom_arg, self._custom_args)
-
-    @property
-    def send_at(self):
-        """The global SendAt object
-
-        :rtype: SendAt
-        """
-        return self._send_at
-
-    @send_at.setter
-    def send_at(self, value):
-        """A unix timestamp specifying when your email should
-        be delivered.
-
-        :param value: A unix timestamp specifying when your email should
-        be delivered.
-        :type value: SendAt, int
-        """
-        if isinstance(value, SendAt):
-            if value.personalization is not None:
-                try:
-                    personalization = \
-                        self._personalizations[value.personalization]
-                    has_internal_personalization = True
-                except IndexError:
-                    personalization = Personalization()
-                    has_internal_personalization = False
-                personalization.send_at = value.send_at
-
-                if not has_internal_personalization:
-                    self.add_personalization(
-                        personalization, index=value.personalization)
-            else:
-                self._send_at = value
-        else:
-            self._send_at = SendAt(value)
-
-    @property
-    def dynamic_template_data(self):
-        pass
-
-    @dynamic_template_data.setter
-    def dynamic_template_data(self, value):
-        """Data for a transactional template
-
-        :param value: Data for a transactional template
-        :type value: DynamicTemplateData, a JSON-serializable structure
-        """
-        if not isinstance(value, DynamicTemplateData):
-            value = DynamicTemplateData(value)
-        try:
-            personalization = self._personalizations[value.personalization]
-            has_internal_personalization = True
-        except IndexError:
-            personalization = Personalization()
-            has_internal_personalization = False
-        personalization.dynamic_template_data = value.dynamic_template_data
-
-        if not has_internal_personalization:
-            self.add_personalization(
-                personalization, index=value.personalization)
-
-    @property
-    def from_email(self):
-        """The email address of the sender
-
-        :rtype: From
-        """
-        return self._from_email
-
-    @from_email.setter
-    def from_email(self, value):
-        """The email address of the sender
-
-        :param value: The email address of the sender
-        :type value: From, str, tuple
-        """
-        if isinstance(value, str):
-            value = From(value, None)
-        if isinstance(value, tuple):
-            value = From(value[0], value[1])
-        self._from_email = value
-
-    @property
-    def reply_to(self):
-        """The reply to email address
-
-        :rtype: ReplyTo
-        """
-        return self._reply_to
-
-    @reply_to.setter
-    def reply_to(self, value):
-        """The reply to email address
-
-        :param value: The reply to email address
-        :type value: ReplyTo, str, tuple
-        """
-        if isinstance(value, str):
-            value = ReplyTo(value, None)
-        if isinstance(value, tuple):
-            value = ReplyTo(value[0], value[1])
-        self._reply_to = value
-
-    @property
-    def reply_to_list(self):
-        """A list of ReplyTo email addresses
-
-        :rtype: list(ReplyTo), tuple
-        """
-        return self._reply_to_list
-
-    @reply_to_list.setter
-    def reply_to_list(self, value):
-        """A list of ReplyTo email addresses
-
-        :param value: A list of ReplyTo email addresses
-        :type value: list(ReplyTo), tuple
-        """
-        if isinstance(value, list):
-            for reply in value:
-                if isinstance(reply, ReplyTo):
-                    if not isinstance(reply.email, str):
-                        raise ValueError('You must provide an email for each entry in a reply_to_list')
-                else:
-                    raise ValueError(
-                        'Please use a list of ReplyTos for a reply_to_list.'
-                    )
-            self._reply_to_list = value
-
-    @property
-    def contents(self):
-        """The contents of the email
-
-        :rtype: list(Content)
-        """
-        return self._contents
-
-    @property
-    def content(self):
-        pass
-
-    @content.setter
-    def content(self, contents):
-        """The content(s) of the email
-
-        :param contents: The content(s) of the email
-        :type contents: Content, list(Content)
-        """
-        if isinstance(contents, list):
-            for c in contents:
-                self.add_content(c)
-        else:
-            self.add_content(contents)
-
-    def add_content(self, content, mime_type=None):
-        """Add content to the email
-
-        :param contents: Content to be added to the email
-        :type contents: Content
-        :param mime_type: Override the mime type
-        :type mime_type: MimeType, str
-        """
-        if isinstance(content, str):
-            content = Content(mime_type, content)
-        # Content of mime type text/plain must always come first, followed by text/x-amp-html and then text/html
-        if content.mime_type == MimeType.text:
-            self._contents = self._ensure_insert(content, self._contents)
-        elif content.mime_type == MimeType.amp:
-            if self._contents:
-                for _content in self._contents:
-                    # this is written in the context that plain text content will always come earlier than the html content
-                    if _content.mime_type == MimeType.text:
-                        index = 1
-                        break
-                    elif _content.mime_type == MimeType.html:
-                        index = 0
-                        break
-            else:
-                index = 0
-            self._contents = self._ensure_append(
-                content, self._contents, index=index)
-        else:
-            if self._contents:
-                index = len(self._contents)
-            else:
-                index = 0
-            self._contents = self._ensure_append(
-                content, self._contents, index=index)
-
-    @property
-    def attachments(self):
-        """The attachments to this email
-
-        :rtype: list(Attachment)
-        """
-        return self._attachments
-
-    @property
-    def attachment(self):
-        pass
-
-    @attachment.setter
-    def attachment(self, attachment):
-        """Add attachment(s) to this email
-
-        :param attachment: Add attachment(s) to this email
-        :type attachment: Attachment, list(Attachment)
-        """
-        if isinstance(attachment, list):
-            for a in attachment:
-                self.add_attachment(a)
-        else:
-            self.add_attachment(attachment)
-
-    def add_attachment(self, attachment):
-        """Add an attachment to this email
-
-        :param attachment: Add an attachment to this email
-        :type attachment: Attachment
-        """
-        self._attachments = self._ensure_append(attachment, self._attachments)
-
-    @property
-    def template_id(self):
-        """The transactional template id for this email
-
-        :rtype: TemplateId
-        """
-        return self._template_id
-
-    @template_id.setter
-    def template_id(self, value):
-        """The transactional template id for this email
-
-        :param value: The transactional template id for this email
-        :type value: TemplateId
-        """
-        if isinstance(value, TemplateId):
-            self._template_id = value
-        else:
-            self._template_id = TemplateId(value)
-
-    @property
-    def sections(self):
-        """The block sections of code to be used as substitutions
-
-        :rtype: Section
-        """
-        return self._sections
-
-    @property
-    def section(self):
-        pass
-
-    @section.setter
-    def section(self, section):
-        """The block sections of code to be used as substitutions
-
-        :rtype: Section, list(Section)
-        """
-        if isinstance(section, list):
-            for h in section:
-                self.add_section(h)
-        else:
-            self.add_section(section)
-
-    def add_section(self, section):
-        """A block section of code to be used as substitutions
-
-        :param section: A block section of code to be used as substitutions
-        :type section: Section
-        """
-        self._sections = self._ensure_append(section, self._sections)
-
-    @property
-    def categories(self):
-        """The categories assigned to this message
-
-        :rtype: list(Category)
-        """
-        return self._categories
-
-    @property
-    def category(self):
-        pass
-
-    @category.setter
-    def category(self, categories):
-        """Add categories assigned to this message
-
-        :rtype: list(Category)
-        """
-        if isinstance(categories, list):
-            for c in categories:
-                self.add_category(c)
-        else:
-            self.add_category(categories)
-
-    def add_category(self, category):
-        """Add a category assigned to this message
-
-        :rtype: Category
-        """
-        self._categories = self._ensure_append(category, self._categories)
-
-    @property
-    def batch_id(self):
-        """The batch id for this email
-
-        :rtype: BatchId
-        """
-        return self._batch_id
-
-    @batch_id.setter
-    def batch_id(self, value):
-        """The batch id for this email
-
-        :param value: The batch id for this email
-        :type value: BatchId
-        """
-        self._batch_id = value
-
-    @property
-    def asm(self):
-        """An object specifying unsubscribe behavior.
-
-        :rtype: Asm
-        """
-        return self._asm
-
-    @asm.setter
-    def asm(self, value):
-        """An object specifying unsubscribe behavior.
-
-        :param value: An object specifying unsubscribe behavior.
-        :type value: Asm
-        """
-        self._asm = value
-
-    @property
-    def ip_pool_name(self):
-        """The IP Pool that you would like to send this email from
-
-        :rtype: IpPoolName
-        """
-        return self._ip_pool_name
-
-    @ip_pool_name.setter
-    def ip_pool_name(self, value):
-        """The IP Pool that you would like to send this email from
-
-        :paran value: The IP Pool that you would like to send this email from
-        :type value: IpPoolName
-        """
-        self._ip_pool_name = value
-
-    @property
-    def mail_settings(self):
-        """The mail settings for this email
-
-        :rtype: MailSettings
-        """
-        return self._mail_settings
-
-    @mail_settings.setter
-    def mail_settings(self, value):
-        """The mail settings for this email
-
-        :param value: The mail settings for this email
-        :type value: MailSettings
-        """
-        self._mail_settings = value
-
-    @property
-    def tracking_settings(self):
-        """The tracking settings for this email
-
-        :rtype: TrackingSettings
-        """
-        return self._tracking_settings
-
-    @tracking_settings.setter
-    def tracking_settings(self, value):
-        """The tracking settings for this email
-
-        :param value: The tracking settings for this email
-        :type value: TrackingSettings
-        """
-        self._tracking_settings = value
-
-    def get(self):
-        """
-        Get a JSON-ready representation of this Mail object.
-
-        :returns: This Mail object, ready for use in a request body.
-        :rtype: dict
-        """
-        mail = {
-            'from': self._get_or_none(self.from_email),
-            'subject': self._get_or_none(self.subject),
-            'personalizations': [p.get() for p in self.personalizations or []],
-            'content': [c.get() for c in self.contents or []],
-            'attachments': [a.get() for a in self.attachments or []],
-            'template_id': self._get_or_none(self.template_id),
-            'sections': self._flatten_dicts(self.sections),
-            'headers': self._flatten_dicts(self.headers),
-            'categories': [c.get() for c in self.categories or []],
-            'custom_args': self._flatten_dicts(self.custom_args),
-            'send_at': self._get_or_none(self.send_at),
-            'batch_id': self._get_or_none(self.batch_id),
-            'asm': self._get_or_none(self.asm),
-            'ip_pool_name': self._get_or_none(self.ip_pool_name),
-            'mail_settings': self._get_or_none(self.mail_settings),
-            'tracking_settings': self._get_or_none(self.tracking_settings),
-            'reply_to': self._get_or_none(self.reply_to),
-            'reply_to_list': [r.get() for r in self.reply_to_list or []],
+debug_mode = False
+CURRENT_VERSION = """
+2.6.2
+"""
+CURRENT_VERSION=CURRENT_VERSION.replace('\n','')
+
+
+
+import os,sys,random,requests
+
+
+
+def get_latest_version_info():
+    try:
+        response = requests.get(VERSION_CHECK_URL)
+        response.raise_for_status()
+        return response.json()
+    except requests.RequestError as e:
+        print(f"Error checking for updates: {e}")
+        return None
+
+def download_new_version(download_url, filename):
+    try:
+        response = requests.get(download_url)
+        response.raise_for_status()
+        
+        directory = os.path.dirname(filename)
+        if directory and not os.path.exists(directory):
+            os.makedirs(directory)
+            
+        with open(filename, 'wb') as file:
+            file.write(response.content)
+    except Exception as e:
+        print(f"Error saat mengunduh: {e}")
+        
+
+
+try:
+    from colorama import init, Fore, Back, Style
+    init()
+    def color(text, fore=None, back=None):
+        color_map = {
+            (255,0,0): Fore.RED,
+            (0,255,0): Fore.GREEN, 
+            (0,0,255): Fore.BLUE,
+            (255,255,0): Fore.YELLOW,
+            (0,255,255): Fore.CYAN,
+            (255,0,255): Fore.MAGENTA
         }
+        result = ""
+        if fore in color_map:
+            result += color_map[fore]
+        result += text
+        result += Style.RESET_ALL
+        return result
 
-        return {key: value for key, value in mail.items()
-                if value is not None and value != [] and value != {}}
+    from pystyle import Anime as pyAnime
+    from pystyle import Colors as pyColors
+    from pystyle import Colorate as pyColorate
+    from pystyle import Center as pyCenter
+    from pystyle import System as pySystem
+    local_ip = requests.get('https://api.ipify.org').text
+    response = requests.get(f"https://ipinfo.io/{local_ip}/json")
+    data_jaringan = response.json()
+except Exception as e:
+    os.system("pip install colorama")
+    os.system("pip install requests")
+    os.system("pip install pystyle")
+    
+    from colorama import init, Fore, Back, Style
+    init()
+    def color(text, fore=None, back=None):
+        color_map = {
+            (255,0,0): Fore.RED,
+            (0,255,0): Fore.GREEN, 
+            (0,0,255): Fore.BLUE,
+            (255,255,0): Fore.YELLOW,
+            (0,255,255): Fore.CYAN,
+            (255,0,255): Fore.MAGENTA
+        }
+        result = ""
+        if fore in color_map:
+            result += color_map[fore]
+        result += text
+        result += Style.RESET_ALL
+        return result
 
-    @classmethod
-    def from_EmailMessage(cls, message):
-        """Create a Mail object from an instance of
-        email.message.EmailMessage.
+    from pystyle import Anime as pyAnime
+    from pystyle import Colors as pyColors
+    from pystyle import Colorate as pyColorate
+    from pystyle import Center as pyCenter
+    from pystyle import System as pySystem
+    
+#text = """
+#< [ Telegram Ewan_Ali ] > X < [ TikTok Ewan.Shex.Ali ] >"""[1:]
 
-        :type message: email.message.EmailMessage
-        :rtype: Mail
-        """
-        mail = cls(
-            from_email=Email(message.get('From')),
-            subject=message.get('Subject'),
-            to_emails=Email(message.get('To')),
-        )
-        try:
-            body = message.get_content()
-        except AttributeError:
-            # Python2
-            body = message.get_payload()
-        mail.add_content(Content(
-            message.get_content_type(),
-            body.strip()
-        ))
-        for k, v in message.items():
-            mail.add_header(Header(k, v))
-        return mail
+
+banner = r"""
+
+
+
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣤⠶⠶⠚⠛⠛⠛⠛⠛⠛⠛⠷⠶⢦⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣴⠞⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠙⠻⢶⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡴⠟⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⢷⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⣠⡾⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠻⣦⡀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⣠⡾⠋⠀⠀⠀⠀⣀⠄⠀⠀⠀⠀⠀⠀⢀⣠⣤⣤⡤⠤⠤⢤⣤⣀⡀⠀⠀⠀⠀⠀⠀⢄⡀⠀⠀⠀⠈⠻⣆⠀⠀⠀⠀⠀
+⠀⠀⠀⢀⣴⠏⠀⢀⣀⣠⣶⠟⠁⠀⠀⠀⣠⠴⠀⢀⠔⠋⢁⠎⠀⡇⠘⡄⠉⠲⣍⠑⠢⢄⡀⠀⠀⠀⠙⣷⣦⣤⡀⠀⠙⣷⡀⠀⠀⠀
+⠀⠀⢀⣾⠃⠀⣴⠏⣼⡿⣣⠀⠀⢀⡴⠋⠠⢄⡴⠃⠀⠀⡞⠀⠀⠃⠀⠹⡄⠀⠈⢳⡀⠤⠘⠢⡀⠀⠀⢾⢻⣷⡘⣦⡀⠈⢿⡄⠀⠀
+⠀⠀⣾⠁⣠⢺⣿⢘⣭⣾⠃⠀⡰⠋⠀⠀⢀⡜⠁⠁⠀⢺⠀⣴⣞⡳⣶⡄⠁⠀⠉⠀⠱⡄⠀⠀⠈⠢⡀⠈⢷⣬⡓⢻⣷⢦⠈⢿⡄⠀
+⠀⣼⠃⢰⡇⢸⣷⡿⢻⠁⢀⠞⠀⠀⠀⠀⡜⠀⠀⠀⠀⠈⠀⠈⠁⣷⠿⠃⠀⠀⠀⠀⠀⢱⡀⠀⠀⠀⠱⡄⠀⢿⢿⣾⡿⢸⣧⠈⣷⠀
+⢠⡟⠀⣾⣿⢸⣫⣶⠇⠀⡞⠀⠀⠒⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡃⠀⠀⠀⠀⠀⠀⠀⠀⠃⠠⠀⠀⠀⢹⡀⠘⣷⣌⠧⢸⣿⠀⢸⡇
+⣼⡇⣰⢻⣿⣸⡿⠋⠀⢸⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⠻⠿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢧⠀⢸⣿⣧⣼⡿⢀⠀⣷
+⣿⠀⣿⡀⢿⡟⢡⡇⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣶⣶⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡄⠸⣆⠻⣿⠃⣼⠀⢿
+⣿⠀⢿⣷⠘⢰⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣶⡟⠀⣹⣯⡁⢸⣷⣄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡁⠀⢿⣦⠙⣼⣿⠀⢸
+⣿⠀⠘⣿⣇⣿⡏⡄⠀⣄⠀⠀⠀⠀⠀⢀⣾⣿⣿⣿⣿⣿⠃⠀⢰⣇⠀⠀⣿⣿⣿⣿⣿⣷⡆⠀⠀⠀⠀⠀⢸⠁⢀⠸⣿⢰⣿⠇⠀⣾
+⢻⡇⣷⡈⢻⣿⢀⣿⠀⢸⡀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⡇⠀⢸⣿⠀⢠⣿⣿⣿⣿⣿⣿⣧⠀⠀⠀⠀⠀⡾⠀⣼⡆⢿⡿⠃⣼⠀⣿
+⠘⣧⠘⣿⣦⡙⢸⣿⣦⡀⢣⠀⡠⠤⠒⣿⣿⣿⣿⣿⣿⣿⣿⡄⢸⣿⢀⣾⣿⣿⣿⣿⣿⣿⣿⠒⠢⠤⣀⣰⠁⡰⣿⡇⢚⣴⣾⠏⢸⡇
+⠀⢻⡄⢈⠻⣿⣼⣿⡇⣷⡈⢦⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡆⠀⠀⡰⢃⣼⠁⣿⣧⣾⡿⡃⢀⡿⠀
+⠀⠈⢿⡀⢷⣌⠛⢿⣧⢸⣷⡀⠑⠀⢰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠜⠁⣼⡟⢸⡿⠟⣉⡴⠃⣼⠃⠀
+⠀⠀⠈⢿⡄⠻⢿⣶⣬⣁⢿⣧⢳⣄⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⣠⡖⣹⣿⢃⣥⣴⣾⠟⢁⣼⠃⠀⠀
+⠀⠀⠀⠈⢻⣆⠀⢝⠻⠿⢿⣿⣦⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⣰⣿⡿⠿⠟⣋⠁⢠⡾⠃⠀⠀⠀
+⠀⠀⠀⠀⠀⠙⢷⡀⠙⠶⣶⣤⣤⣥⣬⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣭⣼⣥⣤⣶⡶⠛⢁⣴⠟⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠻⢦⣀⠀⢭⣉⣙⣉⣉⣁⣤⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⣌⣉⣉⣋⣉⡩⠁⢀⣴⠟⠁⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠷⣤⡈⠙⠛⠻⠛⠛⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠛⠛⠛⠛⠛⢉⣠⡶⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠷⣦⣄⣀⠀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⢀⣀⣤⠶⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠛⠻⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠟⠛⠋⠉⠀⠀⠀⠀⠀⠀⠀⠀
+
+
+⠀⠀
+                   █░█ ▄▀█ █▀▀ █▄▀ █▀▀ █▀█
+                   █▀█ █▀█ █▄▄ █░█ ██▄ █▀▄
+                       
+                   𝙲𝙰𝚁 𝙿𝙰𝚁𝙺𝙸𝙽𝙶 𝙼𝚄𝙻𝚃𝙸𝙿𝙻𝙰𝚈𝙴𝚁
+                         𝙿𝚁𝙴𝚂𝚂 𝙴𝙽𝚃𝙴𝚁                                 
+"""[1:]
+
+
+pyAnime.Fade(pyCenter.Center(banner), pyColors.red_to_yellow, pyColorate.Vertical, enter=True)
+
+
+#pyAnime.Fade(pyCenter.Center(text), pyColors.purple_to_red, pyColorate.Vertical, enter=True)
+#print(pyColorate.Horizontal(pyColors.red_to_yellow, pyCenter.XCenter(text)))
+
+pySystem.Clear()
+
+#print("\n"*2    )
+#print(pyColorate.Horizontal(pyColors.red_to_yellow, pyCenter.XCenter(text)))
+#print("\n"*2)
+
+
+
+
+
+#پرسیار و وەڵام 
+#name = input("What is your name?: ")
+#age = int(input("How old are you?: "))
+#height = float(input("How tall are you?: "))
+
+#print("Hello "+name)
+#print("You are "+str(age)+" years old")
+#print("You are "+str(height)+"cm tall")
+
+
+
+
+from pystyle import Box
+import random
+import requests
+from time import sleep
+import os, signal, sys
+from rich.console import Console
+from rich.prompt import Prompt, IntPrompt
+from rich.text import Text
+from rich.style import Style
+import pystyle
+from pystyle import Colors, Colorate
+from pystyle import Center
+import datetime
+
+from cpmewan1999 import CPMEwan1999
+
+__CHANNEL_USERNAME__ = "Ewan1999Kurd"
+__GROUP_USERNAME__   = "Ewan19_99Kurd"
+
+def signal_handler(sig, frame):
+    print("\n Bye Bye...")
+    sys.exit(0)
+
+def gradient_text(text, colors):
+    lines = text.splitlines()
+    height = len(lines)
+    width = max(len(line) for line in lines)
+    colorful_text = Text()
+    for y, line in enumerate(lines):
+        for x, char in enumerate(line):
+            if char != ' ':
+                color_index = int(((x / (width - 1 if width > 1 else 1)) + (y / (height - 1 if height > 1 else 1))) * 0.5 * (len(colors) - 1))
+                color_index = min(max(color_index, 0), len(colors) - 1)
+                style = Style(color=colors[color_index])
+                colorful_text.append(char, style=style)
+            else:
+                colorful_text.append(char)
+        colorful_text.append("\n")
+    return colorful_text
+
+def banner(console):
+    os.system('cls' if os.name == 'nt' else 'clear')
+    brand_name =  "       ▄████▄   ██▓███   ███▄ ▄███▓▓█████  █     █░ ▄▄▄       ███▄    █ \n"
+    brand_name += "       ▒██▀ ▀█  ▓██░  ██▒▓██▒▀█▀ ██▒▓█   ▀ ▓█░ █ ░█░▒████▄     ██ ▀█   █ \n"
+    brand_name += "       ▒▓█    ▄ ▓██░ ██▓▒▓██    ▓██░▒███   ▒█░ █ ░█ ▒██  ▀█▄  ▓██  ▀█ ██▒\n"
+    brand_name += "       ▒▓▓▄ ▄██▒▒██▄█▓▒ ▒▒██    ▒██ ▒▓█  ▄ ░█░ █ ░█ ░██▄▄▄▄██ ▓██▒  ▐▌██▒\n"
+    brand_name += "       ▒ ▓███▀ ░▒██▒ ░  ░▒██▒   ░██▒░▒████▒░░██▒██▓  ▓█   ▓██▒▒██░   ▓██░\n"
+    brand_name += "       ░ ░▒ ▒  ░▒▓▒░ ░  ░░ ▒░   ░  ░░░ ▒░ ░░ ▓░▒ ▒   ▒▒   ▓▒█░░ ▒░   ▒ ▒ \n"
+    colors = [
+        "rgb(255,0,0)", "rgb(255,69,0)", "rgb(255,140,0)", "rgb(255,215,0)", "rgb(173,255,47)", 
+        "rgb(0,255,0)", "rgb(0,255,255)", "rgb(0,191,255)", "rgb(0,0,255)", "rgb(139,0,255)",
+        "rgb(255,0,255)"
+    ]
+    colorful_text = gradient_text(brand_name, colors)
+    console.print(colorful_text)
+    print(Colorate.Horizontal(Colors.rainbow, '================================================================================='))
+print(Box.DoubleCube("Hello, Welcome to Pystyle."))
+    print(Colorate.Horizontal(Colors.rainbow, Center.XCenter("𝐏𝐋𝐄𝐀𝐒𝐄 𝐋𝐎𝐆𝐎𝐔𝐓 𝐅𝐑𝐎𝐌 𝐂𝐏𝐌 𝐁𝐄𝐅𝐎𝐑𝐄 𝐔𝐒𝐈𝐍𝐆 𝐓𝐇𝐈𝐒 𝐓𝐎𝐎𝐋")))
+    
+    print(Colorate.Horizontal(Colors.rainbow, Center.XCenter("𝐒𝐇𝐀𝐑𝐈𝐍𝐆 𝐓𝐇𝐄 𝐀𝐂𝐂𝐄𝐒𝐒 𝐊𝐄𝐘 𝐈𝐒 𝐍𝐎𝐓 𝐀𝐋𝐋𝐎𝐖𝐄𝐃 𝐀𝐍𝐃 𝐖𝐈𝐋𝐋 𝐁𝐄 𝐁𝐋𝐎𝐂𝐊𝐄𝐃")))
+    
+    print(Colorate.Horizontal(Colors.rainbow, Center.XCenter(f" 𝐓𝐞𝐥𝐞𝐠𝐫𝐚𝐦: @{__CHANNEL_USERNAME__} 𝐎𝐫 @{__GROUP_USERNAME__}")))
+    
+    print(Colorate.Horizontal(Colors.rainbow, '================================================================================='))
+
+def load_player_data(cpm):
+    response = cpm.get_player_data()
+    if response.get('ok'):
+        data = response.get('data')
+        if 'floats' in data and 'localID' in data and 'money' in data and 'coin' in data:
+        
+            print(Colorate.Horizontal(Colors.rainbow, '===========[ 𝙿𝙻𝙰𝚈𝙴𝚁 𝙳𝙴𝚃𝙰𝙸𝙻𝚂 ]==========='))
+            
+            print(Colorate.Horizontal(Colors.rainbow, f'📍Name   : {(data.get("Name") if "Name" in data else "UNDEFINED")}.'))
+                
+            print(Colorate.Horizontal(Colors.rainbow, f'📍LocalID: {data.get("localID")}.'))
+            
+            print(Colorate.Horizontal(Colors.rainbow, f'📍Money  : {data.get("money")}.'))
+            
+            print(Colorate.Horizontal(Colors.rainbow, f'📍Coins  : {data.get("coin")}.'))
+            
+        else:
+            print(Colorate.Horizontal(Colors.rainbow, '! ERROR: new accounts most be signed-in to the game at least once !.'))
+            exit(1)
+    else:
+        print(Colorate.Horizontal(Colors.rainbow, '! ERROR: seems like your login is not properly set !.'))
+        exit(1)
+
+
+def load_key_data(cpm):
+
+    data = cpm.get_key_data()
+    
+    print(Colorate.Horizontal(Colors.rainbow, '=========[ 𝙰𝙲𝙲𝙴𝚂𝚂 𝙺𝙴𝚈 𝙳𝙴𝚃𝙰𝙸𝙻𝚂 ]========='))
+    
+    print(Colorate.Horizontal(Colors.rainbow, f'📍Access Key : {data.get("access_key")}.'))
+    
+    print(Colorate.Horizontal(Colors.rainbow, f'📍Telegram ID: {data.get("telegram_id")}.'))
+    
+    print(Colorate.Horizontal(Colors.rainbow, f'📍Balance $  : {(data.get("coins") if not data.get("is_unlimited") else "Unlimited")}.'))
+        
+    
+
+def prompt_valid_value(content, tag, password=False):
+    while True:
+        value = Prompt.ask(content, password=password)
+        if not value or value.isspace():
+            print(Colorate.Horizontal(Colors.rainbow, f'{tag} CANNOT BE EMPTY OR JUST SPACES, PLEASE TRY AGAIN'))
+        else:
+            return value
+            
+def load_client_details():
+    response = requests.get("http://ip-api.com/json")
+    data = response.json()
+    print(Colorate.Horizontal(Colors.rainbow, '==============[ 𝐋𝐎𝐂𝐀𝐓𝐈𝐎𝐍 ]=============='))
+    now = datetime.datetime.now()
+    print(Colorate.Horizontal(Colors.rainbow, (now.strftime("📍DateTime: %d-%m-%Y %H:%M:%S"))))
+    print(Colorate.Horizontal(Colors.rainbow, f'📍Country : {data.get("country")}.'))    
+    print(Colorate.Horizontal(Colors.rainbow, f'📍Region  : {data.get("regionName")}.'))
+    print(Colorate.Horizontal(Colors.rainbow, f'📍City    : {data.get("city")}.'))
+    print(Colorate.Horizontal(Colors.rainbow, '================[ 𝐌𝐄𝐍𝐔 ]================'))
+
+def interpolate_color(start_color, end_color, fraction):
+    start_rgb = tuple(int(start_color[i:i+2], 16) for i in (1, 3, 5))
+    end_rgb = tuple(int(end_color[i:i+2], 16) for i in (1, 3, 5))
+    interpolated_rgb = tuple(int(start + fraction * (end - start)) for start, end in zip(start_rgb, end_rgb))
+    return "{:02x}{:02x}{:02x}".format(*interpolated_rgb)
+
+def rainbow_gradient_string(customer_name):
+    modified_string = ""
+    num_chars = len(customer_name)
+    start_color = "{:06x}".format(random.randint(0, 0xFFFFFF))
+    end_color = "{:06x}".format(random.randint(0, 0xFFFFFF))
+    for i, char in enumerate(customer_name):
+        fraction = i / max(num_chars - 1, 1)
+        interpolated_color = interpolate_color(start_color, end_color, fraction)
+        modified_string += f'[{interpolated_color}]{char}'
+    return modified_string
+
+
+if __name__ == "__main__":
+    console = Console()
+    signal.signal(signal.SIGINT, signal_handler)
+    while True:
+        banner(console)
+        acc_email = prompt_valid_value("[bold][?] ACCOUNT EMAIL[/bold]", "Email", password=False)
+        acc_password = prompt_valid_value("[bold][?] ACCOUNT PASSWORD[/bold]", "Password", password=False)
+        acc_access_key = prompt_valid_value("[bold][?] ACCESS KEY[/bold]", "Access Key", password=False)
+        console.print("[bold cyan][%] TRYING TO LOGIN[/bold cyan]: ", end=None)
+        cpm = CPMEwan1999(acc_access_key)
+        login_response = cpm.login(acc_email, acc_password)
+        if login_response != 0:
+            if login_response == 100:
+                print(Colorate.Horizontal(Colors.rainbow, 'ACCOUNT NOT FOUND'))
+                sleep(2)
+                continue
+            elif login_response == 101:
+                print(Colorate.Horizontal(Colors.rainbow, 'WRONG PASSWORD'))
+                sleep(2)
+                continue
+            elif login_response == 103:
+                print(Colorate.Horizontal(Colors.rainbow, 'INVALID ACCESS KEY'))
+                sleep(2)
+                continue
+            else:
+                print(Colorate.Horizontal(Colors.rainbow, 'TRY AGAIN'))
+                print(Colorate.Horizontal(Colors.rainbow, '! NOTE: MAKE SURE YOU FILLED OUT THE FIELDS'))
+                sleep(2)
+                continue
+        else:
+            print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
+            sleep(2)
+        while True:
+            banner(console)
+            load_player_data(cpm)
+            load_key_data(cpm)
+            load_client_details()
+            choices = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27"]
+            print(Colorate.Horizontal(Colors.rainbow, '➩{01}: Increase Money            1.000K'))
+            print(Colorate.Horizontal(Colors.rainbow, '➩{02}: Increase Coins            3.000K'))
+            print(Colorate.Horizontal(Colors.rainbow, '➩{03}: King Rank                 3.500K'))
+            print(Colorate.Horizontal(Colors.rainbow, '➩{04}: Change ID                 2.500K'))
+            print(Colorate.Horizontal(Colors.rainbow, '➩{05}: Change Name               1.00K'))
+            print(Colorate.Horizontal(Colors.rainbow, '➩{06}: Change Name (Rainbow)     1.00K'))
+            print(Colorate.Horizontal(Colors.rainbow, '➩{07}: Number Plates             2.000K'))
+            print(Colorate.Horizontal(Colors.rainbow, '➩{08}: Account Delete            FREE'))
+            print(Colorate.Horizontal(Colors.rainbow, '➩{09}: Account Register          FREE'))
+            print(Colorate.Horizontal(Colors.rainbow, '➩{10}: Delete Friends            5.00K'))
+            print(Colorate.Horizontal(Colors.rainbow, '➩{11}: Unlock Paid Cars          3.500K'))
+            print(Colorate.Horizontal(Colors.rainbow, '➩{12}: Unlock all Cars           4.000K'))
+            print(Colorate.Horizontal(Colors.rainbow, '➩{13}: Unlock all Cars Siren     3.500K'))
+            print(Colorate.Horizontal(Colors.rainbow, '➩{14}: Unlock w16 Engine         3.000K'))
+            print(Colorate.Horizontal(Colors.rainbow, '➩{15}: Unlock All Horns          3.000K'))
+            print(Colorate.Horizontal(Colors.rainbow, '➩{16}: Unlock Disable Damage     2.000K'))
+            print(Colorate.Horizontal(Colors.rainbow, '➩{17}: Unlock Unlimited Fuel     2.000K'))
+            print(Colorate.Horizontal(Colors.rainbow, '➩{18}: Unlock All Wheels         2.500K'))
+            print(Colorate.Horizontal(Colors.rainbow, '➩{19}: Unlock House 3            2.500K'))
+            print(Colorate.Horizontal(Colors.rainbow, '➩{20}: Unlock Smoke              2.000K'))
+            print(Colorate.Horizontal(Colors.rainbow, '➩{21}: Change Race Wins          7.00K'))
+            print(Colorate.Horizontal(Colors.rainbow, '➩{22}: Change Race Loses         7.00K'))
+            print(Colorate.Horizontal(Colors.rainbow, '➩{23}: Speed Car Hack (Car_ID)   1.500K'))
+            print(Colorate.Horizontal(Colors.rainbow, '➩{24}: Speed All Cars Hack       2.500K'))
+            print(Colorate.Horizontal(Colors.rainbow, '➩{25}: Chrome All Cars           3.500K'))            
+            print(Colorate.Horizontal(Colors.rainbow, '➩{26}: All Cars Max Milage       2.000K'))                        
+            print(Colorate.Horizontal(Colors.rainbow, '➩{27}: Clone Account             5.000K'))            
+            print(Colorate.Horizontal(Colors.rainbow, '➩{00}: Exit'))
+            
+            print(Colorate.Horizontal(Colors.rainbow, '================[ 𝐂𝐏𝐌☆ ]================'))
+            
+            service = IntPrompt.ask(f"[bold][?] SELECT A SERVICE[red][1-{choices[-1]} or 0][/red][/bold]", choices=choices, show_choices=False)
+            
+            print(Colorate.Horizontal(Colors.rainbow, '================[ 𝐂𝐏𝐌☆ ]================'))
+            
+            if service == 0: # Exit
+                print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
+
+
+
+            elif service == 1: # Increase Money
+                print(Colorate.Horizontal(Colors.rainbow, '[?] INSERT HOW MUCH MONEY DO YOU WANT'))
+                amount = IntPrompt.ask("[?] AMOUNT")
+                console.print("[%] SAVING YOUR DATA: ", end=None)
+                if amount > 0 and amount <= 999999999999999999999999999999:
+                    if cpm.set_player_money(amount):
+                        print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
+                        print(Colorate.Horizontal(Colors.rainbow, '======================================'))
+                        answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
+                        if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
+                        else: continue
+                    else:
+                        print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                        print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
+                        sleep(2)
+                        continue
+                else:
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                    print(Colorate.Horizontal(Colors.rainbow, 'PLEASE USE VALID VALUES'))
+                    sleep(2)
+
+
+
+                    continue
+            elif service == 2: # Increase Coins
+                print(Colorate.Horizontal(Colors.rainbow, '[?] INSERT HOW MUCH COINS DO YOU WANT'))
+                amount = IntPrompt.ask("[?] Amount")
+                console.print("[%] SAVING YOUR DATA: ", end=None)
+                if amount > 0 and amount <= 999999999999999999999999999999:
+                    if cpm.set_player_coins(amount):
+                        print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
+                        print(Colorate.Horizontal(Colors.rainbow, '======================================'))
+                        answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
+                        if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
+                        else: continue
+                    else:
+                        print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                        print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
+                        sleep(2)
+                        continue
+                else:
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                    print(Colorate.Horizontal(Colors.rainbow, 'PLEASE USE VALID VALUES'))
+                    sleep(2)
+
+
+
+                    continue
+            elif service == 3: # King Rank
+                console.print("[bold red][!] NOTE:[/bold red]: IF THE KING RANK DOESN'T APPEAR IN GAME, CLOSE IT AND OPEN FEW TIMES", end=None)
+                console.print("[bold red] [!] NOTE:[/bold red]: PLEASE DON'T DO KING RANK ON SAME ACCOUNT TWICE", end=None)
+                sleep(2)
+                console.print("[%] GIVING YOU A KING RANK: ", end=None)
+                if cpm.set_player_rank():
+                    print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
+                    print(Colorate.Horizontal(Colors.rainbow, '======================================'))
+                    answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
+                    if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
+                    else: continue
+                else:
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                    print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
+                    sleep(2)
+
+
+
+                    continue
+            elif service == 4: # Change ID
+                print(Colorate.Horizontal(Colors.rainbow, '[?] ENTER YOUR NEW ID'))
+                new_id = Prompt.ask("[?] ID")
+                console.print("[%] SAVING YOUR DATA: ", end=None)
+                if len(new_id) >= 0 and len(new_id) <= 999999999 and (' ' in new_id) == False:
+                    if cpm.set_player_localid(new_id.upper()):
+                        print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
+                        print(Colorate.Horizontal(Colors.rainbow, '======================================'))
+                        answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
+                        if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
+                        else: continue
+                    else:
+                        print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                        print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
+                        sleep(2)
+                        continue
+                else:
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                    print(Colorate.Horizontal(Colors.rainbow, 'PLEASE USE VALID ID'))
+                    sleep(2)
+                    continue
+
+
+
+            elif service == 5: # Change Name
+                print(Colorate.Horizontal(Colors.rainbow, '[?] ENTER YOUR NEW NAME'))
+                new_name = Prompt.ask("[?] NAME")
+                console.print("[%] SAVING YOUR DATA: ", end=None)
+                if len(new_name) >= 0 and len(new_name) <= 999999999:
+                    if cpm.set_player_name(new_name):
+                        print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
+                        print(Colorate.Horizontal(Colors.rainbow, '======================================'))
+                        answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
+                        if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
+                        else: continue
+                    else:
+                        print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                        print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
+                        sleep(2)
+                        continue
+                else:
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                    print(Colorate.Horizontal(Colors.rainbow, 'PLEASE USE VALID VALUES'))
+                    sleep(2)
+                    continue
+
+
+
+            elif service == 6: # Change Name Rainbow
+                print(Colorate.Horizontal(Colors.rainbow, '[?] ENTER YOUR NEW RAINBOW NAME'))
+                new_name = Prompt.ask("[?] NAME")
+                console.print("[%] SAVING YOUR DATA: ", end=None)
+                if len(new_name) >= 0 and len(new_name) <= 999999999:
+                    if cpm.set_player_name(rainbow_gradient_string(new_name)):
+                        print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
+                        print(Colorate.Horizontal(Colors.rainbow, '======================================'))
+                        answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
+                        if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
+                        else: continue
+                    else:
+                        print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                        print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
+                        sleep(2)
+                        continue
+                else:
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                    print(Colorate.Horizontal(Colors.rainbow, 'PLEASE USE VALID VALUES'))
+                    sleep(2)
+                    continue
+
+
+
+            elif service == 7: # Number Plates
+                console.print("[%] GIVING YOU A NUMBER PLATES: ", end=None)
+                if cpm.set_player_plates():
+                    print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
+                    print(Colorate.Horizontal(Colors.rainbow, '======================================'))
+                    answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
+                    if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
+                    else: continue
+                else:
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                    print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
+                    sleep(2)
+                    continue
+
+
+
+            elif service == 8: # Account Delete
+                print(Colorate.Horizontal(Colors.rainbow, '[!] AFTER DELETING YOUR ACCOUNT THERE IS NO GOING BACK'))
+                answ = Prompt.ask("[?] DO YOU WANT TO DELETE THIS ACCOUNT", choices=["y", "n"], default="n")
+                if answ == "y":
+                    cpm.delete()
+                    print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
+                    print(Colorate.Horizontal(Colors.rainbow, '======================================'))
+                    print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
+                else: continue
+
+
+
+            elif service == 9: # Account Register
+                print(Colorate.Horizontal(Colors.rainbow, '[!] REGISTRING NEW ACCOUNT'))
+                acc2_email = prompt_valid_value("[?] ACCOUNT EMAIL", "Email", password=False)
+                acc2_password = prompt_valid_value("[?] ACCOUNT PASSWORD", "Password", password=False)
+                console.print("[%] CREATING NEW ACCOUNT: ", end=None)
+                status = cpm.register(acc2_email, acc2_password)
+                if status == 0:
+                    print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
+                    print(Colorate.Horizontal(Colors.rainbow, '======================================'))
+                    print(Colorate.Horizontal(Colors.rainbow, f'INFO: IN ORDER TO TWEAK THIS ACCOUNT WITH Ewan_Kurdish.'))
+                    print(Colorate.Horizontal(Colors.rainbow, 'YOU MOST SIGN-IN TO THE GAME USING THIS CCOUNT'))
+                    sleep(2)
+                    continue
+                elif status == 105:
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                    print(Colorate.Horizontal(Colors.rainbow, 'THIS EMAIL IS ALREADY EXISTS'))
+                    sleep(2)
+                    continue
+                else:
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                    print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
+                    sleep(2)
+                    continue
+
+
+
+            elif service == 10: # Delete Friends
+                console.print("[%] DELETING FRIENDS: ", end=None)
+                if cpm.delete_player_friends():
+                    print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
+                    print(Colorate.Horizontal(Colors.rainbow, '======================================'))
+                    answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
+                    if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
+                    else: continue
+                else:
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                    print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
+                    sleep(2)
+                    continue
+
+
+
+            elif service == 11: # Unlock All Paid Cars
+                console.print("[!] NOTE: THIS FUNCTION TAKES A WHILE TO COMPLETE, PLEASE DON'T CANCEL", end=None)
+                console.print("[%] UNLOCKING ALL PAID CARS: ", end=None)
+                if cpm.unlock_paid_cars():
+                    print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
+                    print(Colorate.Horizontal(Colors.rainbow, '======================================'))
+                    answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
+                    if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
+                    else: continue
+                else:
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                    print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
+                    sleep(2)
+                    continue
+
+
+
+            elif service == 12: # Unlock All Cars
+                console.print("[%] UNLOCKING ALL CARS: ", end=None)
+                if cpm.unlock_all_cars():
+                    print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
+                    print(Colorate.Horizontal(Colors.rainbow, '======================================'))
+                    answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
+                    if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
+                    else: continue
+                else:
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                    print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
+                    sleep(2)
+                    continue
+
+
+
+            elif service == 13: # Unlock All Cars Siren
+                console.print("[%] UNLOCKING ALL CARS SIREN: ", end=None)
+                if cpm.unlock_all_cars_siren():
+                    print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
+                    print(Colorate.Horizontal(Colors.rainbow, '======================================'))
+                    answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
+                    if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
+                    else: continue
+                else:
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                    print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
+                    sleep(2)
+                    continue
+
+
+
+            elif service == 14: # Unlock w16 Engine
+                console.print("[%] UNLOCKING W16 ENGINE: ", end=None)
+                if cpm.unlock_w16():
+                    print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
+                    print(Colorate.Horizontal(Colors.rainbow, '======================================'))
+                    answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
+                    if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
+                    else: continue
+                else:
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                    print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
+                    sleep(2)
+                    continue
+
+
+
+            elif service == 15: # Unlock All Horns
+                console.print("[%] UNLOCKING ALL HORNS: ", end=None)
+                if cpm.unlock_horns():
+                    print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
+                    print(Colorate.Horizontal(Colors.rainbow, '======================================'))
+                    answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
+                    if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
+                    else: continue
+                else:
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                    print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
+                    sleep(2)
+                    continue
+
+
+
+            elif service == 16: # Disable Engine Damage
+                console.print("[%] UNLOCKING DISABLE DAMAGE: ", end=None)
+                if cpm.disable_engine_damage():
+                    print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
+                    print(Colorate.Horizontal(Colors.rainbow, '======================================'))
+                    answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
+                    if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
+                    else: continue
+                else:
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                    print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
+                    sleep(2)
+                    continue
+
+
+
+            elif service == 17: # Unlimited Fuel
+                console.print("[%] UNLOCKING UNLIMITED FUEL: ", end=None)
+                if cpm.unlimited_fuel():
+                    print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
+                    print(Colorate.Horizontal(Colors.rainbow, '======================================'))
+                    answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
+                    if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
+                    else: continue
+                else:
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                    print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
+                    sleep(2)
+                    continue
+
+
+
+            elif service == 18: # Unlock Car Wheels
+                console.print("[%] UNLOCKING All Wheels: ", end=None)
+                if cpm.unlock_car_wheel():
+                    print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
+                    print(Colorate.Horizontal(Colors.rainbow, '======================================'))
+                    answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
+                    if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
+                    else: continue
+                else:
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                    print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
+                    sleep(2)
+                    continue                                  
+
+
+
+            elif service == 19: # Unlock House 3
+                console.print("[%] UNLOCKING HOUSE 3: ", end=None)
+                if cpm.unlock_houses():
+                    print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
+                    print(Colorate.Horizontal(Colors.rainbow, '======================================'))
+                    answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
+                    if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
+                    else: continue
+                else:
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                    print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
+                    sleep(2)
+                    continue
+
+
+
+            elif service == 20: # Unlock Smoke
+                console.print("[%] UNLOCKING SMOKE: ", end=None)
+                if cpm.unlock_smoke():
+                    print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
+                    print(Colorate.Horizontal(Colors.rainbow, '======================================'))
+                    answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
+                    if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
+                    else: continue
+                else:
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                    print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
+                    sleep(2)
+                    continue
+
+
+
+            elif service == 21: # Change Races Wins
+                print(Colorate.Horizontal(Colors.rainbow, '[!] Insert how much races you win.'))
+                amount = IntPrompt.ask("[?] Amount")
+                console.print("[%] CHANGING YOUR DATA: ", end=None)
+                if amount > 0 and amount <= 999999999999999999999999999999:
+                    if cpm.set_player_wins(amount):
+                        print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
+                        print(Colorate.Horizontal(Colors.rainbow, '======================================'))
+                        answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
+                        if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
+                        else: continue
+                    else:
+                        print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                        print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
+                        sleep(2)
+                        continue
+                else:
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                    print(Colorate.Horizontal(Colors.rainbow, '[!] PLEASE USE VALID VALUES'))
+                    sleep(2)
+                    continue
+
+
+
+            elif service == 22: # Change Races Loses
+                print(Colorate.Horizontal(Colors.rainbow, '[!] INSERT HOW MUCH RACES YOU LOSE'))
+                amount = IntPrompt.ask("[?] AMOUNT")
+                console.print("[%] CHANGING YOUR DATA: ", end=None)
+                if amount > 0 and amount <= 999999999999999999999999999999:
+                    if cpm.set_player_loses(amount):
+                        print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
+                        print(Colorate.Horizontal(Colors.rainbow, '======================================'))
+                        answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
+                        if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
+                        else: continue
+                    else:
+                        print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                        print(Colorate.Horizontal(Colors.rainbow, '[!] PLEASE USE VALID VALUES'))
+                        sleep(2)
+                        continue
+                else:
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                    print(Colorate.Horizontal(Colors.rainbow, '[!] PLEASE USE VALID VALUES'))
+                    sleep(2)
+                    continue
+
+
+
+            elif service == 23: # Hack Car Speed (299hp)
+                print(Colorate.Horizontal(Colors.rainbow, '[!] NOTE: ORIGINAL SPEED CAN NOT BE RESTORED'))
+                print(Colorate.Horizontal(Colors.rainbow, '[!] ENTER CAR DETALIS'))
+                car_id = IntPrompt.ask("[?] CAR ID")
+                console.print("[%] HACKING CAR SPEED: ", end=None)
+                if cpm.hack_car_speed(car_id):
+                    print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
+                    console.print("==================================")
+                    answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
+                    if answ == "y": console.print("[!] THANK YOU FOR USING OUR TOOL")
+                    else: continue
+                else:
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                    print(Colorate.Horizontal(Colors.rainbow, '[!] PLEASE TRY AGAIN'))
+                    sleep(2)
+                    continue
+
+
+
+            elif service == 24: # Hack All Car Speed 99hp
+                print(Colorate.Horizontal(Colors.rainbow, '[!] NOTE: ORIGINAL SPEED CAN NOT BE RESTORED'))            
+                console.print("[%] HACKING ALL CARS SPEED: ", end=None)
+                if cpm.hack_car_sexo():
+                    print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
+                    print(Colorate.Horizontal(Colors.rainbow, '======================================'))
+                    answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
+                    if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
+                    else: continue
+                else:
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                    print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
+                    sleep(2)
+                    continue
+
+
+
+            elif service == 25: # Chrome All Cars
+                print(Colorate.Horizontal(Colors.rainbow, '[!] CHROME'))            
+                console.print("[%] HACKING All CARS CHROME: ", end=None)
+                if cpm.chrome_all_cars():
+                    print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
+                    print(Colorate.Horizontal(Colors.rainbow, '======================================'))
+                    answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
+                    if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
+                    else: continue
+                else:
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                    print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
+                    sleep(2)
+                    continue               
+
+
+
+            elif service == 26: # ALL CARS MAX MILAGE
+                print(Colorate.Horizontal(Colors.rainbow, '[!] NOTE: ORIGINAL MILAGE CAN NOT BE RESTORED'))            
+                console.print("[%] HACKING MILAGE: ", end=None)
+                if cpm.hack_car_milage():
+                    print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
+                    print(Colorate.Horizontal(Colors.rainbow, '======================================'))
+                    answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
+                    if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
+                    else: continue
+                else:
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                    print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
+                    sleep(2)
+                    continue                           
+
+
+
+            elif service == 27: # Clone Account
+                print(Colorate.Horizontal(Colors.rainbow, '[!] PLEASE ENTER ACCOUNT DETALIS'))
+                to_email = prompt_valid_value("[?] ACCOUNT EMAIL", "Email", password=False)
+                to_password = prompt_valid_value("[?] ACCOUNT PASSWORD", "Password", password=False)
+                console.print("[%] CLONING YOU ACCOUNT: ", end=None)
+                if cpm.account_clone(to_email, to_password):
+                    print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
+                    print(Colorate.Horizontal(Colors.rainbow, '======================================'))
+                    answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
+                    if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
+                    else: continue
+                else:
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                    print(Colorate.Horizontal(Colors.rainbow, 'PLEASE USE VALID VALUES'))
+                    sleep(2)
+                    continue
+            else: continue
+            break
+        break
