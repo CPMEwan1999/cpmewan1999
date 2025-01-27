@@ -270,7 +270,8 @@ def load_client_details():
     data = response.json()
     print(Colorate.Horizontal(Colors.rainbow, '─════════════════════════════[ 𝖫𝖮𝖢𝖠𝖳𝖨𝖮𝖭 ]═════════════════════════════─'))
     now = datetime.datetime.now()
-print(Colorate.Horizontal(Colors.rainbow, Center.XCenter(Box.DoubleCube('DateTime: %d-%m-%Y %H:%M:%S <> Country: {data.get("country")} <> Region: {data.get("regionName")} <> City: {data.get("city")}'))))
+print(Colorate.Horizontal(Colors.rainbow, Center.XCenter(Box.DoubleCube(f'DateTime: %d-%m-%Y %H:%M:%S <> Country: {data.get("country")} <> Region: {data.get("regionName")} <> City: {data.get("city")}'))))
+    print(Colorate.Horizontal(Colors.rainbow, '─════════════════════════════[ 𝖬𝖤𝖭𝖴 ]═════════════════════════════─'))
 
 def interpolate_color(start_color, end_color, fraction):
     start_rgb = tuple(int(start_color[i:i+2], 16) for i in (1, 3, 5))
