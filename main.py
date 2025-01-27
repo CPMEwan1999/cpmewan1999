@@ -247,6 +247,9 @@ def load_player_data(cpm):
 
 
 def load_key_data(cpm):
+def load_client_details():
+    response = requests.get("http://ip-api.com/json")
+    data = response.json()
 
     data = cpm.get_key_data()
     
