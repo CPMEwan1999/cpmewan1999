@@ -269,8 +269,7 @@ def load_client_details():
     response = requests.get("http://ip-api.com/json")
     data = response.json()
     print(Colorate.Horizontal(Colors.rainbow, '─═════════════[ 𝐋𝐎𝐂𝐀𝐓𝐈𝐎𝐍 ]═════════════─'))
-    now = datetime.datetime.now()
-    print(Colorate.Horizontal(Colors.rainbow, Center.XCenter(Box.DoubleCube(f'DateTime: %d-%m-%Y %H:%M:%S <> Country : {data.get("country")} <> Region: {data.get("regionName")} <> City: {data.get("city")}'))
+    print(Colorate.Horizontal(Colors.rainbow, Center.XCenter(Box.DoubleCube(f'Country : {data.get("country")} <> Region: {data.get("regionName")} <> City: {data.get("city")}'))
     
     print(Colorate.Horizontal(Colors.rainbow, '─═══════════════[ 𝐌𝐄𝐍𝐔 ]═══════════════─'))
 
