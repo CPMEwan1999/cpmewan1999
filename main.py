@@ -247,14 +247,12 @@ def load_player_data(cpm):
 
 
 def load_key_data(cpm):
-def load_client_details():
-    response = requests.get("http://ip-api.com/json")
-    data = response.json()
+
     data = cpm.get_key_data()
     
     print(Colorate.Horizontal(Colors.rainbow, '─════════════════════════════[ 𝖠𝖢𝖢𝖤𝖲𝖲 𝖪𝖤𝖸 𝖣𝖤𝖳𝖠𝖨𝖫𝖲 ]═════════════════════════════─'))
     
-    print(Colorate.Horizontal(Colors.rainbow, Center.XCenter(Box.DoubleCube(f'Access Key: {data.get("access_key")} <> Telegram ID: {data.get("telegram_id")} <> Balance: {(data.get("coins") if not data.get("is_unlimited") else "Unlimited")}\n\nCountry: {data.get("country")} <> Region: {data.get("regionName")} <> City: {data.get("city")}''))))
+    print(Colorate.Horizontal(Colors.rainbow, Center.XCenter(Box.DoubleCube(f'Access Key: {data.get("access_key")} <> Telegram ID: {data.get("telegram_id")} <> Balance: {(data.get("coins") if not data.get("is_unlimited") else "Unlimited")} <> Country : {data.get("country")}.'))))
     
         
     
@@ -267,6 +265,16 @@ def prompt_valid_value(content, tag, password=False):
         else:
             return value
             
+def load_client_details():
+    response = requests.get("http://ip-api.com/json")
+    data = response.json()
+    print(Colorate.Horizontal(Colors.rainbow, '─═════════════[ 𝐋𝐎𝐂𝐀𝐓𝐈𝐎𝐍 ]═════════════─'))
+    now = datetime.datetime.now()
+    print(Colorate.Horizontal(Colors.rainbow, (now.strftime("📍DateTime: %d-%m-%Y %H:%M:%S"))))
+    print(Colorate.Horizontal(Colors.rainbow, f'📍Country : {data.get("country")}.'))    
+    print(Colorate.Horizontal(Colors.rainbow, f'📍Region  : {data.get("regionName")}.'))
+    print(Colorate.Horizontal(Colors.rainbow, f'📍City    : {data.get("city")}.'))
+    print(Colorate.Horizontal(Colors.rainbow, '─═══════════════[ 𝐌𝐄𝐍𝐔 ]═══════════════─'))
 
 def interpolate_color(start_color, end_color, fraction):
     start_rgb = tuple(int(start_color[i:i+2], 16) for i in (1, 3, 5))
