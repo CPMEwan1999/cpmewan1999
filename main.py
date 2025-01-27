@@ -268,9 +268,9 @@ def prompt_valid_value(content, tag, password=False):
 def load_client_details():
     response = requests.get("http://ip-api.com/json")
     data = response.json()
-    print(Colorate.Horizontal(Colors.rainbow, Center.XCenter('─═════════════[ 𝖫𝖮𝖢𝖠𝖳𝖨𝖮𝖭 ]═════════════─')))
+    print(Colorate.Horizontal(Colors.rainbow, Center.XCenter('─════════════════[ 𝖫𝖮𝖢𝖠𝖳𝖨𝖮𝖭 ]════════════════─')))
     print(Colorate.Horizontal(Colors.rainbow, Center.XCenter(f'Country: {data.get("country")} <> Region: {data.get("regionName")} <> City: {data.get("city")}')))
-    print(Colorate.Horizontal(Colors.rainbow, Center.XCenter('─═════════════[ 𝖬𝖤𝖭𝖴 ]═════════════─')))
+    print(Colorate.Horizontal(Colors.rainbow, '─════════════════════════════════════[ 𝖬𝖤𝖭𝖴 ]════════════════════════════════════─'))
 
 def interpolate_color(start_color, end_color, fraction):
     start_rgb = tuple(int(start_color[i:i+2], 16) for i in (1, 3, 5))
