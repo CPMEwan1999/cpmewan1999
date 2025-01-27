@@ -238,9 +238,8 @@ def load_player_data(cpm):
             
             print(Colorate.Horizontal(Colors.rainbow, f'📍Name   : {(data.get("Name") if "Name" in data else "UNDEFINED")}.'))
                 
-print(Colorate.Horizontal(Colors.rainbow, f'📍LocalID: {data.get("localID")} Money : {data.get("money")} : {data.get("coin")}'))
-            
-        else:
+            print(Colorate.Horizontal(Colors.rainbow, f'📍LocalID: {data.get("localID")} Money : {data.get("money")} : {data.get("coin")}'))
+            else:
             print(Colorate.Horizontal(Colors.rainbow, '! ERROR: new accounts most be signed-in to the game at least once !.'))
             exit(1)
     else:
