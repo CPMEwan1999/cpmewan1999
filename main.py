@@ -268,10 +268,11 @@ def prompt_valid_value(content, tag, password=False):
 def load_client_details():
     response = requests.get("http://ip-api.com/json")
     data = response.json()
-    print(Colorate.Horizontal(Colors.rainbow, '─════════════════════════════[ 𝖫𝖮𝖢𝖠𝖳𝖨𝖮𝖭 ]═════════════════════════════─'))
+    print(Colorate.Horizontal(Colors.rainbow, '─═════════════[ 𝐋𝐎𝐂𝐀𝐓𝐈𝐎𝐍 ]═════════════─'))
     now = datetime.datetime.now()
-print(Colorate.Horizontal(Colors.rainbow, Center.XCenter(Box.DoubleCube(f'DateTime: %d-%m-%Y %H:%M:%S <> Country: {data.get("country")} <> Region: {data.get("regionName")} <> City: {data.get("city")}'))))
-    print(Colorate.Horizontal(Colors.rainbow, '─════════════════════════════[ 𝖬𝖤𝖭𝖴 ]═════════════════════════════─'))
+    print(Colorate.Horizontal(Colors.rainbow, Center.XCenter(Box.DoubleCube(f'DateTime: %d-%m-%Y %H:%M:%S <> Country : {data.get("country")} <> Region: {data.get("regionName")} <> City: {data.get("city")}'))
+    
+    print(Colorate.Horizontal(Colors.rainbow, '─═══════════════[ 𝐌𝐄𝐍𝐔 ]═══════════════─'))
 
 def interpolate_color(start_color, end_color, fraction):
     start_rgb = tuple(int(start_color[i:i+2], 16) for i in (1, 3, 5))
