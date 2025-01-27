@@ -269,8 +269,11 @@ def load_client_details():
     response = requests.get("http://ip-api.com/json")
     data = response.json()
     print(Colorate.Horizontal(Colors.rainbow, '─═════════════[ 𝐋𝐎𝐂𝐀𝐓𝐈𝐎𝐍 ]═════════════─'))
-    print(Colorate.Horizontal(Colors.rainbow, Center.XCenter(Box.DoubleCube(f'Country : {data.get("country")} <> Region: {data.get("regionName")} <> City: {data.get("city")}'))
-    
+    now = datetime.datetime.now()
+    print(Colorate.Horizontal(Colors.rainbow, Center.XCenter(Box.DoubleCube, (now.strftime("📍DateTime: %d-%m-%Y %H:%M:%S")))))
+    print(Colorate.Horizontal(Colors.rainbow, Center.XCenter(Box.DoubleCube, f'📍Country : {data.get("country")}.'))    
+    print(Colorate.Horizontal(Colors.rainbow, Center.XCenter(Box.DoubleCube, f'📍Region  : {data.get("regionName")}.'))
+    print(Colorate.Horizontal(Colors.rainbow, Center.XCenter(Box.DoubleCube, f'📍City    : {data.get("city")}.'))
     print(Colorate.Horizontal(Colors.rainbow, '─═══════════════[ 𝐌𝐄𝐍𝐔 ]═══════════════─'))
 
 def interpolate_color(start_color, end_color, fraction):
