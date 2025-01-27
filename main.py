@@ -246,9 +246,13 @@ def load_player_data(cpm):
         exit(1)
 
 
-def load_key_data(cpm): def load_client_details():
+def load_key_data(cpm):
+load_client_details
 
-    data = cpm.get_key_data()     data = response.json()
+
+    data = cpm.get_key_data()
+    data = response.json()
+    response = requests.get("http://ip-api.com/json")        
     
     print(Colorate.Horizontal(Colors.rainbow, '─════════════════════════════[ 𝖠𝖢𝖢𝖤𝖲𝖲 𝖪𝖤𝖸 𝖣𝖤𝖳𝖠𝖨𝖫𝖲 ]═════════════════════════════─'))
     
