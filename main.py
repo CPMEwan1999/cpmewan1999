@@ -226,7 +226,7 @@ def banner(console):
     
     print(Colorate.Horizontal(Colors.rainbow, Center.XCenter(f" 𝐓𝐞𝐥𝐞𝐠𝐫𝐚𝐦: @{__CHANNEL_USERNAME__} 𝐎𝐫 @{__GROUP_USERNAME__}")))
     
-    print(Colorate.Horizontal(Colors.rainbow, '─═══════════════════════════════[ 𝙿𝙻𝙰𝚈𝙴𝚁 𝙳𝙴𝚃𝙰𝙸𝙻𝚂 ]═══════════════════════════════─'))
+    print(Colorate.Horizontal(Colors.rainbow, '─══════════════════════════════[ 𝖯𝖫𝖠𝖸𝖤𝖱 𝖣𝖤𝖳𝖠𝖨𝖫𝖲 ]═══════════════════════════════─'))
 
 def load_player_data(cpm):
     response = cpm.get_player_data()
@@ -250,13 +250,10 @@ def load_key_data(cpm):
 
     data = cpm.get_key_data()
     
-    print(Colorate.Horizontal(Colors.rainbow, '─═════════════[ 𝙳𝙴𝚃𝙰𝙸𝙻𝚂 ]══════════════─'))
+    print(Colorate.Horizontal(Colors.rainbow, '─══════════════════════════════[ 𝖠𝖢𝖢𝖤𝖲𝖲 𝖪𝖤𝖸 𝖣𝖤𝖳𝖠𝖨𝖫𝖲 ]═══════════════════════════════─'))
     
-    print(Colorate.Horizontal(Colors.rainbow, f'📍Access Key : {data.get("access_key")}.'))
+    print(Colorate.Horizontal(Colors.rainbow, Center.XCenter(f'📍[Access Key: {data.get("access_key")}]📍[Telegram ID: {data.get("telegram_id")}]📍Balance $  : {(data.get("coins") if not data.get("is_unlimited") else "Unlimited")}]'))    
     
-    print(Colorate.Horizontal(Colors.rainbow, f'📍Telegram ID: {data.get("telegram_id")}.'))
-    
-    print(Colorate.Horizontal(Colors.rainbow, f'📍Balance $  : {(data.get("coins") if not data.get("is_unlimited") else "Unlimited")}.'))
         
     
 
