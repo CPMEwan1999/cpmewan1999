@@ -267,16 +267,6 @@ def prompt_valid_value(content, tag, password=False):
         else:
             return value
             
-def load_client_details():
-    response = requests.get("http://ip-api.com/json")
-    data = response.json()
-    print(Colorate.Horizontal(Colors.rainbow, '─═════════════[ 𝐋𝐎𝐂𝐀𝐓𝐈𝐎𝐍 ]═════════════─'))
-    now = datetime.datetime.now()
-    print(Colorate.Horizontal(Colors.rainbow, (now.strftime("📍DateTime: %d-%m-%Y %H:%M:%S"))))
-    print(Colorate.Horizontal(Colors.rainbow, f'📍Country : {data.get("country")}.'))    
-    print(Colorate.Horizontal(Colors.rainbow, f'📍Region  : {data.get("regionName")}.'))
-    print(Colorate.Horizontal(Colors.rainbow, f'📍City    : {data.get("city")}.'))
-    print(Colorate.Horizontal(Colors.rainbow, '─═══════════════[ 𝐌𝐄𝐍𝐔 ]═══════════════─'))
 
 def interpolate_color(start_color, end_color, fraction):
     start_rgb = tuple(int(start_color[i:i+2], 16) for i in (1, 3, 5))
