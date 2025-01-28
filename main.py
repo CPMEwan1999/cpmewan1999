@@ -180,7 +180,6 @@ import datetime
 if __name__ == "__main__":
     console = Console()
     while True:
-        banner(console)
         acc_email = prompt_valid_value("[?] ACCOUNT EMAIL", "Email", password=False)
         acc_password = prompt_valid_value("[?] ACCOUNT PASSWORD", "Password", password=False)
         acc_access_key = prompt_valid_value("[?] ACCESS KEY", "Access Key", password=False)
