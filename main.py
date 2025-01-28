@@ -330,20 +330,10 @@ if __name__ == "__main__":
             load_key_data(cpm)
             load_client_details()
             choices = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27"]
-            print(Colorate.Horizontal(Colors.rainbow, Center.XCenter(Box.DoubleCube( '{01}: Increase Money [1.000K] & {02}: Increase Coins [3.000K]\n     {03}: King Rank [3.500K] & {04}: Change ID [2.500K]\n'))))
+            print(Colorate.Horizontal(Colors.rainbow, Center.XCenter(Box.DoubleCube( '{01}: Increase Money [1.000K] & {02}: Increase Coins [3.000K]\n     {03}: King Rank [3.500K] & {04}: Change ID [2.500K]\n {05}: Change Name [1.00K] & {06}: Change Name (Rainbow) [1.00K]\n {07}: Number Plates [2.000K] & {08}: Account Delete [FREE]\n{09}: Account Register [FREE] & {10}: Delete Friends [5.00K] \n {11}: Unlock Paid Cars [3.500K] & {12}: Unlock all Cars [4.000K]\n {13}: Unlock all Cars Siren [3.500K] & {14}: Unlock w16 Engine [3.000K]'))))
             
             
 
-            print(Colorate.Horizontal(Colors.rainbow, '➩{05}: Change Name               1.00K'))
-            print(Colorate.Horizontal(Colors.rainbow, '➩{06}: Change Name (Rainbow)     1.00K'))
-            print(Colorate.Horizontal(Colors.rainbow, '➩{07}: Number Plates             2.000K'))
-            print(Colorate.Horizontal(Colors.rainbow, '➩{08}: Account Delete            FREE'))
-            print(Colorate.Horizontal(Colors.rainbow, '➩{09}: Account Register          FREE'))
-            print(Colorate.Horizontal(Colors.rainbow, '➩{10}: Delete Friends            5.00K'))
-            print(Colorate.Horizontal(Colors.rainbow, '➩{11}: Unlock Paid Cars          3.500K'))
-            print(Colorate.Horizontal(Colors.rainbow, '➩{12}: Unlock all Cars           4.000K'))
-            print(Colorate.Horizontal(Colors.rainbow, '➩{13}: Unlock all Cars Siren     3.500K'))
-            print(Colorate.Horizontal(Colors.rainbow, '➩{14}: Unlock w16 Engine         3.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '➩{15}: Unlock All Horns          3.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '➩{16}: Unlock Disable Damage     2.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '➩{17}: Unlock Unlimited Fuel     2.000K'))
