@@ -220,7 +220,7 @@ def banner(console):
     ]
     colorful_text = gradient_text(brand_name, colors)
     console.print(colorful_text)
-    print(Colorate.Horizontal(Colors.rainbow, '─══════════════════════════════════════☆☆══════════════════════════════════════─'))
+    print(Colorate.Horizontal(Colors.rainbow, Center.XCenter( '─══════════════════════════════════════☆☆══════════════════════════════════════─')))
     
     print(Colorate.Horizontal(Colors.rainbow, Center.XCenter("𝐏𝐋𝐄𝐀𝐒𝐄 𝐋𝐎𝐆𝐎𝐔𝐓 𝐅𝐑𝐎𝐌 𝐂𝐏𝐌 𝐁𝐄𝐅𝐎𝐑𝐄 𝐔𝐒𝐈𝐍𝐆 𝐓𝐇𝐈𝐒 𝐓𝐎𝐎𝐋")))
     
@@ -272,7 +272,7 @@ def load_client_details():
     data = response.json()
     print(Colorate.Horizontal(Colors.rainbow, Center.XCenter('─════════════════════[ 𝖫𝖮𝖢𝖠𝖳𝖨𝖮𝖭 ]════════════════════─')))
     print(Colorate.Horizontal(Colors.rainbow, Center.XCenter(f'Country: {data.get("country")} <> Region: {data.get("regionName")} <> City: {data.get("city")}')))
-    print(Colorate.Horizontal(Colors.rainbow, '─════════════════════════════════════[ 𝖬𝖤𝖭𝖴 ]═══════════════════════════════════─'))
+    print(Colorate.Horizontal(Colors.rainbow, Center.XCenter( '─════════════════════════════════════[ 𝖬𝖤𝖭𝖴 ]═══════════════════════════════════─')))
 
 def interpolate_color(start_color, end_color, fraction):
     start_rgb = tuple(int(start_color[i:i+2], 16) for i in (1, 3, 5))
@@ -332,10 +332,8 @@ if __name__ == "__main__":
             choices = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27"]
             print(Colorate.Horizontal(Colors.rainbow, Center.XCenter(Box.DoubleCube( '{01}: Increase Money [1.000K] | {02}: Increase Coins [3.000K]'))))
             print(Colorate.Horizontal(Colors.rainbow, Center.XCenter(Box.DoubleCube( '{03}: King Rank [3.500K] | {04}: Change ID [2.500K]'))))
-            print(Colorate.Horizontal(Colors.rainbow, '➩{05}: Change Name               1.00K'))
-            print(Colorate.Horizontal(Colors.rainbow, '➩{06}: Change Name (Rainbow)     1.00K'))
-            print(Colorate.Horizontal(Colors.rainbow, '➩{07}: Number Plates             2.000K'))
-            print(Colorate.Horizontal(Colors.rainbow, '➩{08}: Account Delete            FREE'))
+            print(Colorate.Horizontal(Colors.rainbow, Center.XCenter(Box.DoubleCube( '{05}: Change Name [1.00K] | {06}: Change Name (Rainbow) [1.00K]'))))
+            print(Colorate.Horizontal(Colors.rainbow, Center.XCenter(Box.DoubleCube( '{07}: Number Plates [2.000K] | {08}: Account Delete [FREE]'))
             print(Colorate.Horizontal(Colors.rainbow, '➩{09}: Account Register          FREE'))
             print(Colorate.Horizontal(Colors.rainbow, '➩{10}: Delete Friends            5.00K'))
             print(Colorate.Horizontal(Colors.rainbow, '➩{11}: Unlock Paid Cars          3.500K'))
