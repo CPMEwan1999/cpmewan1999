@@ -166,8 +166,6 @@ import json
 import requests
 import time
 import os
-import phonenumbers
-from phonenumbers import carrier, geocoder, timezone
 from sys import stderr
 from pystyle import Box
 import random
