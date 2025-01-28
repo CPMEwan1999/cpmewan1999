@@ -151,43 +151,14 @@ pySystem.Clear()
 
 
 
-if __name__ == "__main__":
-    while True:
-        acc_email = prompt_valid_value("[?] ACCOUNT EMAIL", "Email", password=False)
-        acc_password = prompt_valid_value("[?] ACCOUNT PASSWORD", "Password", password=False)
-        acc_access_key = prompt_valid_value("[?] ACCESS KEY", "Access Key", password=False)
-        console.print("[%] TRYING TO LOGIN: ", end=None)
-        cpm = CPMEwan1999(acc_access_key)
-        login_response = cpm.login(acc_email, acc_password)
-        if login_response != 0:
-            if login_response == 100:
-                print(Colorate.Horizontal(Colors.rainbow, 'ACCOUNT NOT FOUND'))
-                sleep(2)
-                continue
-            elif login_response == 101:
-                print(Colorate.Horizontal(Colors.rainbow, 'WRONG PASSWORD'))
-                sleep(2)
-                continue
-            elif login_response == 103:
-                print(Colorate.Horizontal(Colors.rainbow, 'INVALID ACCESS KEY'))
-                sleep(2)
-                continue
-            else:
-                print(Colorate.Horizontal(Colors.rainbow, 'TRY AGAIN'))
-                print(Colorate.Horizontal(Colors.rainbow, '! NOTE: MAKE SURE YOU FILLED OUT THE FIELDS'))
-                sleep(2)
-                continue
-        else:
-            print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
-            sleep(2)
-        while True:
-            banner(console)
-            load_player_data(cpm)
-            load_key_data(cpm)
-            load_client_details()
-            choices = ["0", "1"]
-            print(Colorate.Horizontal(Colors.rainbow, '➩{01}: Increase Money            1.000K'))
-            print(Colorate.Horizontal(Colors.rainbow, '➩{00}: Exit'))
+#پرسیار و وەڵام 
+#name = input("What is your name?: ")
+#age = int(input("How old are you?: "))
+#height = float(input("How tall are you?: "))
+
+#print("Hello "+name)
+#print("You are "+str(age)+" years old")
+#print("You are "+str(height)+"cm tall")
 
 
 
@@ -321,6 +292,47 @@ def rainbow_gradient_string(customer_name):
         modified_string += f'[{interpolated_color}]{char}'
     return modified_string
 
+if __name__ == "__main__":
+    console = Console()
+    signal.signal(signal.SIGINT, signal_handler)
+    while True:
+        banner(console)
+        acc_email = prompt_valid_value("[?] ACCOUNT EMAIL", "Email", password=False)
+        acc_password = prompt_valid_value("[?] ACCOUNT PASSWORD", "Password", password=False)
+        acc_access_key = prompt_valid_value("[?] ACCESS KEY", "Access Key", password=False)
+        console.print("[%] TRYING TO LOGIN: ", end=None)
+        cpm = CPMEwan1999(acc_access_key)
+        login_response = cpm.login(acc_email, acc_password)
+        if login_response != 0:
+            if login_response == 100:
+                print(Colorate.Horizontal(Colors.rainbow, 'ACCOUNT NOT FOUND'))
+                sleep(2)
+                continue
+            elif login_response == 101:
+                print(Colorate.Horizontal(Colors.rainbow, 'WRONG PASSWORD'))
+                sleep(2)
+                continue
+            elif login_response == 103:
+                print(Colorate.Horizontal(Colors.rainbow, 'INVALID ACCESS KEY'))
+                sleep(2)
+                continue
+            else:
+                print(Colorate.Horizontal(Colors.rainbow, 'TRY AGAIN'))
+                print(Colorate.Horizontal(Colors.rainbow, '! NOTE: MAKE SURE YOU FILLED OUT THE FIELDS'))
+                sleep(2)
+                continue
+        else:
+            print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
+            sleep(2)
+        while True:
+            banner(console)
+            load_player_data(cpm)
+            load_key_data(cpm)
+            load_client_details()
+            choices = ["0", "1"]
+            print(Colorate.Horizontal(Colors.rainbow, '➩{01}: Increase Money            1.000K'))
+
+            print(Colorate.Horizontal(Colors.rainbow, '➩{00}: Exit'))
 
 if __name__ == "__main__":
     console = Console()
