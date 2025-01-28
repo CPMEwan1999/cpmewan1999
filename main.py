@@ -368,13 +368,13 @@ if __name__ == "__main__":
             print(Colorate.Horizontal(Colors.rainbow, Box.DoubleCube( '➩{25}: Chrome All Cars           3.500K')))
             print(Colorate.Horizontal(Colors.rainbow, Box.DoubleCube( '➩{26}: All Cars Max Milage       2.000K')))
             print(Colorate.Horizontal(Colors.rainbow, Box.DoubleCube( '➩{27}: Clone Account             5.000K')))
-            print(Colorate.Horizontal(Colors.rainbow, Box.DoubleCube( '➩{00}: Exit')))
+            print(Colorate.Horizontal(Colors.rainbow, Box.DoubleCube( '➩{00}: Exit'))
             
 print(Colorate.Horizontal(Colors.rainbow, Box.DoubleCube( '─═══════════════[ 𝐂𝐏𝐌☆ ]═══════════════─')))
             
             service = IntPrompt.ask(f"[bold][?] SELECT A SERVICE[red][1-{choices[-1]} or 0][/red][/bold]", choices=choices, show_choices=False)
             
-            print(Colorate.Horizontal(Colors.rainbow, '================[ 𝐂𝐏𝐌☆ ]================'))
+print(Colorate.Horizontal(Colors.rainbow, Box.DoubleCube( '─═══════════════[ 𝐂𝐏𝐌☆ ]═══════════════─')))
             
             if service == 0: # Exit
                 print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
