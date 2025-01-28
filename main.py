@@ -354,8 +354,8 @@ if __name__ == "__main__":
             print(Colorate.Horizontal(Colors.rainbow, '➩{26}: All Cars Max Milage       2.000K'))                        
             print(Colorate.Horizontal(Colors.rainbow, '➩{27}: Clone Account             5.000K'))            
             print(Colorate.Horizontal(Colors.rainbow, '➩{00}: Exit'))
-                        var = raw_input("1","2")
             print(Colorate.Horizontal(Colors.rainbow, "you entered", var))
+        var = raw_input("1","2")
             
             print(Colorate.Horizontal(Colors.rainbow, '─═══════════════[ 𝐂𝐏𝐌☆ ]═══════════════─'))
             
