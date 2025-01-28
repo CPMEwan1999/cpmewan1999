@@ -163,7 +163,6 @@ pySystem.Clear()
 
 
 
-@is_option
 def TrackLu():
     try:
         username = input(f"\n {Wh}Enter Username : {Gr}")
