@@ -328,7 +328,7 @@ if __name__ == "__main__":
             load_key_data(cpm)
             load_client_details()
             choices = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27"]
-            print('➩{01}: Increase Money', print('02'))
+            print('[bold red]01[/bold red]: [bold blue]Increase Money[/bold blue] [1000K]','[bold red]02[/bold red]: [bold blue]Increase Coins[/bold blue] [3000K]'))
             print(Colorate.Horizontal(Colors.rainbow, '➩{02}: Increase Coins            3.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '➩{03}: King Rank                 3.500K'))
             print(Colorate.Horizontal(Colors.rainbow, '➩{04}: Change ID                 2.500K'))
