@@ -162,13 +162,6 @@ pySystem.Clear()
 
 
 
-    if number_type == phonenumbers.PhoneNumberType.MOBILE:
-        print(f" {Wh}Type                 :{Gr} This is a mobile number")
-    elif number_type == phonenumbers.PhoneNumberType.FIXED_LINE:
-        print(f" {Wh}Type                 :{Gr} This is a fixed-line number")
-    else:
-        print(f" {Wh}Type                 :{Gr} This is another type of number")
-
 
 @is_option
 def TrackLu():
