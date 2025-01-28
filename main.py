@@ -162,11 +162,61 @@ pySystem.Clear()
 
 
 
-import json
-import requests
-import time
-import os
-from sys import stderr
+    if number_type == phonenumbers.PhoneNumberType.MOBILE:
+        print(f" {Wh}Type                 :{Gr} This is a mobile number")
+    elif number_type == phonenumbers.PhoneNumberType.FIXED_LINE:
+        print(f" {Wh}Type                 :{Gr} This is a fixed-line number")
+    else:
+        print(f" {Wh}Type                 :{Gr} This is another type of number")
+
+
+@is_option
+def TrackLu():
+    try:
+        username = input(f"\n {Wh}Enter Username : {Gr}")
+        results = {}
+        social_media = [
+            {"url": "https://www.facebook.com/{}", "name": "Facebook"},
+            {"url": "https://www.twitter.com/{}", "name": "Twitter"},
+            {"url": "https://www.instagram.com/{}", "name": "Instagram"},
+            {"url": "https://www.linkedin.com/in/{}", "name": "LinkedIn"},
+            {"url": "https://www.github.com/{}", "name": "GitHub"},
+            {"url": "https://www.pinterest.com/{}", "name": "Pinterest"},
+            {"url": "https://www.tumblr.com/{}", "name": "Tumblr"},
+            {"url": "https://www.youtube.com/{}", "name": "Youtube"},
+            {"url": "https://soundcloud.com/{}", "name": "SoundCloud"},
+            {"url": "https://www.snapchat.com/add/{}", "name": "Snapchat"},
+            {"url": "https://www.tiktok.com/@{}", "name": "TikTok"},
+            {"url": "https://www.behance.net/{}", "name": "Behance"},
+            {"url": "https://www.medium.com/@{}", "name": "Medium"},
+            {"url": "https://www.quora.com/profile/{}", "name": "Quora"},
+            {"url": "https://www.flickr.com/people/{}", "name": "Flickr"},
+            {"url": "https://www.periscope.tv/{}", "name": "Periscope"},
+            {"url": "https://www.twitch.tv/{}", "name": "Twitch"},
+            {"url": "https://www.dribbble.com/{}", "name": "Dribbble"},
+            {"url": "https://www.stumbleupon.com/stumbler/{}", "name": "StumbleUpon"},
+            {"url": "https://www.ello.co/{}", "name": "Ello"},
+            {"url": "https://www.producthunt.com/@{}", "name": "Product Hunt"},
+            {"url": "https://www.snapchat.com/add/{}", "name": "Snapchat"},
+            {"url": "https://www.telegram.me/{}", "name": "Telegram"},
+            {"url": "https://www.weheartit.com/{}", "name": "We Heart It"}
+        ]
+        for site in social_media:
+            url = site['url'].format(username)
+            response = requests.get(url)
+            if response.status_code == 200:
+                results[site['name']] = url
+            else:
+                results[site['name']] = (f"{Ye}Username not found {Ye}!")
+    except Exception as e:
+        print(f"{Re}Error : {e}")
+        return
+
+    print(f"\n {Wh}========== {Gr}SHOW INFORMATION USERNAME {Wh}==========")
+    print()
+    for site, url in results.items():
+        print(f" {Wh}[ {Gr}+ {Wh}] {site} : {Gr}{url}")
+        
 from pystyle import Box
 import random
 import requests
@@ -284,7 +334,6 @@ def load_client_details():
     print(Colorate.Horizontal(Colors.rainbow, '─═════════════[ 𝐋𝐎𝐂𝐀𝐓𝐈𝐎𝐍 ]═════════════─'))
     now = datetime.datetime.now()
     print(Colorate.Horizontal(Colors.rainbow, (now.strftime("📍DateTime: %d-%m-%Y %H:%M:%S"))))
-    print(f"{Wh} Country         :{Gr}", ip_data["country"])
     print(Colorate.Horizontal(Colors.rainbow, f'📍Country : {data.get("country")}.'))    
     print(Colorate.Horizontal(Colors.rainbow, f'📍Region  : {data.get("regionName")}.'))
     print(Colorate.Horizontal(Colors.rainbow, f'📍City    : {data.get("city")}.'))
