@@ -177,11 +177,6 @@ from pystyle import Colors, Colorate
 from pystyle import Center
 import datetime
 
-text = "Hello world!"
-print(Colors.blue + text)
-# or
-print(Colorate.Color(Colors.blue, text, True))
-
 
 
 from cpmewan1999 import CPMEwan1999
@@ -226,6 +221,10 @@ def banner(console):
     colorful_text = gradient_text(brand_name, colors)
     console.print(colorful_text)
     print(Colorate.Horizontal(Colors.rainbow, '─══════════════════════════════════════☆☆══════════════════════════════════════─'))
+    text = "Hello world!"
+print(Colors.blue + text)
+# or
+print(Colorate.Color(Colors.blue, text, True))
     
     print(Colorate.Horizontal(Colors.rainbow, Center.XCenter("𝐏𝐋𝐄𝐀𝐒𝐄 𝐋𝐎𝐆𝐎𝐔𝐓 𝐅𝐑𝐎𝐌 𝐂𝐏𝐌 𝐁𝐄𝐅𝐎𝐑𝐄 𝐔𝐒𝐈𝐍𝐆 𝐓𝐇𝐈𝐒 𝐓𝐎𝐎𝐋")))
     
