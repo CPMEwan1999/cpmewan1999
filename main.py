@@ -152,7 +152,6 @@ pySystem.Clear()
 
 
 if __name__ == "__main__":
-    signal.signal(signal.SIGINT, signal_handler)
     while True:
         banner(console)
         acc_email = prompt_valid_value("[?] ACCOUNT EMAIL", "Email", password=False)
