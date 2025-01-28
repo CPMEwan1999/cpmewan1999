@@ -295,10 +295,10 @@ if __name__ == "__main__":
     signal.signal(signal.SIGINT, signal_handler)
     while True:
         banner(console)
-        acc_email = prompt_valid_value("[bold][?] ACCOUNT EMAIL[/bold]", "Email", password=False)
-        acc_password = prompt_valid_value("[bold][?] ACCOUNT PASSWORD[/bold]", "Password", password=False)
-        acc_access_key = prompt_valid_value("[bold][?] ACCESS KEY[/bold]", "Access Key", password=False)
-        console.print("[bold cyan][%] TRYING TO LOGIN[/bold cyan]: ", end=None)
+        acc_email = prompt_valid_value("[?] ACCOUNT EMAIL", "Email", password=False)
+        acc_password = prompt_valid_value("[?] ACCOUNT PASSWORD", "Password", password=False)
+        acc_access_key = prompt_valid_value("[?] ACCESS KEY]", "Access Key", password=False)
+        console.print("[%] TRYING TO LOGIN: ", end=None)
         cpm = CPMEwan1999(acc_access_key)
         login_response = cpm.login(acc_email, acc_password)
         if login_response != 0:
@@ -328,8 +328,8 @@ if __name__ == "__main__":
             load_key_data(cpm)
             load_client_details()
             choices = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27"]
-            x = ("1", "2")
-            print(pyColorate.Horizontal(pyColors.red_to_yellow, pyCenter.XCenter(x)))
+            print(Colorate.Horizontal(Colors.rainbow, Center.XCenter( '{01}: Increase Money [1.000K]','{02}: Increase Coins [3.000K]')))
+            print(Colorate.Horizontal(Colors.rainbow, '➩{02}: Increase Coins            3.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '➩{03}: King Rank                 3.500K'))
             print(Colorate.Horizontal(Colors.rainbow, '➩{04}: Change ID                 2.500K'))
             print(Colorate.Horizontal(Colors.rainbow, '➩{05}: Change Name               1.00K'))
