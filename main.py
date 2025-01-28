@@ -162,11 +162,7 @@ pySystem.Clear()
 
 
 
-import json
-import requests
-import time
-import os
-from sys import stderr
+
 from pystyle import Box
 import random
 import requests
@@ -278,44 +274,16 @@ def prompt_valid_value(content, tag, password=False):
         else:
             return value
             
-def IP_Track():
-    ip = input(f"{Wh}\n Enter IP target : {Gr}")  # INPUT IP ADDRESS
-    print()
-    print(f' {Wh}============= {Gr}SHOW INFORMATION IP ADDRESS {Wh}=============')
-    req_api = requests.get(f"http://ipwho.is/{ip}")  # API IPWHOIS.IS
-    ip_data = json.loads(req_api.text)
-    time.sleep(2)
-    print(f"{Wh}\n IP target       :{Gr}", ip)
-    print(f"{Wh} Type IP         :{Gr}", ip_data["type"])
-    print(f"{Wh} Country         :{Gr}", ip_data["country"])
-    print(f"{Wh} Country Code    :{Gr}", ip_data["country_code"])
-    print(f"{Wh} City            :{Gr}", ip_data["city"])
-    print(f"{Wh} Continent       :{Gr}", ip_data["continent"])
-    print(f"{Wh} Continent Code  :{Gr}", ip_data["continent_code"])
-    print(f"{Wh} Region          :{Gr}", ip_data["region"])
-    print(f"{Wh} Region Code     :{Gr}", ip_data["region_code"])
-    print(f"{Wh} Latitude        :{Gr}", ip_data["latitude"])
-    print(f"{Wh} Longitude       :{Gr}", ip_data["longitude"])
-    lat = int(ip_data['latitude'])
-    lon = int(ip_data['longitude'])
-    print(f"{Wh} Maps            :{Gr}", f"https://www.google.com/maps/@{lat},{lon},8z")
-    print(f"{Wh} EU              :{Gr}", ip_data["is_eu"])
-    print(f"{Wh} Postal          :{Gr}", ip_data["postal"])
-    print(f"{Wh} Calling Code    :{Gr}", ip_data["calling_code"])
-    print(f"{Wh} Capital         :{Gr}", ip_data["capital"])
-    print(f"{Wh} Borders         :{Gr}", ip_data["borders"])
-    print(f"{Wh} Country Flag    :{Gr}", ip_data["flag"]["emoji"])
-    print(f"{Wh} ASN             :{Gr}", ip_data["connection"]["asn"])
-    print(f"{Wh} ORG             :{Gr}", ip_data["connection"]["org"])
-    print(f"{Wh} ISP             :{Gr}", ip_data["connection"]["isp"])
-    print(f"{Wh} Domain          :{Gr}", ip_data["connection"]["domain"])
-    print(f"{Wh} ID              :{Gr}", ip_data["timezone"]["id"])
-    print(f"{Wh} ABBR            :{Gr}", ip_data["timezone"]["abbr"])
-    print(f"{Wh} DST             :{Gr}", ip_data["timezone"]["is_dst"])
-    print(f"{Wh} Offset          :{Gr}", ip_data["timezone"]["offset"])
-    print(f"{Wh} UTC             :{Gr}", ip_data["timezone"]["utc"])
-    print(f"{Wh} Current Time    :{Gr}", ip_data["timezone"]["current_time"])
-
+def load_client_details():
+    response = requests.get("http://ip-api.com/json")
+    data = response.json()
+    print(Colorate.Horizontal(Colors.rainbow, '─═════════════[ 𝐋𝐎𝐂𝐀𝐓𝐈𝐎𝐍 ]═════════════─'))
+    now = datetime.datetime.now()
+    print(Colorate.Horizontal(Colors.rainbow, (now.strftime("📍DateTime: %d-%m-%Y %H:%M:%S"))))
+    print(Colorate.Horizontal(Colors.rainbow, f'📍Country : {data.get("country")}.'))    
+    print(Colorate.Horizontal(Colors.rainbow, f'📍Region  : {data.get("regionName")}.'))
+    print(Colorate.Horizontal(Colors.rainbow, f'📍City    : {data.get("city")}.'))
+    print(Colorate.Horizontal(Colors.rainbow, '─═══════════════[ 𝐌𝐄𝐍𝐔 ]═══════════════─'))
 
 def interpolate_color(start_color, end_color, fraction):
     start_rgb = tuple(int(start_color[i:i+2], 16) for i in (1, 3, 5))
@@ -373,7 +341,7 @@ if __name__ == "__main__":
             load_key_data(cpm)
             load_client_details()
             choices = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27"]
-            print(Colorate.Horizontal(Colors.rainbow, '➩{01}: Increase Money            1.000K'))
+            print(Colorate.Horizontal(Colors.rainbow, Center.XCenter(Box.DoubleCube( '➩{01}: Increase Money            1.000K'))))
             print(Colorate.Horizontal(Colors.rainbow, '➩{02}: Increase Coins            3.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '➩{03}: King Rank                 3.500K'))
             print(Colorate.Horizontal(Colors.rainbow, '➩{04}: Change ID                 2.500K'))
