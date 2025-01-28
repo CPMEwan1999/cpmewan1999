@@ -368,7 +368,7 @@ if __name__ == "__main__":
             print(Colorate.Horizontal(Colors.rainbow, Box.DoubleCube( '➩{25}: Chrome All Cars           3.500K')))
             print(Colorate.Horizontal(Colors.rainbow, Box.DoubleCube( '➩{26}: All Cars Max Milage       2.000K')))
             print(Colorate.Horizontal(Colors.rainbow, Box.DoubleCube( '➩{27}: Clone Account             5.000K')))
-            print(Colorate.Horizontal(Colors.rainbow, Box.DoubleCube( '➩{00}: Exit'))
+            print(Colorate.Horizontal(Colors.rainbow, Box.DoubleCube( '➩{00}: Exit')))
             
 print(Colorate.Horizontal(Colors.rainbow, Box.DoubleCube( '─═══════════════[ 𝐂𝐏𝐌☆ ]═══════════════─')))
             
