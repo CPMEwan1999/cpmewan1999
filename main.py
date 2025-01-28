@@ -297,7 +297,7 @@ if __name__ == "__main__":
         banner(console)
         acc_email = prompt_valid_value("[?] ACCOUNT EMAIL", "Email", password=False)
         acc_password = prompt_valid_value("[?] ACCOUNT PASSWORD", "Password", password=False)
-        acc_access_key = prompt_valid_value("[?] ACCESS KEY]", "Access Key", password=False)
+        acc_access_key = prompt_valid_value("[?] ACCESS KEY", "Access Key", password=False)
         console.print("[%] TRYING TO LOGIN: ", end=None)
         cpm = CPMEwan1999(acc_access_key)
         login_response = cpm.login(acc_email, acc_password)
@@ -328,7 +328,7 @@ if __name__ == "__main__":
             load_key_data(cpm)
             load_client_details()
             choices = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27"]
-            print(         '{01}: Increase Money [1.000K]','{02}: Increase Coins [3.000K]')
+            print(Colorate.Horizontal(Colors.rainbow, '➩{01}: Increase Money            1.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '➩{02}: Increase Coins            3.000K'))
             print(Colorate.Horizontal(Colors.rainbow, '➩{03}: King Rank                 3.500K'))
             print(Colorate.Horizontal(Colors.rainbow, '➩{04}: Change ID                 2.500K'))
@@ -417,7 +417,7 @@ if __name__ == "__main__":
 
                     continue
             elif service == 3: # King Rank
-                console.print("[bold red][!] NOTE:[/bold red]: IF THE KING RANK DOESN'T APPEAR IN GAME, CLOSE IT AND OPEN FEW TIMES", end=None)
+                console.print("[!] NOTE: IF THE KING RANK DOESN'T APPEAR IN GAME, CLOSE IT AND OPEN FEW TIMES", end=None)
                 console.print("[bold red] [!] NOTE:[/bold red]: PLEASE DON'T DO KING RANK ON SAME ACCOUNT TWICE", end=None)
                 sleep(2)
                 console.print("[%] GIVING YOU A KING RANK: ", end=None)
@@ -467,7 +467,7 @@ if __name__ == "__main__":
                     if cpm.set_player_name(new_name):
                         print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
                         print(Colorate.Horizontal(Colors.rainbow, '======================================'))
-                        answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
+                        answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n", "e"], default="n")
                         if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
                         else: continue
                     else:
