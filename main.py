@@ -177,7 +177,7 @@ from pystyle import Colors, Colorate
 from pystyle import Center
 import datetime
 
-text = "Hello world!","99"
+text = "Hello world!"
 print(Colors.blue + text)
 # or
 print(Colorate.Color(Colors.blue, text, True))
