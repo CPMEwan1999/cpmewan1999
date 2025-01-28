@@ -335,7 +335,6 @@ if __name__ == "__main__":
             marks = [1, 2, 3, 4]
             div = ['1000', '3000', '3500', '100']
             print(f"{'Name'}{'Marks'}{'Division'}")
-            print(f"{names[i] : <10}{marks[i] : ^10}{div[i] : ^10}")
             print(Colorate.Horizontal(Colors.rainbow, '➩{05}: Change Name               1.00K'))
             print(Colorate.Horizontal(Colors.rainbow, '➩{06}: Change Name (Rainbow)     1.00K'))
             print(Colorate.Horizontal(Colors.rainbow, '➩{07}: Number Plates             2.000K'))
