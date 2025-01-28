@@ -228,11 +228,6 @@ def banner(console):
     
     print(Colorate.Horizontal(Colors.rainbow, Center.XCenter(f" 𝐓𝐞𝐥𝐞𝐠𝐫𝐚𝐦: @{__CHANNEL_USERNAME__} 𝐎𝐫 @{__GROUP_USERNAME__}")))
     
-    text = "Hello world!"
-    text = "Hello world!"
-    print(Colors.blue + text)
-    print(Colorate.Color(Colors.blue, text, True))
-    
     print(Colorate.Horizontal(Colors.rainbow, Center.XCenter('─════════════════════════════[ 𝖯𝖫𝖠𝖸𝖤𝖱 𝖣𝖤𝖳𝖠𝖨𝖫𝖲 ]════════════════════════════─')))
 
 def load_player_data(cpm):
@@ -335,10 +330,12 @@ if __name__ == "__main__":
             load_key_data(cpm)
             load_client_details()
             choices = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27"]
-            print(Colorate.Horizontal(Colors.rainbow, '➩{01}: Increase Money            1.000K'))
-            print(Colorate.Horizontal(Colors.rainbow, '➩{02}: Increase Coins            3.000K'))
-            print(Colorate.Horizontal(Colors.rainbow, '➩{03}: King Rank                 3.500K'))
-            print(Colorate.Horizontal(Colors.rainbow, '➩{04}: Change ID                 2.500K'))
+            
+            names = ['Increase Money', 'Increase Coins', 'King Rank', 'Change ID']
+            marks = [1, 2, 3, 4]
+            div = ['1000', '3000', '3500', '100']
+            print(f"{'Name'}{'Marks'}{'Division'}")
+            print(f"{names[i] : <10}{marks[i] : ^10}{div[i] : ^10}")
             print(Colorate.Horizontal(Colors.rainbow, '➩{05}: Change Name               1.00K'))
             print(Colorate.Horizontal(Colors.rainbow, '➩{06}: Change Name (Rainbow)     1.00K'))
             print(Colorate.Horizontal(Colors.rainbow, '➩{07}: Number Plates             2.000K'))
