@@ -228,7 +228,8 @@ def banner(console):
     
     print(Colorate.Horizontal(Colors.rainbow, Center.XCenter(f" 𝐓𝐞𝐥𝐞𝐠𝐫𝐚𝐦: @{__CHANNEL_USERNAME__} 𝐎𝐫 @{__GROUP_USERNAME__}")))
     
-    text = "Hello world!","19"
+    text = "Hello world!"
+    text = "Hello world!"
     print(Colors.blue + text)
     print(Colorate.Color(Colors.blue, text, True))
     
