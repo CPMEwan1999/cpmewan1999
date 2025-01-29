@@ -162,7 +162,7 @@ pySystem.Clear()
 
 
 
-from datetime import date
+import datetime
 from pystyle import Box
 import random
 import requests
@@ -228,24 +228,7 @@ def banner(console):
     
     print(Colorate.Horizontal(Colors.rainbow, Center.XCenter(f" 𝐓𝐞𝐥𝐞𝐠𝐫𝐚𝐦: @{__CHANNEL_USERNAME__} 𝐎𝐫 @{__GROUP_USERNAME__}")))
     
-    today = date.today()
-
-# dd/mm/YY
-d1 = today.strftime("%d/%m/%Y")
-print("d1 =", d1)
-
-# Textual month, day and year	
-d2 = today.strftime("%B %d, %Y")
-print("d2 =", d2)
-
-# mm/dd/y
-d3 = today.strftime("%m/%d/%y")
-print("d3 =", d3)
-
-# Month abbreviation, day and year	
-d4 = today.strftime("%b-%d-%Y")
-print("d4 =", d4)
-    
+    print(Colorate.Horizontal(Colors.rainbow, Center.XCenter('─════════════════════════════[ 𝖯𝖫𝖠𝖸𝖤𝖱 𝖣𝖤𝖳𝖠𝖨𝖫𝖲 ]════════════════════════════─')))
 
 def load_player_data(cpm):
     response = cpm.get_player_data()
@@ -289,6 +272,8 @@ def load_client_details():
     data = response.json()
     print(Colorate.Horizontal(Colors.rainbow, Center.XCenter('─═════════════════════[ 𝖫𝖮𝖢𝖠𝖳𝖨𝖮𝖭 ]════════════════════─')))
     print(Colorate.Horizontal(Colors.rainbow, Center.XCenter(f'Country: {data.get("country")} <> Region: {data.get("regionName")} <> City: {data.get("city")}')))
+    x = datetime.datetime.now()
+    print(x)
     print(Colorate.Horizontal(Colors.rainbow, Center.XCenter( '─═══════════════════════════════════════[ 𝖬𝖤𝖭𝖴 ]═══════════════════════════════════════─')))
 
 def interpolate_color(start_color, end_color, fraction):
