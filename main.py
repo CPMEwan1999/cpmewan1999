@@ -341,18 +341,18 @@ if __name__ == "__main__":
             print(Colorate.Horizontal(Colors.rainbow, '                    ─═══════════════[ 𝐂𝐏𝐌☆ ]═══════════════─'))
             
             if service == 0: # Exit
-                print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
+                print(Colorate.Horizontal(Colors.rainbow, Center.XCenter( f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}')))
 
 
 
             elif service == 1: # Increase Money
-                print(Colorate.Horizontal(Colors.rainbow, ' [?] INSERT HOW MUCH MONEY DO YOU WANT'))
+                print(Colorate.Horizontal(Colors.rainbow, Center.XCenter( ' [?] INSERT HOW MUCH MONEY DO YOU WANT')))
                 amount = IntPrompt.ask(" [?] AMOUNT")
-                console.print(" [%] SAVING YOUR DATA: ", end=None)
+                console.print("                     [%] SAVING YOUR DATA: ", end=None)
                 if amount > 0 and amount <= 999999999999999999999999999999:
                     if cpm.set_player_money(amount):
-                        print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
-                        print(Colorate.Horizontal(Colors.rainbow, '======================================'))
+                        print(Colorate.Horizontal(Colors.rainbow, Center.XCenter( 'SUCCESSFUL')))
+                        print(Colorate.Horizontal(Colors.rainbow, '─═════════════════════════─'))
                         answ = Prompt.ask(" [?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
                         if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
                         else: continue
