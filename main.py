@@ -246,7 +246,6 @@ print("d3 =", d3)
 d4 = today.strftime("%b-%d-%Y")
 print("d4 =", d4)
     
-    print(Colorate.Horizontal(Colors.rainbow, Center.XCenter('─════════════════════════════[ 𝖯𝖫𝖠𝖸𝖤𝖱 𝖣𝖤𝖳𝖠𝖨𝖫𝖲 ]════════════════════════════─')))
 
 def load_player_data(cpm):
     response = cpm.get_player_data()
