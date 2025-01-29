@@ -207,12 +207,12 @@ def gradient_text(text, colors):
 
 def banner(console):
     os.system('cls' if os.name == 'nt' else 'clear')
-    brand_name =  "         ▄████▄   ██▓███   ███▄ ▄███▓▓█████  █     █░ ▄▄▄       ███▄    █ \n"
-    brand_name += "         ▒██▀ ▀█  ▓██░  ██▒▓██▒▀█▀ ██▒▓█   ▀ ▓█░ █ ░█░▒████▄     ██ ▀█   █ \n"
-    brand_name += "         ▒▓█    ▄ ▓██░ ██▓▒▓██    ▓██░▒███   ▒█░ █ ░█ ▒██  ▀█▄  ▓██  ▀█ ██▒\n"
-    brand_name += "         ▒▓▓▄ ▄██▒▒██▄█▓▒ ▒▒██    ▒██ ▒▓█  ▄ ░█░ █ ░█ ░██▄▄▄▄██ ▓██▒  ▐▌██▒\n"
-    brand_name += "         ▒ ▓███▀ ░▒██▒ ░  ░▒██▒   ░██▒░▒████▒░░██▒██▓  ▓█   ▓██▒▒██░   ▓██░\n"
-    brand_name += "         ░ ░▒ ▒  ░▒▓▒░ ░  ░░ ▒░   ░  ░░░ ▒░ ░░ ▓░▒ ▒   ▒▒   ▓▒█░░ ▒░   ▒ ▒ \n"
+    brand_name =  "          ▄████▄   ██▓███   ███▄ ▄███▓▓█████  █     █░ ▄▄▄       ███▄    █ \n"
+    brand_name += "          ▒██▀ ▀█  ▓██░  ██▒▓██▒▀█▀ ██▒▓█   ▀ ▓█░ █ ░█░▒████▄     ██ ▀█   █ \n"
+    brand_name += "          ▒▓█    ▄ ▓██░ ██▓▒▓██    ▓██░▒███   ▒█░ █ ░█ ▒██  ▀█▄  ▓██  ▀█ ██▒\n"
+    brand_name += "          ▒▓▓▄ ▄██▒▒██▄█▓▒ ▒▒██    ▒██ ▒▓█  ▄ ░█░ █ ░█ ░██▄▄▄▄██ ▓██▒  ▐▌██▒\n"
+    brand_name += "          ▒ ▓███▀ ░▒██▒ ░  ░▒██▒   ░██▒░▒████▒░░██▒██▓  ▓█   ▓██▒▒██░   ▓██░\n"
+    brand_name += "          ░ ░▒ ▒  ░▒▓▒░ ░  ░░ ▒░   ░  ░░░ ▒░ ░░ ▓░▒ ▒   ▒▒   ▓▒█░░ ▒░   ▒ ▒ \n"
     colors = [
         "rgb(255,0,0)", "rgb(255,69,0)", "rgb(255,140,0)", "rgb(255,215,0)", "rgb(173,255,47)", 
         "rgb(0,255,0)", "rgb(0,255,255)", "rgb(0,191,255)", "rgb(0,0,255)", "rgb(139,0,255)",
@@ -330,7 +330,7 @@ if __name__ == "__main__":
             load_key_data(cpm)
             load_client_details()
             choices = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27"]
-            print(Colorate.Horizontal(Colors.rainbow, Center.XCenter(Box.DoubleCube( '{01}: Increase Money         [1.000K] & {02}: Increase Coins         [3.000K]\n\n{03}: King Rank              [3.500K] & {04}: Change ID              [2.500K]\n{05}: Change Name            [1.00K]  & {06}: Change Name (Rainbow)  [1.00K]\n\n{07}: Number Plates          [2.000K] & {08}: Account Delete         [FREE]\n\n{09}: Account Register       [FREE]   & {10}: Delete Friends         [5.00K]\n\n{11}: Unlock Paid Cars       [3.500K] & {12}: Unlock All Cars        [4.000K]\n\n{13}: Unlock all Cars Siren  [3.500K] & {14}: Unlock w16 Engine      [3.000K]\n\n{15}: Unlock All Horns       [3.000K] & {16}: Unlock Disable Damage  [2.000K]\n\n{17}: Unlock Unlimited Fuel  [2.000K] & {18}: Unlock All Wheels      [2.500K]\n\n{19}: Unlock House 3         [2.500K] & {20}: Unlock Smoke           [2.000K]\n\n{21}: Change Race Wins       [7.00K]  & {22}: Change Race Loses      [7.00K]\n\n{23}: Speed Car Hack (CarID) [1.500K] & {24}: Speed All Cars Hack    [2.500K]\n\n{25}: Chrome All Cars        [3.500K] & {26}: All Cars Max Milage    [2.000K]\n\n                              WELCOME'))))
+            print(Colorate.Horizontal(Colors.rainbow, Center.XCenter(Box.DoubleCube( '{01}: Increase Money         [1.000K] & {02}: Increase Coins         [3.000K]\n\n{03}: King Rank              [3.500K] & {04}: Change ID              [2.500K]\n\n{05}: Change Name            [1.00K]  & {06}: Change Name (Rainbow)  [1.00K]\n\n{07}: Number Plates          [2.000K] & {08}: Account Delete         [FREE]\n\n{09}: Account Register       [FREE]   & {10}: Delete Friends         [5.00K]\n\n{11}: Unlock Paid Cars       [3.500K] & {12}: Unlock All Cars        [4.000K]\n\n{13}: Unlock all Cars Siren  [3.500K] & {14}: Unlock w16 Engine      [3.000K]\n\n{15}: Unlock All Horns       [3.000K] & {16}: Unlock Disable Damage  [2.000K]\n\n{17}: Unlock Unlimited Fuel  [2.000K] & {18}: Unlock All Wheels      [2.500K]\n\n{19}: Unlock House 3         [2.500K] & {20}: Unlock Smoke           [2.000K]\n\n{21}: Change Race Wins       [7.00K]  & {22}: Change Race Loses      [7.00K]\n\n{23}: Speed Car Hack (CarID) [1.500K] & {24}: Speed All Cars Hack    [2.500K]\n\n{25}: Chrome All Cars        [3.500K] & {26}: All Cars Max Milage    [2.000K]\n\n                              𝑊𝐸𝐿𝐶𝑂𝑀𝐸 𝑇𝑂 𝑈𝑆𝐸 𝑀𝑌 𝑇𝑂𝑂𝐿'))))
             
             print(Colorate.Horizontal(Colors.rainbow, Center.XCenter(Box.DoubleCube( '➩{27}: Clone Account [5.000K]'))))
             print(Colorate.Horizontal(Colors.rainbow, Center.XCenter(Box.DoubleCube(  '➩{00}: Exit'))))
