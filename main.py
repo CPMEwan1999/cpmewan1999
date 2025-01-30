@@ -149,7 +149,7 @@ pySystem.Clear()
 
 
 
-import inspect
+
 from pystyle import Box
 import random
 import requests
@@ -235,11 +235,6 @@ def load_player_data(cpm):
         exit(1)
 
 
-def get_function_name():
-    frame = inspect.currentframe()
-    return frame.f_code.co_name
-print("The name of function is : " +get_function_name()) 
-
 def load_key_data(cpm):
 
     data = cpm.get_key_data()
@@ -319,7 +314,6 @@ if __name__ == "__main__":
         while True:
             banner(console)
             load_player_data(cpm)
-            frame = inspect.currentframe()
             load_key_data(cpm)
             load_client_details()
             choices = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27"]
