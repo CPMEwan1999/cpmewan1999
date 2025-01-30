@@ -149,7 +149,7 @@ pySystem.Clear()
 
 
 
-
+import inspect
 from pystyle import Box
 import random
 import requests
@@ -234,6 +234,11 @@ def load_player_data(cpm):
         print(Colorate.Horizontal(Colors.rainbow, '! ERROR: seems like your login is not properly set !.'))
         exit(1)
 
+
+def get_function_name():
+    frame = inspect.currentframe()
+    return frame.f_code.co_name
+print("The name of function is : " +get_function_name()) 
 
 def load_key_data(cpm):
 
