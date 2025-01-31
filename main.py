@@ -149,8 +149,7 @@ pySystem.Clear()
 
 
 
-import os 
-from FileDto import FileDto
+
 from pystyle import Box
 import random
 import requests
@@ -175,46 +174,6 @@ __GROUP_USERNAME__   = "Ewan19_99Kurd"
 def signal_handler(sig, frame):
     print("\n Bye Bye...")
     sys.exit(0)
-
-def getFileItems(path):
-
-directory = os.fsencode(path)    
-    items = []
-
-    for file in os.listdir(directory):
-        fileName = os.fsdecode(file)
-        if os.path.isfile(path + '\\' + fileName):
-            datePart = fileName[0:12]
-            fileDto = FileDto(datePart,fileName)
-            items.append(fileDto)
-    
-    items.sort(key=lambda x: x.id, reverse=False)
-    return items
-
-path = input('Enter a path where the SQL scripts that need to be combined live:')
-
-fileItems = getFileItems(path)
-
-counter = 1
-
-outFileName = 'Combined Release Script.sql'
-outFilePath = path + "\\" + outFileName
-
-with open(outFilePath, 'w', encoding='utf-8') as outfile:
-
-    for names in fileItems:
-
-        outfile.write('--' + str(counter) + '.' + names.fileName)
-        outfile.write('\n\n')
-
-        with open(path + "\\" + names.fileName) as infile:
-            for line in infile:
-                outfile.write(line)
-
-        outfile.write('\nGO\n')
-        counter += 1
-
-print("Done.%s SQL scripts have been combined into one called - %s" % (len(fileItems), outFileName))
 
 def gradient_text(text, colors):
     lines = text.splitlines()
