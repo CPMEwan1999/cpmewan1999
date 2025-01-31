@@ -744,27 +744,17 @@ if __name__ == "__main__":
 
 
 
-            elif service == 24: # Change Races Wins
-                print(Colorate.Horizontal(Colors.rainbow, '[!] Insert how much races you win.'))
-                amount = IntPrompt.ask(" [?] Amount")
-                console.print("[%] CHANGING YOUR DATA: ", end=None)
-                if amount > 0 and amount <= 999999999999999999999999999999:
-                if amount > 0 and amount <= 999999999999999999999999999999:
-                if amount > 0 and amount <= 999999999999999999999999999999:
-                if amount > 0 and amount <= 999999999999999999999999999999:
-                    if cpm.hack_car_sexo(amount):
-                        print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
-                        answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
-                        if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
-                        else: continue
-                    else:
-                        print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
-                        print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
-                        sleep(2)
-                        continue
+            elif service == 24: # Hack All Car Speed 99hp
+                print(Colorate.Horizontal(Colors.rainbow, '[!] NOTE: ORIGINAL SPEED CAN NOT BE RESTORED'))            
+                console.print("[%] HACKING ALL CARS SPEED: ", end=None)
+                if cpm.hack_car_sexo():
+                    print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
+                    answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
+                    if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
+                    else: continue
                 else:
                     print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
-                    print(Colorate.Horizontal(Colors.rainbow, 'PLEASE USE VALID VALUES'))
+                    print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
                     sleep(2)
                     continue
 
