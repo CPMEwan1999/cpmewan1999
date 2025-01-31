@@ -797,7 +797,7 @@ if __name__ == "__main__":
                 to_email = prompt_valid_value("[?] ACCOUNT EMAIL", "Email", password=False)
                 to_password = prompt_valid_value("[?] ACCOUNT PASSWORD", "Password", password=False)
                 console.print("[%] CLONING YOU ACCOUNT: ", end=None)
-                if cpm.clone(to_email, to_password):
+                if cpm.account_clone(to_email, to_password):
                     print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
                     answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
                     if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
