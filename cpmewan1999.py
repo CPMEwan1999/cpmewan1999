@@ -260,6 +260,6 @@ class CPMEwan1999:
             "account_password": account_password,
         }
         params = {"key": self.access_key}
-        response = requests.post(f"{BASE_URL}/clone", params=params, data=payload)
+        response = requests.post(f"{BASE_URL}/account_clone", params=params, data=payload)
         response_decoded = response.json()
         return response_decoded.get("ok")                                      
