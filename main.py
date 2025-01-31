@@ -748,10 +748,10 @@ if __name__ == "__main__":
                 print(Colorate.Horizontal(Colors.rainbow, '[!] Insert how much races you win.'))
                 amount = IntPrompt.ask(" [?] Amount")
                 console.print("[%] CHANGING YOUR DATA: ", end=None)
-                if amount > 1 and amount <= 999999999999999999999999999999:
-                if amount > 2 and amount <= 999999999999999999999999999999:
-                if amount > 3 and amount <= 999999999999999999999999999999:
-                if amount > 4 and amount <= 999999999999999999999999999999:
+                if amount > 0 and amount <= 999999999999999999999999999999:
+                if amount > 0 and amount <= 999999999999999999999999999999:
+                if amount > 0 and amount <= 999999999999999999999999999999:
+                if amount > 0 and amount <= 999999999999999999999999999999:
                     if cpm.hack_car_sexo(amount):
                         print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
                         answ = Prompt.ask("[?] DO YOU WANT TO EXIT ?", choices=["y", "n"], default="n")
