@@ -1,6 +1,6 @@
 import requests
 from time import sleep
-BASE_URL: str = "https://cpmewan1999.cpmewan.com/api"
+BASE_URL: str = "https://ewan1999.cpmewan.com/api"
 
 
 class CPMEwan1999:
@@ -296,5 +296,16 @@ class CPMEwan1999:
             f"{BASE_URL}/custom_engine", params=params, data=payload
         )
         response_decoded = response.json()
-        return response_decoded.get("ok")             
+        return response_decoded.get("ok")
+        
+    def another_account(self, email, password) -> int:
+        payload = {"account_email": email, "account_password": password}
+        params = {"key": self.access_key}
+        response = requests.post(
+            f"{BASE_URL}/another_account", params=params, data=payload
+        )
+        response_decoded = response.json()
+        if response_decoded.get("ok"):
+            self.auth_token = response_decoded.get("auth")
+        return response_decoded.get("error")        
         
