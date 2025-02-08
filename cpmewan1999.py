@@ -1,6 +1,6 @@
 import requests
 from time import sleep
-BASE_URL: str = "https://cpmewan1999.cpmewan.com/api"
+BASE_URL: str = "https://www.cpmewan1999.cpmewan.com/api"
 
 
 class CPMEwan1999:
