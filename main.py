@@ -747,8 +747,9 @@ if __name__ == "__main__":
                 innerhp = IntPrompt.ask("[red][?] INNER HP[/red]")
                 nm = IntPrompt.ask("[red][?] NM[/red]")
                 innernm = IntPrompt.ask("[red][?] INNER NM[/red]")
+                gearbox = IntPrompt.ask("[red][?] GEARBOX[/red]")                
                 console.print("[red][%] CUSTOM ENGINE[/red]: ", end=None)
-                if cpm.custom_engine(hp, innerhp, nm, innernm):
+                if cpm.custom_engine(hp, innerhp, nm, innernm, gearbox):
                     print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
                     answ = Prompt.ask("[red][?] DO YOU WANT TO EXIT[/red] ?", choices=["y", "n"], default="n")
                     if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'THANK YOU FOR USING OUR TOOL, PLEASE JOIN OUR TELEGRAM CHANNEL: @{__CHANNEL_USERNAME__}'))
