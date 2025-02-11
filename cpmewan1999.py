@@ -282,13 +282,14 @@ class CPMEwan1999:
         response_decoded = response.json()
         return response_decoded.get("ok")                  
         
-    def custom_engine(self, hp, innerhp, nm, innernm) -> bool:
+    def custom_engine(self, hp, innerhp, nm, innernm, gearbox) -> bool:
         payload = {
         "account_auth": self.auth_token,
         "hp": hp,
         "innerhp": innerhp,
         "nm": nm,
         "innernm": innernm,
+        "gearbox": gearbox,        
         
         }
         params = {"key": self.access_key}
