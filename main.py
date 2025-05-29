@@ -478,8 +478,7 @@ if __name__ == "__main__":
 
 
             elif service == 9: # Unlock w16 Engine
-                print(Colorate.Horizontal(Colors.rainbow, '[!] NOTE: ORIGINAL MILAGE CAN NOT BE RESTORED'))            
-                console.print("[red][%] HACKING MILAGE[/red]: ", end=None)
+                console.print("[red][%] UNLOCKING W16 ENGINE[/red]: ", end=None)
                 if cpm.unlock_w16():
                     print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
                     answ = Prompt.ask("[red][?] DO YOU WANT TO EXIT[/red] ?", choices=["y", "n"], default="n")
@@ -489,7 +488,7 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
                     print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
                     sleep(2)
-                    continue                           
+                    continue
 
 
 
